@@ -3,28 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Creator Planner</title>
+  <title>クリエイター作業プランナー</title>
   <style>
     :root {
-      --accent: #7F77DD;
-      --accent-light: #A09BE8;
-      --accent-dark: #5F58B0;
-      --bg: #F5F4FC;
-      --surface: #FFFFFF;
-      --surface2: #EEEDFB;
-      --text: #2D2B3D;
-      --text-muted: #7A7890;
-      --border: #E0DEFA;
-      --success: #5BBB6A;
-      --warning: #F0A820;
-      --danger: #E05555;
-      --shadow: 0 2px 14px rgba(127,119,221,0.10);
+      --accent:      #7F77DD;
+      --accent-l:    #A09BE8;
+      --accent-d:    #5F58B0;
+      --bg:          #F5F4FC;
+      --surface:     #FFFFFF;
+      --surface2:    #EEEDFB;
+      --text:        #2D2B3D;
+      --muted:       #7A7890;
+      --border:      #E0DEFA;
+      --success:     #5BBB6A;
+      --danger:      #E05555;
+      --shadow:      0 2px 14px rgba(127,119,221,0.10);
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Helvetica Neue', 'Hiragino Sans', system-ui, sans-serif;
+      font-family: 'Helvetica Neue','Hiragino Sans',system-ui,sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
@@ -34,444 +32,343 @@
     .header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
-      padding: 14px 24px;
+      padding: 13px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      position: sticky; top: 0; z-index: 20;
       box-shadow: var(--shadow);
     }
-    .header-title {
-      font-size: 19px;
-      font-weight: 800;
-      color: var(--accent);
-      letter-spacing: -0.3px;
-    }
-    .header-date {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
+    .header-title { font-size: 17px; font-weight: 800; color: var(--accent); }
+    .header-date  { font-size: 12px; color: var(--muted); }
 
     /* ── Tabs ── */
     .tabs {
       display: flex;
       background: var(--surface);
       border-bottom: 2px solid var(--border);
-      padding: 0 20px;
-      gap: 4px;
+      padding: 0 16px;
+      gap: 2px;
+      position: sticky; top: 49px; z-index: 19;
     }
     .tab-btn {
-      padding: 13px 22px;
-      border: none;
-      background: none;
+      padding: 12px 18px;
+      border: none; background: none;
       cursor: pointer;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-muted);
+      font-size: 13px; font-weight: 600;
+      color: var(--muted);
       border-bottom: 3px solid transparent;
       margin-bottom: -2px;
-      transition: all 0.18s;
+      transition: all .18s;
+      white-space: nowrap;
+      font-family: inherit;
     }
-    .tab-btn.active {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
-    }
+    .tab-btn.active  { color: var(--accent); border-bottom-color: var(--accent); }
     .tab-btn:hover:not(.active) { color: var(--text); }
 
-    /* ── Layout ── */
+    /* ── Content ── */
     .content {
       max-width: 760px;
       margin: 0 auto;
-      padding: 20px 16px 48px;
+      padding: 18px 14px 60px;
     }
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
+    .tab-panel          { display: none; }
+    .tab-panel.active   { display: block; }
 
     /* ── Card ── */
     .card {
       background: var(--surface);
       border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 14px;
+      padding: 18px;
+      margin-bottom: 12px;
       box-shadow: var(--shadow);
       border: 1px solid var(--border);
     }
     .card-title {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 14px;
-      color: var(--text);
+      font-size: 14px; font-weight: 700;
+      margin-bottom: 14px; color: var(--text);
+      display: flex; align-items: center; justify-content: space-between;
     }
-
-    /* ── Notification banner ── */
-    .notif-banner {
-      background: #FFFBEC;
-      border: 1px solid #F0D070;
-      border-radius: 10px;
-      padding: 10px 14px;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      font-size: 13px;
-    }
-    .notif-banner.hidden { display: none; }
 
     /* ── Pattern grid ── */
-    .pattern-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
+    .pattern-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
     .pattern-card {
       border: 2px solid var(--border);
       border-radius: 12px;
-      padding: 14px 10px;
+      padding: 13px 10px;
       cursor: pointer;
-      transition: all 0.18s;
+      transition: all .18s;
       text-align: center;
       user-select: none;
     }
-    .pattern-card:hover { border-color: var(--accent-light); background: var(--surface2); }
+    .pattern-card:hover { border-color: var(--accent-l); background: var(--surface2); }
     .pattern-card.selected { border-color: var(--accent); background: var(--surface2); }
-    .pattern-card .p-emoji { font-size: 26px; margin-bottom: 6px; }
-    .pattern-card .p-name { font-weight: 700; font-size: 14px; margin-bottom: 3px; }
-    .pattern-card .p-desc { font-size: 12px; color: var(--text-muted); }
+    .p-emoji { font-size: 24px; margin-bottom: 5px; }
+    .p-name  { font-weight: 700; font-size: 13px; margin-bottom: 2px; }
+    .p-desc  { font-size: 11px; color: var(--muted); }
 
-    /* ── Time summary ── */
+    /* ── Time progress ── */
     .time-row {
-      display: flex;
-      align-items: flex-end;
-      gap: 20px;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
+      display: flex; gap: 18px; flex-wrap: wrap;
+      margin-bottom: 10px; align-items: flex-end;
     }
-    .time-col .t-label { font-size: 12px; color: var(--text-muted); margin-bottom: 2px; }
-    .time-col .t-val { font-size: 22px; font-weight: 800; color: var(--accent); line-height: 1; }
+    .time-col .t-lbl { font-size: 11px; color: var(--muted); margin-bottom: 2px; }
+    .time-col .t-val { font-size: 20px; font-weight: 800; color: var(--accent); line-height: 1; }
     .time-col .t-val.warn { color: var(--danger); }
-    .progress-bar {
-      width: 100%;
-      height: 7px;
-      background: var(--surface2);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    .progress-fill {
-      height: 100%;
-      background: var(--accent);
-      border-radius: 4px;
-      transition: width 0.4s;
-    }
+    .progress-bar  { width: 100%; height: 7px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width .4s; }
     .progress-fill.over { background: var(--danger); }
 
-    /* ── Task list ── */
+    /* ── Task items ── */
     .task-item {
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 14px;
-      margin-bottom: 8px;
-      background: var(--surface);
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      transition: opacity 0.2s;
+      border-radius: 10px; padding: 11px 13px;
+      margin-bottom: 7px; background: var(--surface);
+      display: flex; gap: 10px; align-items: flex-start;
+      transition: opacity .2s;
     }
-    .task-item.done { opacity: 0.55; }
-    .task-cb {
-      width: 18px; height: 18px;
-      accent-color: var(--accent);
-      cursor: pointer;
-      flex-shrink: 0;
-      margin-top: 3px;
-    }
+    .task-item.done { opacity: .55; }
+    .task-cb { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; margin-top: 3px; }
     .task-body { flex: 1; min-width: 0; }
-    .task-header {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-bottom: 3px;
-    }
-    .task-name {
-      font-weight: 600;
-      font-size: 14px;
-      word-break: break-word;
-    }
+    .task-name-row { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; margin-bottom: 3px; }
+    .task-name { font-weight: 600; font-size: 14px; word-break: break-word; }
     .task-item.done .task-name { text-decoration: line-through; }
-    .badge {
-      padding: 1px 7px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-    .b-must     { background: #FFECEC; color: #C04040; }
-    .b-optional { background: #E4EEFF; color: #3366CC; }
-    .b-cat      { background: var(--surface2); color: var(--accent-dark); }
-    .task-sub {
-      font-size: 12px;
-      color: var(--text-muted);
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .pom-count { color: var(--accent); font-weight: 600; }
-    .task-memo { font-size: 11px; color: var(--text-muted); font-style: italic; margin-top: 3px; }
-    .task-actions { display: flex; gap: 4px; flex-shrink: 0; }
+    .task-sub  { font-size: 12px; color: var(--muted); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 2px; }
+    .task-memo { font-size: 11px; color: var(--muted); font-style: italic; margin-top: 3px; }
+    .actual-time { color: var(--accent); font-weight: 600; }
+    .task-actions { display: flex; gap: 3px; flex-shrink: 0; }
     .btn-ic {
-      width: 26px; height: 26px;
-      border: none;
-      background: var(--surface2);
-      border-radius: 6px;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px;
-      color: var(--text-muted);
-      transition: all 0.15s;
+      width: 26px; height: 26px; border: none;
+      background: var(--surface2); border-radius: 6px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 13px; color: var(--muted); transition: all .15s;
     }
     .btn-ic:hover { background: var(--border); color: var(--text); }
 
+    /* ── Badges ── */
+    .badge { padding: 1px 7px; border-radius: 20px; font-size: 10px; font-weight: 700; flex-shrink: 0; }
+    .b-must { background: #FFECEC; color: #C04040; }
+    .b-opt  { background: #E4EEFF; color: #3366CC; }
+    .b-cat  { background: var(--surface2); color: var(--accent-d); }
+
     /* ── Buttons ── */
     .btn {
-      padding: 9px 18px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 700;
-      transition: all 0.18s;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
+      padding: 9px 16px; border-radius: 8px; border: none;
+      cursor: pointer; font-size: 13px; font-weight: 700;
+      transition: all .18s; display: inline-flex; align-items: center; gap: 5px;
+      font-family: inherit;
     }
-    .btn-primary { background: var(--accent); color: #fff; }
-    .btn-primary:hover { background: var(--accent-dark); }
+    .btn-primary   { background: var(--accent); color: #fff; }
+    .btn-primary:hover   { background: var(--accent-d); }
     .btn-secondary { background: var(--surface2); color: var(--accent); border: 1px solid var(--border); }
     .btn-secondary:hover { background: var(--border); }
-    .btn-danger { background: #FFEAEA; color: var(--danger); }
-    .btn-danger:hover { background: #FFCCCC; }
+    .btn-danger    { background: #FFEAEA; color: var(--danger); }
+    .btn-danger:hover    { background: #FFCCCC; }
+    .btn-full { width: 100%; justify-content: center; }
 
-    /* ── Form ── */
-    .form-group { margin-bottom: 12px; }
-    .form-label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 5px; color: var(--text-muted); }
+    /* ── Forms ── */
+    .form-group  { margin-bottom: 12px; }
+    .form-label  { display: block; font-size: 12px; font-weight: 700; margin-bottom: 5px; color: var(--muted); }
     .form-ctrl {
-      width: 100%;
-      padding: 9px 11px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 14px;
-      color: var(--text);
-      background: var(--surface);
-      transition: border-color 0.18s;
+      width: 100%; padding: 9px 11px;
+      border: 1px solid var(--border); border-radius: 8px;
+      font-size: 14px; color: var(--text);
+      background: var(--surface); transition: border-color .18s;
       font-family: inherit;
     }
     .form-ctrl:focus { outline: none; border-color: var(--accent); }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
-    /* ── Priority toggle ── */
+    textarea.form-ctrl { resize: vertical; min-height: 70px; }
+    .form-row  { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .pri-toggle { display: flex; gap: 8px; }
     .pri-btn {
-      flex: 1;
-      padding: 9px;
-      border-radius: 8px;
-      border: 2px solid var(--border);
-      background: var(--surface);
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 700;
-      text-align: center;
-      transition: all 0.18s;
-      font-family: inherit;
+      flex: 1; padding: 9px; border-radius: 8px;
+      border: 2px solid var(--border); background: var(--surface);
+      cursor: pointer; font-size: 13px; font-weight: 700;
+      text-align: center; transition: all .18s; font-family: inherit;
     }
-    .pri-btn.sel-must     { border-color: #C04040; background: #FFECEC; color: #C04040; }
-    .pri-btn.sel-optional { border-color: #3366CC; background: #E4EEFF; color: #3366CC; }
+    .pri-btn.sel-must { border-color: #C04040; background: #FFECEC; color: #C04040; }
+    .pri-btn.sel-opt  { border-color: #3366CC; background: #E4EEFF; color: #3366CC; }
 
     /* ── Modal ── */
     .modal-overlay {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(20,18,40,0.45);
-      z-index: 200;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
+      display: none; position: fixed; inset: 0;
+      background: rgba(20,18,40,.45); z-index: 200;
+      align-items: center; justify-content: center; padding: 16px;
     }
     .modal-overlay.active { display: flex; }
     .modal {
-      background: var(--surface);
-      border-radius: 16px;
-      padding: 22px;
-      width: 100%;
-      max-width: 460px;
-      max-height: 90vh;
-      overflow-y: auto;
+      background: var(--surface); border-radius: 16px;
+      padding: 22px; width: 100%; max-width: 460px;
+      max-height: 90vh; overflow-y: auto;
     }
     .modal-hdr {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 18px;
+      display: flex; align-items: center;
+      justify-content: space-between; margin-bottom: 18px;
     }
     .modal-hdr h2 { font-size: 17px; font-weight: 800; }
 
     /* ── Pomodoro timer ── */
-    .timer-wrap { text-align: center; padding: 20px 12px 24px; }
-    .timer-phase-label {
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 6px;
+    .timer-wrap { text-align: center; padding: 16px 12px 20px; }
+    .phase-label {
+      font-size: 12px; font-weight: 800; letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 8px;
     }
-    .timer-phase-label.work  { color: var(--accent); }
-    .timer-phase-label.break { color: var(--success); }
+    .phase-label.work  { color: var(--accent); }
+    .phase-label.break { color: var(--success); }
     .timer-digits {
-      font-size: 78px;
-      font-weight: 800;
+      font-size: 76px; font-weight: 800;
       font-variant-numeric: tabular-nums;
-      line-height: 1;
-      margin-bottom: 14px;
-      transition: color 0.3s;
+      line-height: 1; margin-bottom: 12px; transition: color .3s;
     }
     .timer-digits.work  { color: var(--accent); }
     .timer-digits.break { color: var(--success); }
     .timer-bar {
-      width: 100%; max-width: 360px; margin: 0 auto 22px;
-      height: 6px;
-      background: var(--surface2);
-      border-radius: 3px;
-      overflow: hidden;
+      width: 100%; max-width: 340px; margin: 0 auto 20px;
+      height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden;
     }
     .timer-bar-fill {
-      height: 100%;
-      border-radius: 3px;
-      transition: width 0.5s linear, background 0.3s;
+      height: 100%; border-radius: 3px;
+      transition: width .5s linear, background .3s;
     }
     .timer-bar-fill.work  { background: var(--accent); }
     .timer-bar-fill.break { background: var(--success); }
-    .timer-btns { display: flex; gap: 12px; justify-content: center; }
-    .btn-t-main {
-      padding: 12px 36px;
-      border-radius: 30px;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: 800;
-      background: var(--accent);
-      color: #fff;
-      transition: all 0.18s;
-      font-family: inherit;
+    .task-label-row {
+      font-size: 13px; color: var(--muted);
+      min-height: 20px; margin-bottom: 16px;
     }
-    .btn-t-main:hover { background: var(--accent-dark); transform: scale(1.03); }
+    .timer-btns { display: flex; gap: 10px; justify-content: center; }
+    .btn-t-main {
+      padding: 11px 34px; border-radius: 30px; border: none;
+      cursor: pointer; font-size: 15px; font-weight: 800;
+      background: var(--accent); color: #fff;
+      transition: all .18s; font-family: inherit;
+    }
+    .btn-t-main:hover { background: var(--accent-d); transform: scale(1.03); }
     .btn-t-main.break { background: var(--success); }
     .btn-t-reset {
-      padding: 12px 22px;
-      border-radius: 30px;
-      border: none;
-      cursor: pointer;
-      font-size: 15px;
-      font-weight: 700;
-      background: var(--surface2);
-      color: var(--text-muted);
-      transition: all 0.18s;
-      font-family: inherit;
+      padding: 11px 20px; border-radius: 30px; border: none;
+      cursor: pointer; font-size: 14px; font-weight: 700;
+      background: var(--surface2); color: var(--muted);
+      transition: all .18s; font-family: inherit;
     }
     .btn-t-reset:hover { background: var(--border); color: var(--text); }
 
-    /* ── Complete overlay ── */
-    .complete-toast {
-      display: none;
-      background: var(--surface2);
-      border: 2px solid var(--accent);
-      border-radius: 12px;
-      padding: 14px 18px;
-      margin-bottom: 16px;
-      text-align: center;
-      font-weight: 700;
-      font-size: 15px;
-      color: var(--accent);
-      animation: fadeIn 0.3s;
+    /* ── Toast ── */
+    .toast {
+      display: none; background: var(--surface2);
+      border: 2px solid var(--accent); border-radius: 12px;
+      padding: 12px 16px; margin-bottom: 14px;
+      text-align: center; font-weight: 700; font-size: 14px;
+      color: var(--accent); animation: fadeIn .3s;
     }
-    .complete-toast.show { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+    .toast.show { display: block; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(-5px); } to { opacity:1; transform:none; } }
 
-    /* ── Stats ── */
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+    /* ── Sound toggle ── */
+    .sound-row {
+      display: flex; align-items: center; justify-content: flex-end;
+      gap: 8px; font-size: 12px; color: var(--muted); margin-bottom: 4px;
     }
-    .stat-box {
-      background: var(--surface2);
-      border-radius: 10px;
-      padding: 14px 10px;
-      text-align: center;
+    .toggle-wrap { position: relative; width: 36px; height: 20px; }
+    .toggle-wrap input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .toggle-slider {
+      position: absolute; cursor: pointer;
+      inset: 0; background: var(--border); border-radius: 10px; transition: .3s;
     }
-    .stat-num { font-size: 26px; font-weight: 800; color: var(--accent); }
-    .stat-lbl { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+    .toggle-slider:before {
+      content: ''; position: absolute;
+      width: 14px; height: 14px; left: 3px; bottom: 3px;
+      background: #fff; border-radius: 50%; transition: .3s;
+    }
+    input:checked + .toggle-slider { background: var(--accent); }
+    input:checked + .toggle-slider:before { transform: translateX(16px); }
+
+    /* ── Session log ── */
+    .session-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 0; border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .session-item:last-child { border-bottom: none; }
+    .session-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .session-time-str { color: var(--muted); font-size: 11px; flex-shrink: 0; }
+    .session-task { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .session-dur  { color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+    /* ── Stats row ── */
+    .stat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+    .stat-box  { background: var(--surface2); border-radius: 10px; padding: 12px 8px; text-align: center; }
+    .stat-num  { font-size: 22px; font-weight: 800; color: var(--accent); }
+    .stat-lbl  { font-size: 10px; color: var(--muted); margin-top: 3px; }
 
     /* ── Records ── */
-    .rec-task {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 11px 13px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      margin-bottom: 8px;
+    .rec-card {
+      border: 1px solid var(--border); border-radius: 10px;
+      margin-bottom: 8px; overflow: hidden; cursor: pointer;
+      transition: border-color .18s;
     }
-    .rec-info { flex: 1; min-width: 0; }
-    .rec-name { font-weight: 700; font-size: 14px; }
-    .rec-meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-    .rec-pom  { font-size: 17px; font-weight: 800; color: var(--accent); flex-shrink: 0; }
+    .rec-card:hover { border-color: var(--accent-l); }
+    .rec-header { padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .rec-date   { font-size: 14px; font-weight: 700; }
+    .rec-summary { font-size: 12px; color: var(--muted); margin-top: 3px; }
+    .rec-ach { font-size: 18px; font-weight: 800; color: var(--accent); flex-shrink: 0; }
+    .rec-body {
+      display: none; padding: 12px 14px;
+      border-top: 1px solid var(--border);
+      background: var(--surface2);
+    }
+    .rec-card.expanded .rec-body { display: block; }
+    .rec-task-row { font-size: 12px; padding: 3px 0; display: flex; align-items: center; gap: 6px; }
 
-    /* ── Empty state ── */
-    .empty { text-align: center; padding: 28px; color: var(--text-muted); font-size: 14px; }
+    /* ── Weekly chart ── */
+    .chart-wrap { width: 100%; height: 160px; }
+    canvas { display: block; }
+
+    /* ── Empty / help ── */
+    .empty { text-align: center; padding: 24px; color: var(--muted); font-size: 14px; }
+    .help  { font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .status-msg {
+      text-align: center; font-size: 13px;
+      padding: 8px 12px; border-radius: 8px; margin-top: 8px;
+    }
+    .status-msg.ok  { background: #EDFAF2; color: var(--success); }
+    .status-msg.err { background: #FFEAEA; color: var(--danger); }
+    .status-msg.inf { background: var(--surface2); color: var(--muted); }
 
     /* ── Responsive ── */
     @media (max-width: 480px) {
-      .timer-digits { font-size: 58px; }
-      .form-row { grid-template-columns: 1fr; }
-      .stat-grid { grid-template-columns: repeat(3, 1fr); }
-      .header-title { font-size: 16px; }
-      .tab-btn { padding: 12px 14px; font-size: 13px; }
+      .timer-digits  { font-size: 58px; }
+      .form-row      { grid-template-columns: 1fr; }
+      .tab-btn       { padding: 11px 12px; font-size: 12px; }
+      .header-title  { font-size: 15px; }
     }
   </style>
 </head>
 <body>
 
-<!-- Header -->
+<!-- ── Header ── -->
 <div class="header">
   <div class="header-title">🎨 Creator Planner</div>
   <div class="header-date" id="headerDate"></div>
 </div>
 
-<!-- Tabs -->
+<!-- ── Tabs ── -->
 <div class="tabs">
-  <button class="tab-btn active" data-tab="plan"     onclick="switchTab('plan',this)">📋 計画</button>
-  <button class="tab-btn"        data-tab="pomodoro" onclick="switchTab('pomodoro',this)">⏱ ポモドーロ</button>
-  <button class="tab-btn"        data-tab="records"  onclick="switchTab('records',this)">📊 記録</button>
+  <button class="tab-btn active" onclick="switchTab('plan',this)">📋 計画</button>
+  <button class="tab-btn"        onclick="switchTab('pomodoro',this)">⏱ ポモドーロ</button>
+  <button class="tab-btn"        onclick="switchTab('records',this)">📊 記録</button>
+  <button class="tab-btn"        onclick="switchTab('settings',this)">⚙️ 設定</button>
 </div>
 
 <div class="content">
 
-  <!-- Notification banner -->
-  <div class="notif-banner" id="notifBanner">
-    <span>🔔 タイマー終了時のブラウザ通知を許可しますか？</span>
-    <button class="btn btn-secondary" onclick="askNotifPerm()" style="white-space:nowrap">許可する</button>
-  </div>
-
-  <!-- ===== PLAN ===== -->
+  <!-- ══════════════════════════════════════ PLAN ══ -->
   <div class="tab-panel active" id="tab-plan">
 
     <!-- Pattern -->
     <div class="card">
       <div class="card-title">📅 今日のパターン</div>
-      <div class="pattern-grid" id="patternGrid">
+      <div class="pattern-grid">
         <div class="pattern-card" id="pc-free"  onclick="selectPattern('free')">
           <div class="p-emoji">☀️</div>
           <div class="p-name">フリーday</div>
@@ -499,39 +396,38 @@
     <div class="card">
       <div class="card-title">⏰ 作業時間</div>
       <div class="time-row">
-        <div class="time-col">
-          <div class="t-label">使える時間</div>
-          <div class="t-val" id="tAvail">-- h</div>
-        </div>
-        <div class="time-col">
-          <div class="t-label">割り当て済み</div>
-          <div class="t-val" id="tAlloc">0 h</div>
-        </div>
-        <div class="time-col">
-          <div class="t-label">残り</div>
-          <div class="t-val" id="tRemain">-- h</div>
-        </div>
+        <div class="time-col"><div class="t-lbl">使える時間</div><div class="t-val" id="tAvail">-- h</div></div>
+        <div class="time-col"><div class="t-lbl">割り当て済み</div><div class="t-val" id="tAlloc">0 h</div></div>
+        <div class="time-col"><div class="t-lbl">残り</div><div class="t-val" id="tRemain">-- h</div></div>
       </div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="timeFill" style="width:0%"></div>
-      </div>
+      <div class="progress-bar"><div class="progress-fill" id="timeFill" style="width:0%"></div></div>
     </div>
 
     <!-- Tasks -->
     <div class="card">
-      <div class="card-title" style="display:flex;align-items:center;justify-content:space-between">
-        <span>📝 タスク</span>
-        <button class="btn btn-primary" style="padding:6px 14px;font-size:12px" onclick="openAdd()">＋ 追加</button>
+      <div class="card-title">
+        📝 タスク
+        <button class="btn btn-primary" style="padding:6px 13px;font-size:12px" onclick="openAdd()">＋ 追加</button>
       </div>
       <div id="taskList"><div class="empty" id="emptyMsg">タスクがありません。「＋ 追加」から追加してください。</div></div>
     </div>
 
+    <!-- Day memo -->
+    <div class="card">
+      <div class="card-title">📝 今日のメモ</div>
+      <textarea class="form-ctrl" id="dayMemo" rows="3" placeholder="今日の目標・意気込みなど..." oninput="saveDayMemo()"></textarea>
+    </div>
+
+    <button class="btn btn-primary btn-full" style="margin-bottom:10px; padding:12px;" onclick="saveTodayRecord()">
+      💾 今日の記録を保存する
+    </button>
+
   </div>
 
-  <!-- ===== POMODORO ===== -->
+  <!-- ══════════════════════════════════════ POMODORO ══ -->
   <div class="tab-panel" id="tab-pomodoro">
 
-    <!-- Task selector -->
+    <!-- Task select -->
     <div class="card">
       <div class="card-title">🎯 作業するタスク</div>
       <select class="form-ctrl" id="pomSelect" onchange="onPomSelectChange()">
@@ -541,13 +437,19 @@
 
     <!-- Timer -->
     <div class="card">
-      <div id="completeToast" class="complete-toast"></div>
+      <div class="sound-row">
+        <span>🔔 通知音</span>
+        <label class="toggle-wrap">
+          <input type="checkbox" id="soundToggle" onchange="onSoundToggle()">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div id="completeToast" class="toast"></div>
       <div class="timer-wrap">
-        <div class="timer-phase-label work" id="phaseLabel">作業時間</div>
+        <div class="phase-label work" id="phaseLabel">🍅 作業時間</div>
         <div class="timer-digits work" id="timerDigits">25:00</div>
-        <div class="timer-bar">
-          <div class="timer-bar-fill work" id="timerBarFill" style="width:100%"></div>
-        </div>
+        <div class="timer-bar"><div class="timer-bar-fill work" id="timerBarFill" style="width:100%"></div></div>
+        <div class="task-label-row" id="taskLabelRow">タスクを選択してスタート</div>
         <div class="timer-btns">
           <button class="btn-t-main" id="mainBtn" onclick="toggleTimer()">▶ スタート</button>
           <button class="btn-t-reset" onclick="resetTimer()">↺ リセット</button>
@@ -555,70 +457,105 @@
       </div>
     </div>
 
+    <!-- Sessions -->
+    <div class="card">
+      <div class="card-title">📋 今日のセッション</div>
+      <div id="sessionLog"><div class="empty" style="padding:12px">まだセッションがありません</div></div>
+    </div>
+
     <!-- Stats -->
     <div class="card">
       <div class="card-title">📊 今日の実績</div>
       <div class="stat-grid">
-        <div class="stat-box"><div class="stat-num" id="sPomodoros">0</div><div class="stat-lbl">ポモドーロ</div></div>
-        <div class="stat-box"><div class="stat-num" id="sWorkMin">0</div><div class="stat-lbl">作業時間（分）</div></div>
-        <div class="stat-box"><div class="stat-num" id="sCompTask">0</div><div class="stat-lbl">完了タスク</div></div>
+        <div class="stat-box"><div class="stat-num" id="sPoms">0</div><div class="stat-lbl">ポモドーロ</div></div>
+        <div class="stat-box"><div class="stat-num" id="sWork">0分</div><div class="stat-lbl">作業時間</div></div>
+        <div class="stat-box"><div class="stat-num" id="sComp">0</div><div class="stat-lbl">完了タスク</div></div>
       </div>
     </div>
 
   </div>
 
-  <!-- ===== RECORDS ===== -->
+  <!-- ══════════════════════════════════════ RECORDS ══ -->
   <div class="tab-panel" id="tab-records">
 
-    <!-- Summary -->
+    <!-- Weekly chart -->
     <div class="card">
-      <div class="card-title">📈 今日のサマリー</div>
-      <div id="recSummary" style="font-size:14px;color:var(--text-muted)">パターンを選択してください</div>
+      <div class="card-title">📈 週間サマリー（過去7日）</div>
+      <div class="chart-wrap"><canvas id="weekChart"></canvas></div>
+      <div id="weekStats" style="font-size:12px;color:var(--muted);margin-top:8px;text-align:center"></div>
     </div>
 
-    <!-- Task records -->
+    <!-- Past records -->
     <div class="card">
-      <div class="card-title">✅ タスク一覧</div>
-      <div id="recTaskList"><div class="empty">タスクがありません</div></div>
+      <div class="card-title">🗓 過去の記録</div>
+      <div id="recordsList"><div class="empty">記録がありません。「計画」タブの「今日の記録を保存する」で記録しましょう！</div></div>
     </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════ SETTINGS ══ -->
+  <div class="tab-panel" id="tab-settings">
 
     <!-- Notion -->
     <div class="card">
-      <div class="card-title">📎 Notion連携（オプション）</div>
+      <div class="card-title">📎 Notion 連携</div>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:12px">
+        ※ ブラウザのCORS制限でNotionに直接リクエストできない場合があります。
+        その場合はブラウザ拡張（CORS Unblock など）をご利用ください。
+      </p>
       <div class="form-group">
-        <label class="form-label">Notion API Key</label>
-        <input type="password" class="form-ctrl" id="notionKey" placeholder="secret_..." />
+        <label class="form-label">Integration Token</label>
+        <input type="password" class="form-ctrl" id="notionKey" placeholder="secret_..." oninput="saveSettings()">
+        <div class="help">Notion Integration ページで発行したトークン</div>
       </div>
       <div class="form-group">
         <label class="form-label">データベース ID</label>
-        <input type="text" class="form-ctrl" id="notionDb" placeholder="32桁のID" />
+        <input type="text" class="form-ctrl" id="notionDb" placeholder="32桁の英数字" oninput="saveSettings()">
+        <div class="help">NotionデータベースのURLから取得（ ?v= の前の32桁）</div>
       </div>
-      <button class="btn btn-primary" style="width:100%" onclick="exportNotion()">📤 今日の記録をNotionに保存</button>
-      <div id="notionMsg" style="margin-top:9px;font-size:13px;text-align:center"></div>
+      <button class="btn btn-primary btn-full" onclick="exportNotion()" style="padding:11px">
+        📤 今日の記録を Notion に保存
+      </button>
+      <div id="notionMsg"></div>
     </div>
 
-    <!-- Reset -->
-    <div style="text-align:center;margin-top:6px">
-      <button class="btn btn-danger" onclick="clearData()">🗑️ 今日のデータをリセット</button>
+    <!-- Sound -->
+    <div class="card">
+      <div class="card-title">🔔 通知音</div>
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <span style="font-size:14px">ポモドーロ終了時に音を鳴らす</span>
+        <label class="toggle-wrap">
+          <input type="checkbox" id="soundToggle2" onchange="onSoundToggle2()">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <button class="btn btn-secondary" style="margin-top:12px;font-size:12px" onclick="testSound()">🔊 テスト音を再生</button>
+    </div>
+
+    <!-- Data management -->
+    <div class="card">
+      <div class="card-title">🗑 データ管理</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button class="btn btn-secondary btn-full" onclick="clearToday()">今日のデータをリセット</button>
+        <button class="btn btn-danger btn-full" onclick="clearAll()">すべてのデータを削除</button>
+      </div>
     </div>
 
   </div>
 
 </div><!-- /content -->
 
-<!-- Task Modal -->
+<!-- ── Task Modal ── -->
 <div class="modal-overlay" id="taskModal" onclick="onModalBg(event)">
   <div class="modal">
     <div class="modal-hdr">
       <h2 id="modalTitle">タスクを追加</h2>
       <button class="btn-ic" onclick="closeModal()">✕</button>
     </div>
-
     <div class="form-group">
       <label class="form-label">タスク名 *</label>
-      <input type="text" class="form-ctrl" id="fName" placeholder="例：アイコンのイラストを仕上げる" />
+      <input type="text" class="form-ctrl" id="fName" placeholder="例：アイコンのイラストを仕上げる">
     </div>
-
     <div class="form-group">
       <label class="form-label">カテゴリ</label>
       <select class="form-ctrl" id="fCat">
@@ -631,26 +568,23 @@
         <option>その他</option>
       </select>
     </div>
-
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">優先度</label>
         <div class="pri-toggle">
-          <button class="pri-btn" id="priMust"     onclick="setPri('must')">必須</button>
-          <button class="pri-btn" id="priOptional" onclick="setPri('optional')">できたら</button>
+          <button class="pri-btn" id="priMust" onclick="setPri('must')">⚡ 必須</button>
+          <button class="pri-btn" id="priOpt"  onclick="setPri('opt')">✨ できたら</button>
         </div>
       </div>
       <div class="form-group">
-        <label class="form-label">予定時間（時間）</label>
-        <input type="number" class="form-ctrl" id="fHours" min="0.5" max="12" step="0.5" placeholder="1.0" />
+        <label class="form-label">予定時間（h）</label>
+        <input type="number" class="form-ctrl" id="fHours" min="0.5" max="12" step="0.5" placeholder="1.0">
       </div>
     </div>
-
     <div class="form-group">
       <label class="form-label">メモ</label>
-      <textarea class="form-ctrl" id="fMemo" rows="3" placeholder="参考URL・注意事項など..."></textarea>
+      <textarea class="form-ctrl" id="fMemo" rows="2" placeholder="参考URL・注意事項など..."></textarea>
     </div>
-
     <div style="display:flex;gap:10px;justify-content:flex-end">
       <button class="btn btn-secondary" onclick="closeModal()">キャンセル</button>
       <button class="btn btn-primary"   onclick="saveTask()">保存</button>
@@ -659,209 +593,186 @@
 </div>
 
 <script>
-// ═══════════════════════════════════════
+// ═══════════════════════════════════════════════════
+//  Web Worker (inline Blob) — keeps ticking even in bg
+// ═══════════════════════════════════════════════════
+const _workerSrc = `setInterval(()=>self.postMessage('tick'),200);`;
+const _workerBlob = new Blob([_workerSrc], { type:'application/javascript' });
+const _workerURL  = URL.createObjectURL(_workerBlob);
+let   _worker     = null;
+
+function startWorker() {
+  stopWorker();
+  _worker = new Worker(_workerURL);
+  _worker.onmessage = () => tick();
+}
+function stopWorker() {
+  if (_worker) { _worker.terminate(); _worker = null; }
+}
+
+// ═══════════════════════════════════════════════════
 //  Constants
-// ═══════════════════════════════════════
+// ═══════════════════════════════════════════════════
 const PATTERNS = {
-  free:  { name:'フリーday',    hours:6,   emoji:'☀️' },
+  free:  { name:'フリーday',    hours:6,   emoji:'☀️'  },
   short: { name:'バイト短め',   hours:3,   emoji:'🌤️' },
-  long:  { name:'バイト長め',   hours:1.5, emoji:'⛅' },
+  long:  { name:'バイト長め',   hours:1.5, emoji:'⛅'  },
   busy:  { name:'終日潰れる日', hours:0,   emoji:'🌧️' },
 };
-
 const WORK_SEC  = 25 * 60;
 const BREAK_SEC =  5 * 60;
 
-const DATA_KEY   = () => 'cp_data_' + dateStr();
-const TIMER_KEY  = 'cp_timer';
-const NOTION_KEY = 'cp_notion';
+const K_TODAY    = 'cp_today';
+const K_HISTORY  = 'cp_history';
+const K_TIMER    = 'cp_timer';
+const K_SETTINGS = 'cp_settings';
 
-function dateStr() {
+// ═══════════════════════════════════════════════════
+//  State
+// ═══════════════════════════════════════════════════
+function todayStr() {
   const d = new Date();
-  return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
 
-// ═══════════════════════════════════════
-//  State helpers
-// ═══════════════════════════════════════
-function defaultState() {
-  return { pattern:null, tasks:[], todayPoms:0 };
+function defaultToday() {
+  return { date: todayStr(), pattern: null, tasks: [], dayMemo: '', sessions: [], todayPoms: 0 };
 }
 
-function load() {
-  try { return JSON.parse(localStorage.getItem(DATA_KEY())) || defaultState(); }
-  catch { return defaultState(); }
+function loadJ(k, fb) {
+  try { return JSON.parse(localStorage.getItem(k)) || fb; } catch { return fb; }
 }
-function save() { localStorage.setItem(DATA_KEY(), JSON.stringify(st)); }
+function saveJ(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
 
-function loadTimer() {
-  try { return JSON.parse(localStorage.getItem(TIMER_KEY)) || null; }
-  catch { return null; }
-}
-function saveTimer(t) {
-  if (t) localStorage.setItem(TIMER_KEY, JSON.stringify(t));
-  else    localStorage.removeItem(TIMER_KEY);
-}
+let st  = loadJ(K_TODAY, defaultToday());
+// Reset if date changed
+if (st.date !== todayStr()) { st = defaultToday(); saveJ(K_TODAY, st); }
 
-function loadNotion() {
-  try { return JSON.parse(localStorage.getItem(NOTION_KEY)) || {}; }
-  catch { return {}; }
-}
-function saveNotion(o) { localStorage.setItem(NOTION_KEY, JSON.stringify(o)); }
+let history  = loadJ(K_HISTORY, []);
+let settings = loadJ(K_SETTINGS, { notionKey:'', notionDb:'', sound: true });
 
-// ═══════════════════════════════════════
-//  App state
-// ═══════════════════════════════════════
-let st = load();
-
-// Timer state (persisted for tab-away accuracy)
 let tmr = {
   active: false,
-  phase: 'work',       // 'work' | 'break'
-  startEpoch: null,    // Date.now() when current phase started (accounting for pauses)
+  phase: 'work',
+  startEpoch: null,
+  pausedRemaining: null,
   selectedId: null,
 };
 
-// Modal state
-let editId   = null;
-let curPri   = 'must';
-let tickerId = null;
+// Restore timer
+(function restoreTimer() {
+  const saved = loadJ(K_TIMER, null);
+  if (!saved) return;
+  tmr.phase      = saved.phase      || 'work';
+  tmr.selectedId = saved.selectedId || null;
+  tmr.pausedRemaining = saved.pausedRemaining ?? null;
+  if (saved.active && saved.startEpoch) {
+    const dur  = tmr.phase === 'work' ? WORK_SEC : BREAK_SEC;
+    const elap = (Date.now() - saved.startEpoch) / 1000;
+    if (elap < dur) {
+      tmr.active     = true;
+      tmr.startEpoch = saved.startEpoch;
+    } else {
+      handleExpiredPhase(saved);
+    }
+  }
+})();
 
-// ═══════════════════════════════════════
+let editId = null;
+let curPri = 'must';
+
+// ═══════════════════════════════════════════════════
 //  Init
-// ═══════════════════════════════════════
+// ═══════════════════════════════════════════════════
 function init() {
-  // Header date
   const d = new Date();
   const days = ['日','月','火','水','木','金','土'];
   document.getElementById('headerDate').textContent =
     `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${days[d.getDay()]}）`;
 
-  // Restore Notion keys
-  const nk = loadNotion();
-  if (nk.key) document.getElementById('notionKey').value = nk.key;
-  if (nk.db)  document.getElementById('notionDb').value  = nk.db;
+  document.getElementById('dayMemo').value = st.dayMemo || '';
 
-  // Restore timer from localStorage (supports tab-away)
-  const saved = loadTimer();
-  if (saved) {
-    tmr.phase      = saved.phase      || 'work';
-    tmr.selectedId = saved.selectedId || null;
-    if (saved.active && saved.startEpoch) {
-      // Verify the phase hasn't already expired
-      const dur  = tmr.phase === 'work' ? WORK_SEC : BREAK_SEC;
-      const elap = (Date.now() - saved.startEpoch) / 1000;
-      if (elap < dur) {
-        tmr.active     = true;
-        tmr.startEpoch = saved.startEpoch;
-      } else {
-        // Phase already expired while away — quietly complete it
-        handleExpiredPhase();
-      }
-    }
-    if (saved.pausedEpoch) {
-      // Paused: reconstruct startEpoch from saved remaining
-      tmr.pausedRemaining = saved.pausedRemaining || null;
-    }
-  }
-  if (saved && saved.pausedRemaining !== undefined) {
-    tmr.pausedRemaining = saved.pausedRemaining;
-  }
+  // Settings UI
+  document.getElementById('notionKey').value = settings.notionKey || '';
+  document.getElementById('notionDb').value  = settings.notionDb  || '';
+  document.getElementById('soundToggle').checked  = settings.sound !== false;
+  document.getElementById('soundToggle2').checked = settings.sound !== false;
 
   renderAll();
-  updateNotifBanner();
 
   if (tmr.active) {
+    startWorker();
     document.getElementById('mainBtn').textContent = '⏸ 一時停止';
-    startTicker();
-  } else {
-    refreshTimerUI();
   }
+  refreshTimerUI();
+  renderPomSelect();
+  renderSessionLog();
+  renderStats();
 }
 
-// ═══════════════════════════════════════
+// ═══════════════════════════════════════════════════
 //  Tabs
-// ═══════════════════════════════════════
-function switchTab(tab, btn) {
+// ═══════════════════════════════════════════════════
+function switchTab(name, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
   btn.classList.add('active');
-  if (tab === 'pomodoro') refreshPomSelect();
-  if (tab === 'records')  renderRecords();
+  if (name === 'pomodoro') renderPomSelect();
+  if (name === 'records')  { renderRecords(); drawWeekChart(); }
 }
 
-// ═══════════════════════════════════════
+// ═══════════════════════════════════════════════════
 //  Render all
-// ═══════════════════════════════════════
+// ═══════════════════════════════════════════════════
 function renderAll() {
   renderPatterns();
   renderTimeProgress();
   renderTaskList();
-  refreshPomSelect();
-  renderStats();
-  renderRecords();
 }
 
-// ═══════════════════════════════════════
+// ═══════════════════════════════════════════════════
 //  Pattern
-// ═══════════════════════════════════════
-function selectPattern(key) {
-  st.pattern = key;
-  save();
-  renderPatterns();
-  renderTimeProgress();
-  renderRecords();
+// ═══════════════════════════════════════════════════
+function selectPattern(k) {
+  st.pattern = k; saveJ(K_TODAY, st);
+  renderPatterns(); renderTimeProgress();
 }
-
 function renderPatterns() {
-  Object.keys(PATTERNS).forEach(k => {
-    document.getElementById('pc-' + k)
-      .classList.toggle('selected', st.pattern === k);
-  });
+  Object.keys(PATTERNS).forEach(k =>
+    document.getElementById('pc-' + k).classList.toggle('selected', st.pattern === k));
 }
 
-// ═══════════════════════════════════════
+// ═══════════════════════════════════════════════════
 //  Time progress
-// ═══════════════════════════════════════
+// ═══════════════════════════════════════════════════
 function renderTimeProgress() {
-  const avail  = st.pattern !== null ? PATTERNS[st.pattern].hours : null;
-  const alloc  = st.tasks.reduce((s,t) => s + (parseFloat(t.hours)||0), 0);
-
+  const avail = st.pattern !== null ? PATTERNS[st.pattern].hours : null;
+  const alloc = st.tasks.reduce((s,t) => s + (parseFloat(t.hours)||0), 0);
   document.getElementById('tAlloc').textContent = alloc.toFixed(1) + ' h';
-
   if (avail !== null) {
     const rem  = avail - alloc;
     const over = alloc > avail && avail > 0;
     document.getElementById('tAvail').textContent  = avail + ' h';
     document.getElementById('tRemain').textContent = rem.toFixed(1) + ' h';
     document.getElementById('tRemain').classList.toggle('warn', over);
-
-    const pct  = avail > 0 ? Math.min((alloc / avail) * 100, 100) : 0;
-    const fill = document.getElementById('timeFill');
-    fill.style.width = pct + '%';
-    fill.classList.toggle('over', over);
+    const pct  = avail > 0 ? Math.min(alloc / avail * 100, 100) : 0;
+    document.getElementById('timeFill').style.width = pct + '%';
+    document.getElementById('timeFill').classList.toggle('over', over);
   } else {
-    document.getElementById('tAvail').textContent  = '-- h';
-    document.getElementById('tRemain').textContent = '-- h';
+    ['tAvail','tRemain'].forEach(id => document.getElementById(id).textContent = '-- h');
     document.getElementById('timeFill').style.width = '0%';
   }
 }
 
-// ═══════════════════════════════════════
+// ═══════════════════════════════════════════════════
 //  Tasks
-// ═══════════════════════════════════════
+// ═══════════════════════════════════════════════════
 function renderTaskList() {
   const list  = document.getElementById('taskList');
   const empty = document.getElementById('emptyMsg');
-
-  // Clear existing items (keep empty msg)
   list.querySelectorAll('.task-item').forEach(e => e.remove());
-
-  if (!st.tasks.length) {
-    empty.style.display = '';
-    return;
-  }
+  if (!st.tasks.length) { empty.style.display = ''; return; }
   empty.style.display = 'none';
 
   const sorted = [...st.tasks].sort((a,b) => {
@@ -869,39 +780,40 @@ function renderTaskList() {
     if (a.priority !== b.priority) return a.priority === 'must' ? -1 : 1;
     return 0;
   });
-
   sorted.forEach(t => list.appendChild(buildTaskEl(t)));
 }
 
 function buildTaskEl(t) {
-  const d    = document.createElement('div');
+  const d = document.createElement('div');
   d.className = 'task-item' + (t.done ? ' done' : '');
-  d.dataset.id = t.id;
 
-  const pomStr = t.poms > 0 ? `<span class="pom-count">🍅 ${t.poms}</span>` : '';
-  const hrStr  = t.hours > 0 ? `<span>⏱ ${t.hours}h</span>` : '';
+  const actualMin = t.actualMin || 0;
+  const actualStr = actualMin > 0
+    ? `<span class="actual-time">実績: ${fmtMin(actualMin)}</span>`
+    : '';
   const memoHtml = t.memo ? `<div class="task-memo">${esc(t.memo)}</div>` : '';
 
   d.innerHTML = `
     <input type="checkbox" class="task-cb" ${t.done?'checked':''} onchange="toggleDone('${t.id}')">
     <div class="task-body">
-      <div class="task-header">
+      <div class="task-name-row">
         <span class="task-name">${esc(t.name)}</span>
-        <span class="badge ${t.priority==='must'?'b-must':'b-optional'}">${t.priority==='must'?'必須':'できたら'}</span>
+        <span class="badge ${t.priority==='must'?'b-must':'b-opt'}">${t.priority==='must'?'⚡ 必須':'✨ できたら'}</span>
         <span class="badge b-cat">${esc(t.category)}</span>
       </div>
-      <div class="task-sub">${hrStr}${pomStr}</div>
+      <div class="task-sub">
+        ${t.hours ? `<span>⏱ ${t.hours}h予定</span>` : ''}
+        ${actualStr}
+      </div>
       ${memoHtml}
     </div>
     <div class="task-actions">
       <button class="btn-ic" onclick="openEdit('${t.id}')" title="編集">✏️</button>
       <button class="btn-ic" onclick="delTask('${t.id}')" title="削除">🗑️</button>
-    </div>
-  `;
+    </div>`;
   return d;
 }
 
-// ── Modal ──
 function openAdd() {
   editId = null;
   document.getElementById('modalTitle').textContent = 'タスクを追加';
@@ -931,21 +843,17 @@ function closeModal() {
   document.getElementById('taskModal').classList.remove('active');
   editId = null;
 }
-
-function onModalBg(e) {
-  if (e.target === document.getElementById('taskModal')) closeModal();
-}
+function onModalBg(e) { if (e.target === document.getElementById('taskModal')) closeModal(); }
 
 function setPri(p) {
   curPri = p;
-  document.getElementById('priMust').className     = 'pri-btn' + (p==='must'     ? ' sel-must'     : '');
-  document.getElementById('priOptional').className = 'pri-btn' + (p==='optional' ? ' sel-optional' : '');
+  document.getElementById('priMust').className = 'pri-btn' + (p === 'must' ? ' sel-must' : '');
+  document.getElementById('priOpt').className  = 'pri-btn' + (p === 'opt'  ? ' sel-opt'  : '');
 }
 
 function saveTask() {
   const name = document.getElementById('fName').value.trim();
-  if (!name) { alert('タスク名を入力してください'); return; }
-
+  if (!name) { document.getElementById('fName').focus(); return; }
   const data = {
     name,
     category: document.getElementById('fCat').value,
@@ -953,173 +861,163 @@ function saveTask() {
     hours:    parseFloat(document.getElementById('fHours').value) || 0,
     memo:     document.getElementById('fMemo').value.trim(),
   };
-
   if (editId) {
     const i = st.tasks.findIndex(t => t.id === editId);
     if (i !== -1) st.tasks[i] = { ...st.tasks[i], ...data };
   } else {
-    st.tasks.push({ id:'t'+Date.now(), done:false, poms:0, ...data });
+    st.tasks.push({ id: 't' + Date.now(), done: false, actualMin: 0, ...data });
   }
-
-  save();
+  saveJ(K_TODAY, st);
   closeModal();
   renderAll();
+  renderPomSelect();
 }
 
 function delTask(id) {
   if (!confirm('このタスクを削除しますか？')) return;
   st.tasks = st.tasks.filter(t => t.id !== id);
-  save();
+  saveJ(K_TODAY, st);
   renderAll();
+  renderPomSelect();
 }
 
 function toggleDone(id) {
   const t = st.tasks.find(x => x.id === id);
-  if (t) { t.done = !t.done; save(); renderAll(); }
+  if (t) { t.done = !t.done; saveJ(K_TODAY, st); renderAll(); renderStats(); }
 }
 
-// ═══════════════════════════════════════
+function saveDayMemo() {
+  st.dayMemo = document.getElementById('dayMemo').value;
+  saveJ(K_TODAY, st);
+}
+
+// ═══════════════════════════════════════════════════
 //  Pomodoro
-// ═══════════════════════════════════════
-function refreshPomSelect() {
-  const sel   = document.getElementById('pomSelect');
-  const prev  = sel.value;
+// ═══════════════════════════════════════════════════
+function renderPomSelect() {
+  const sel  = document.getElementById('pomSelect');
+  const prev = sel.value;
   sel.innerHTML = '<option value="">タスクを選択...</option>';
   st.tasks.filter(t => !t.done).forEach(t => {
-    const o    = document.createElement('option');
-    o.value    = t.id;
-    o.textContent = t.name;
+    const o = document.createElement('option');
+    o.value = t.id;
+    o.textContent = (t.priority === 'must' ? '⚡ ' : '✨ ') + t.name;
     sel.appendChild(o);
   });
   if (prev) sel.value = prev;
   tmr.selectedId = sel.value || null;
+  refreshTaskLabel();
 }
 
 function onPomSelectChange() {
   tmr.selectedId = document.getElementById('pomSelect').value || null;
+  refreshTaskLabel();
   persistTimer();
+}
+
+function refreshTaskLabel() {
+  const t = st.tasks.find(x => x.id === tmr.selectedId);
+  document.getElementById('taskLabelRow').textContent =
+    t ? `🎯 ${t.name}` : 'タスクを選択してスタート';
 }
 
 function toggleTimer() {
-  if (tmr.active) pauseTimer();
-  else            resumeTimer();
+  if (tmr.active) pauseTimer(); else resumeTimer();
 }
 
 function resumeTimer() {
-  const dur  = tmr.phase === 'work' ? WORK_SEC : BREAK_SEC;
-  const rem  = (tmr.pausedRemaining !== undefined && tmr.pausedRemaining !== null)
-               ? tmr.pausedRemaining
-               : dur;
-
+  const dur = tmr.phase === 'work' ? WORK_SEC : BREAK_SEC;
+  const rem = (tmr.pausedRemaining !== null && tmr.pausedRemaining !== undefined)
+              ? tmr.pausedRemaining : dur;
   tmr.startEpoch      = Date.now() - (dur - rem) * 1000;
   tmr.active          = true;
   tmr.pausedRemaining = null;
-
   document.getElementById('mainBtn').textContent = '⏸ 一時停止';
   persistTimer();
-  startTicker();
+  startWorker();
   hideToast();
 }
 
 function pauseTimer() {
-  const dur  = tmr.phase === 'work' ? WORK_SEC : BREAK_SEC;
-  const elap = (Date.now() - tmr.startEpoch) / 1000;
-  tmr.pausedRemaining = Math.max(0, dur - elap);
-  tmr.active          = false;
-
-  stopTicker();
+  const dur = tmr.phase === 'work' ? WORK_SEC : BREAK_SEC;
+  tmr.pausedRemaining = Math.max(0, dur - (Date.now() - tmr.startEpoch) / 1000);
+  tmr.active = false;
+  stopWorker();
   document.getElementById('mainBtn').textContent = '▶ 再開';
   persistTimer();
 }
 
 function resetTimer() {
-  stopTicker();
+  stopWorker();
   tmr = { active:false, phase:'work', startEpoch:null, pausedRemaining:null, selectedId: tmr.selectedId };
-  saveTimer(null);
+  saveJ(K_TIMER, null);
   document.getElementById('mainBtn').textContent = '▶ スタート';
   document.getElementById('mainBtn').classList.remove('break');
   hideToast();
   refreshTimerUI();
 }
 
-function startTicker() {
-  stopTicker();
-  tickerId = setInterval(tick, 200);
-}
-function stopTicker() {
-  if (tickerId) { clearInterval(tickerId); tickerId = null; }
-}
-
 function tick() {
   if (!tmr.active) return;
-
   const dur  = tmr.phase === 'work' ? WORK_SEC : BREAK_SEC;
   const elap = (Date.now() - tmr.startEpoch) / 1000;
   const rem  = Math.max(0, dur - elap);
-
   setTimerUI(rem, dur, tmr.phase);
-
   if (rem <= 0) phaseComplete();
 }
 
 function refreshTimerUI() {
   const dur = tmr.phase === 'work' ? WORK_SEC : BREAK_SEC;
-  let rem;
-  if (tmr.active) {
-    rem = Math.max(0, dur - (Date.now() - tmr.startEpoch) / 1000);
-  } else {
-    rem = (tmr.pausedRemaining !== null && tmr.pausedRemaining !== undefined)
-          ? tmr.pausedRemaining : dur;
-  }
+  const rem = tmr.active
+    ? Math.max(0, dur - (Date.now() - tmr.startEpoch) / 1000)
+    : (tmr.pausedRemaining ?? dur);
   setTimerUI(rem, dur, tmr.phase);
 }
 
 function setTimerUI(rem, dur, phase) {
   const mins = Math.floor(rem / 60);
   const secs = Math.floor(rem % 60);
-  const pct  = (rem / dur) * 100;
-
   document.getElementById('timerDigits').textContent =
     String(mins).padStart(2,'0') + ':' + String(secs).padStart(2,'0');
-
-  document.getElementById('timerBarFill').style.width = pct + '%';
-
-  const isWork = phase === 'work';
-  document.getElementById('timerDigits').className   = 'timer-digits '   + (isWork ? 'work' : 'break');
-  document.getElementById('timerBarFill').className  = 'timer-bar-fill ' + (isWork ? 'work' : 'break');
-  document.getElementById('phaseLabel').className    = 'timer-phase-label ' + (isWork ? 'work' : 'break');
-  document.getElementById('phaseLabel').textContent  = isWork ? '🍅 作業時間' : '☕ 休憩時間';
+  document.getElementById('timerBarFill').style.width = ((rem / dur) * 100) + '%';
+  const w = phase === 'work';
+  document.getElementById('timerDigits').className   = 'timer-digits '   + (w ? 'work' : 'break');
+  document.getElementById('timerBarFill').className  = 'timer-bar-fill ' + (w ? 'work' : 'break');
+  document.getElementById('phaseLabel').className    = 'phase-label '    + (w ? 'work' : 'break');
+  document.getElementById('phaseLabel').textContent  = w ? '🍅 作業時間' : '☕ 休憩時間';
 }
 
 function phaseComplete() {
-  stopTicker();
+  stopWorker();
   tmr.active          = false;
   tmr.pausedRemaining = null;
 
   if (tmr.phase === 'work') {
-    // Credit pomodoro
+    // Record session
     st.todayPoms = (st.todayPoms || 0) + 1;
-    if (tmr.selectedId) {
-      const t = st.tasks.find(x => x.id === tmr.selectedId);
-      if (t) t.poms = (t.poms || 0) + 1;
-    }
-    save();
-    renderStats();
+    const task = st.tasks.find(x => x.id === tmr.selectedId);
+    if (task) task.actualMin = (task.actualMin || 0) + 25;
+    const now = new Date();
+    st.sessions = st.sessions || [];
+    st.sessions.push({
+      id: 's' + Date.now(),
+      taskId: tmr.selectedId || null,
+      taskName: task ? task.name : '（タスクなし）',
+      durationMin: 25,
+      timeStr: `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`,
+    });
+    saveJ(K_TODAY, st);
     renderTaskList();
-    renderRecords();
-
-    notify('🍅 作業完了！', '25分の集中お疲れさまです。休憩しましょう！');
-    showToast('🍅 作業完了！休憩タイマーを開始してください');
-
-    // Transition to break
+    renderSessionLog();
+    renderStats();
+    playSound('work');
+    showToast('🍅 作業完了！お疲れさまです。休憩しましょう！');
     tmr.phase = 'break';
     document.getElementById('mainBtn').textContent = '▶ 休憩スタート';
     document.getElementById('mainBtn').classList.add('break');
-
   } else {
-    notify('☕ 休憩終了！', '休憩が終わりました。作業を再開しましょう！');
-    showToast('☕ 休憩終了！次の作業を始めましょう');
-
+    playSound('break');
+    showToast('☕ 休憩終了！次の作業を始めましょう。');
     tmr.phase = 'work';
     document.getElementById('mainBtn').textContent = '▶ スタート';
     document.getElementById('mainBtn').classList.remove('break');
@@ -1130,219 +1028,394 @@ function phaseComplete() {
   persistTimer();
 }
 
-// Called on init if a phase expired while the tab was closed
-function handleExpiredPhase() {
-  const saved = loadTimer();
-  if (!saved) return;
+function handleExpiredPhase(saved) {
   if (saved.phase === 'work') {
     st.todayPoms = (st.todayPoms || 0) + 1;
     if (saved.selectedId) {
       const t = st.tasks.find(x => x.id === saved.selectedId);
-      if (t) t.poms = (t.poms || 0) + 1;
+      if (t) t.actualMin = (t.actualMin || 0) + 25;
     }
-    save();
-    tmr.phase      = 'break';
-    tmr.selectedId = saved.selectedId || null;
+    saveJ(K_TODAY, st);
+    tmr.phase = 'break';
   } else {
     tmr.phase = 'work';
   }
-  saveTimer(null);
+  saveJ(K_TIMER, null);
 }
 
 function persistTimer() {
-  saveTimer({
-    active:          tmr.active,
-    phase:           tmr.phase,
-    startEpoch:      tmr.startEpoch,
-    pausedRemaining: tmr.pausedRemaining,
-    selectedId:      tmr.selectedId,
+  saveJ(K_TIMER, {
+    active: tmr.active, phase: tmr.phase,
+    startEpoch: tmr.startEpoch, pausedRemaining: tmr.pausedRemaining,
+    selectedId: tmr.selectedId,
   });
 }
 
-// Toast (non-blocking, replaces alert)
 function showToast(msg) {
   const el = document.getElementById('completeToast');
-  el.textContent = msg;
-  el.classList.add('show');
+  el.textContent = msg; el.classList.add('show');
 }
-function hideToast() {
-  document.getElementById('completeToast').classList.remove('show');
-}
+function hideToast() { document.getElementById('completeToast').classList.remove('show'); }
 
-// ═══════════════════════════════════════
-//  Stats
-// ═══════════════════════════════════════
-function renderStats() {
-  const poms = st.todayPoms || 0;
-  document.getElementById('sPomodoros').textContent = poms;
-  document.getElementById('sWorkMin').textContent   = poms * 25;
-  document.getElementById('sCompTask').textContent  = st.tasks.filter(t => t.done).length;
-}
-
-// ═══════════════════════════════════════
-//  Records
-// ═══════════════════════════════════════
-function renderRecords() {
-  // Summary
-  const sumEl = document.getElementById('recSummary');
-  if (st.pattern) {
-    const p    = PATTERNS[st.pattern];
-    const comp = st.tasks.filter(t => t.done).length;
-    const tot  = st.tasks.length;
-    const poms = st.todayPoms || 0;
-    sumEl.innerHTML = `
-      <div style="display:flex;flex-direction:column;gap:7px">
-        <div><strong>パターン：</strong>${p.emoji} ${p.name}（${p.hours}h目安）</div>
-        <div><strong>ポモドーロ：</strong>${poms}回 ／ ${poms*25}分集中</div>
-        <div><strong>タスク進捗：</strong>${comp} / ${tot} 完了</div>
-      </div>`;
-  } else {
-    sumEl.textContent = 'パターンを選択してください';
-  }
-
-  // Task list
-  const listEl = document.getElementById('recTaskList');
-  if (!st.tasks.length) {
-    listEl.innerHTML = '<div class="empty">タスクがありません</div>';
+// ── Session log ──
+function renderSessionLog() {
+  const log = document.getElementById('sessionLog');
+  const sessions = st.sessions || [];
+  if (!sessions.length) {
+    log.innerHTML = '<div class="empty" style="padding:12px">まだセッションがありません</div>';
     return;
   }
-  listEl.innerHTML = '';
-
-  const sorted = [...st.tasks].sort((a,b) => {
-    if (a.done !== b.done) return a.done ? -1 : 1;
-    return (b.poms||0) - (a.poms||0);
-  });
-
-  sorted.forEach(t => {
-    const d = document.createElement('div');
-    d.className = 'rec-task';
-    d.innerHTML = `
-      <div class="rec-info">
-        <div class="rec-name">${t.done?'✅ ':'⬜ '}${esc(t.name)}</div>
-        <div class="rec-meta">${esc(t.category)} · ${t.priority==='must'?'必須':'できたら'} · ${t.hours||0}h予定</div>
-      </div>
-      <div class="rec-pom">🍅 ${t.poms||0}</div>
-    `;
-    listEl.appendChild(d);
-  });
+  log.innerHTML = [...sessions].reverse().map(s => `
+    <div class="session-item">
+      <div class="session-dot"></div>
+      <span class="session-time-str">${s.timeStr}</span>
+      <span class="session-task">${esc(s.taskName)}</span>
+      <span class="session-dur">${fmtMin(s.durationMin)}</span>
+    </div>
+  `).join('');
 }
 
-// ═══════════════════════════════════════
+// ── Stats ──
+function renderStats() {
+  const poms   = st.todayPoms || 0;
+  const totMin = (st.sessions || []).reduce((s,x) => s + x.durationMin, 0);
+  const comp   = st.tasks.filter(t => t.done).length;
+  document.getElementById('sPoms').textContent = poms;
+  document.getElementById('sWork').textContent = totMin >= 60
+    ? `${Math.floor(totMin/60)}h${totMin%60 ? totMin%60+'m' : ''}`
+    : (totMin + '分');
+  document.getElementById('sComp').textContent = comp;
+}
+
+// ═══════════════════════════════════════════════════
+//  Web Audio API
+// ═══════════════════════════════════════════════════
+function playSound(type) {
+  if (settings.sound === false) return;
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const beep = (freq, t0, dur) => {
+      const osc  = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.type = 'sine'; osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.3, t0);
+      gain.gain.exponentialRampToValueAtTime(0.001, t0 + dur);
+      osc.start(t0); osc.stop(t0 + dur + 0.05);
+    };
+    const t = ctx.currentTime;
+    if (type === 'work') {
+      beep(523, t,       0.18);  // C5
+      beep(659, t + 0.22, 0.18); // E5
+      beep(784, t + 0.44, 0.35); // G5
+    } else {
+      beep(784, t,       0.18);  // G5
+      beep(659, t + 0.22, 0.18); // E5
+      beep(523, t + 0.44, 0.35); // C5
+    }
+  } catch {}
+}
+
+function testSound() { playSound('work'); }
+
+function onSoundToggle() {
+  settings.sound = document.getElementById('soundToggle').checked;
+  document.getElementById('soundToggle2').checked = settings.sound;
+  saveJ(K_SETTINGS, settings);
+}
+function onSoundToggle2() {
+  settings.sound = document.getElementById('soundToggle2').checked;
+  document.getElementById('soundToggle').checked = settings.sound;
+  saveJ(K_SETTINGS, settings);
+}
+
+// ═══════════════════════════════════════════════════
+//  Records / History
+// ═══════════════════════════════════════════════════
+function saveTodayRecord() {
+  const tasks  = st.tasks || [];
+  const done   = tasks.filter(t => t.done).length;
+  const totMin = (st.sessions || []).reduce((s,x) => s + x.durationMin, 0);
+  const ach    = tasks.length ? Math.round(done / tasks.length * 100) : 0;
+  const p      = st.pattern ? PATTERNS[st.pattern] : null;
+
+  const rec = {
+    date:       st.date,
+    pattern:    st.pattern,
+    patternLbl: p ? `${p.emoji} ${p.name}` : '未設定',
+    tasks:      tasks.map(t => ({ ...t })),
+    totalMin:   totMin,
+    dayMemo:    st.dayMemo || '',
+    poms:       st.todayPoms || 0,
+    achievement: ach,
+    savedAt:    new Date().toISOString(),
+  };
+
+  const idx = history.findIndex(r => r.date === rec.date);
+  if (idx !== -1) history[idx] = rec;
+  else history.unshift(rec);
+
+  saveJ(K_HISTORY, history);
+  alert('✅ 記録を保存しました！「記録」タブで確認できます。');
+}
+
+function renderRecords() {
+  const list = document.getElementById('recordsList');
+  const recs = [...history].sort((a,b) => b.date.localeCompare(a.date));
+  if (!recs.length) {
+    list.innerHTML = '<div class="empty">記録がありません。「計画」タブの「今日の記録を保存する」で記録しましょう！</div>';
+    return;
+  }
+  list.innerHTML = recs.map((r, i) => {
+    const done  = (r.tasks||[]).filter(t=>t.done).length;
+    const total = (r.tasks||[]).length;
+    const must  = (r.tasks||[]).filter(t=>t.priority==='must');
+    const mustD = must.filter(t=>t.done).length;
+    return `
+      <div class="rec-card" id="rc-${i}" onclick="toggleRec(${i})">
+        <div class="rec-header">
+          <div>
+            <div class="rec-date">${fmtDate(r.date)}</div>
+            <div class="rec-summary">
+              ${r.patternLbl} ｜ 作業 ${fmtMin(r.totalMin)} ｜ ${done}/${total} タスク
+            </div>
+          </div>
+          <div class="rec-ach">${r.achievement}%</div>
+        </div>
+        <div class="rec-body">
+          ${r.dayMemo ? `<div style="font-size:13px;margin-bottom:8px">💬 ${esc(r.dayMemo)}</div>` : ''}
+          <div style="font-size:12px;color:var(--muted);margin-bottom:6px">
+            ⚡ 必須: ${mustD}/${must.length}完了 ｜ 🍅 ポモドーロ: ${r.poms}回
+          </div>
+          ${(r.tasks||[]).map(t => `
+            <div class="rec-task-row" style="${t.done ? 'text-decoration:line-through;color:var(--muted)' : ''}">
+              ${t.done ? '✅' : '⬜'} ${t.priority==='must'?'⚡':'✨'} ${esc(t.name)}
+              ${t.actualMin ? `<span style="color:var(--accent);font-size:11px">(${fmtMin(t.actualMin)})</span>` : ''}
+            </div>`).join('')}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function toggleRec(i) {
+  document.getElementById('rc-' + i)?.classList.toggle('expanded');
+}
+
+// ═══════════════════════════════════════════════════
+//  Weekly Chart (Canvas)
+// ═══════════════════════════════════════════════════
+function drawWeekChart() {
+  const canvas = document.getElementById('weekChart');
+  const wrap   = canvas.parentElement;
+  const dpr    = window.devicePixelRatio || 1;
+  const W      = wrap.clientWidth;
+  const H      = 160;
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  // Build 7 days
+  const dayLabels = ['日','月','火','水','木','金','土'];
+  const days = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const ds = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const rec = ds === todayStr()
+      ? { totalMin: (st.sessions||[]).reduce((s,x)=>s+x.durationMin,0) }
+      : history.find(r => r.date === ds);
+    days.push({ label: dayLabels[d.getDay()], min: rec ? (rec.totalMin || 0) : 0, isToday: ds === todayStr() });
+  }
+
+  const maxMin = Math.max(...days.map(d => d.min), 60);
+  const pad = { t:16, b:28, l:32, r:8 };
+  const cW = W - pad.l - pad.r;
+  const cH = H - pad.t - pad.b;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Grid lines
+  [0, 0.25, 0.5, 0.75, 1].forEach(pct => {
+    const y = pad.t + cH * (1 - pct);
+    ctx.strokeStyle = '#E0DEFA'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+    if (pct > 0) {
+      ctx.fillStyle = '#9090A8'; ctx.font = '9px sans-serif'; ctx.textAlign = 'right';
+      ctx.fillText(fmtMin(Math.round(maxMin * pct)), pad.l - 4, y + 3);
+    }
+  });
+
+  // Bars
+  const barW  = (cW / 7) * 0.55;
+  const barGap = cW / 7;
+  days.forEach((d, i) => {
+    const pct  = d.min / maxMin;
+    const bH   = Math.max(cH * pct, d.min > 0 ? 3 : 0);
+    const x    = pad.l + barGap * i + (barGap - barW) / 2;
+    const y    = pad.t + cH - bH;
+
+    // Bar
+    ctx.fillStyle = d.isToday ? '#7F77DD' : '#B8B4EE';
+    const r = 4;
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + barW - r, y);
+    ctx.quadraticCurveTo(x + barW, y, x + barW, y + r);
+    ctx.lineTo(x + barW, y + bH);
+    ctx.lineTo(x, y + bH);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+    ctx.fill();
+
+    // Value label
+    if (d.min > 0) {
+      ctx.fillStyle = d.isToday ? '#5F58B0' : '#8A86CC';
+      ctx.font = `${d.isToday ? '700' : '400'} 9px sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.fillText(fmtMin(d.min), x + barW / 2, y - 3);
+    }
+
+    // Day label
+    ctx.fillStyle = d.isToday ? '#5F58B0' : '#7A7890';
+    ctx.font = `${d.isToday ? '700' : '400'} 11px sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.fillText(d.label, x + barW / 2, H - pad.b + 14);
+  });
+
+  // Stats
+  const totalWeek = days.reduce((s,d) => s + d.min, 0);
+  const actDays   = days.filter(d => d.min > 0).length;
+  document.getElementById('weekStats').textContent =
+    `今週の合計: ${fmtMin(totalWeek)}  ｜  作業日: ${actDays}日`;
+}
+
+// ═══════════════════════════════════════════════════
 //  Notion export
-// ═══════════════════════════════════════
+// ═══════════════════════════════════════════════════
 async function exportNotion() {
-  const key = document.getElementById('notionKey').value.trim();
-  const db  = document.getElementById('notionDb').value.trim();
+  const key = settings.notionKey;
+  const db  = settings.notionDb;
   const msg = document.getElementById('notionMsg');
 
   if (!key || !db) {
-    msg.style.color = 'var(--danger)';
-    msg.textContent = '⚠️ API KeyとデータベースIDを入力してください';
+    msg.innerHTML = '<div class="status-msg err">⚠️ Integration TokenとデータベースIDを設定タブで入力してください</div>';
     return;
   }
 
-  saveNotion({ key, db });
-  msg.style.color = 'var(--text-muted)';
-  msg.textContent = '送信中...';
+  msg.innerHTML = '<div class="status-msg inf">送信中...</div>';
 
-  const d      = new Date();
-  const dStr   = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  const pText  = st.pattern ? `${PATTERNS[st.pattern].emoji} ${PATTERNS[st.pattern].name}` : '未設定';
-  const comp   = st.tasks.filter(t=>t.done).map(t=>`- ${t.name} 🍅${t.poms||0}`).join('\n');
-  const incomp = st.tasks.filter(t=>!t.done).map(t=>`- ${t.name}`).join('\n');
+  const tasks  = st.tasks || [];
+  const done   = tasks.filter(t => t.done);
+  const totMin = (st.sessions || []).reduce((s,x) => s + x.durationMin, 0);
+  const ach    = tasks.length ? Math.round(done.length / tasks.length * 100) : 0;
+  const p      = st.pattern ? PATTERNS[st.pattern] : null;
+  const dStr   = st.date;
 
   const body = {
     parent: { database_id: db },
     properties: {
-      Name:           { title:     [{ text:{ content:`${dStr} の作業記録` } }] },
-      Date:           { date:      { start: dStr } },
-      Pattern:        { rich_text: [{ text:{ content: pText } }] },
-      Pomodoros:      { number:    st.todayPoms||0 },
-      CompletedTasks: { rich_text: [{ text:{ content: comp||'なし' } }] },
-      Notes:          { rich_text: [{ text:{ content: incomp ? `未完了:\n${incomp}` : '' } }] },
-    }
+      'タイトル':       { title:     [{ text:{ content:`${dStr} の作業記録` } }] },
+      '日付':           { date:      { start: dStr } },
+      'パターン':       { rich_text: [{ text:{ content: p ? `${p.emoji} ${p.name}` : '未設定' } }] },
+      '作業時間（分）': { number:    totMin },
+      '達成度（%）':    { number:    ach },
+      '完了タスク':     { rich_text: [{ text:{ content: done.map(t=>t.name).join(', ') || 'なし' } }] },
+      '一言メモ':       { rich_text: [{ text:{ content: st.dayMemo || '' } }] },
+    },
   };
 
   try {
     const res = await fetch('https://api.notion.com/v1/pages', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${key}`,
+        'Authorization':  `Bearer ${key}`,
         'Notion-Version': '2022-06-28',
-        'Content-Type': 'application/json',
+        'Content-Type':   'application/json',
       },
       body: JSON.stringify(body),
     });
-
     if (res.ok) {
-      msg.style.color = 'var(--success)';
-      msg.textContent = '✅ Notionに保存しました！';
+      msg.innerHTML = '<div class="status-msg ok">✅ Notionに保存しました！</div>';
     } else {
-      const e = await res.json().catch(()=>({}));
-      msg.style.color = 'var(--danger)';
-      msg.textContent = `❌ エラー: ${e.message || res.status}`;
+      const e = await res.json().catch(() => ({}));
+      msg.innerHTML = `<div class="status-msg err">❌ エラー: ${esc(e.message || String(res.status))}</div>`;
     }
   } catch (e) {
-    msg.style.color = 'var(--danger)';
-    msg.textContent = `❌ 送信失敗: ${e.message}`;
+    msg.innerHTML = `<div class="status-msg err">❌ 通信エラー: ${esc(e.message)}<br><small>CORSエラーの場合はブラウザ拡張をお試しください。</small></div>`;
   }
 }
 
-// ═══════════════════════════════════════
-//  Notifications
-// ═══════════════════════════════════════
-function updateNotifBanner() {
-  const b = document.getElementById('notifBanner');
-  if (!('Notification' in window) || Notification.permission === 'granted') {
-    b.classList.add('hidden');
-  }
+// ═══════════════════════════════════════════════════
+//  Settings
+// ═══════════════════════════════════════════════════
+function saveSettings() {
+  settings.notionKey = document.getElementById('notionKey').value.trim();
+  settings.notionDb  = document.getElementById('notionDb').value.trim();
+  saveJ(K_SETTINGS, settings);
 }
 
-function askNotifPerm() {
-  if ('Notification' in window) {
-    Notification.requestPermission().then(() => updateNotifBanner());
-  }
+// ═══════════════════════════════════════════════════
+//  Data management
+// ═══════════════════════════════════════════════════
+function clearToday() {
+  if (!confirm('今日のデータをすべてリセットしますか？')) return;
+  stopWorker();
+  st  = defaultToday();
+  tmr = { active:false, phase:'work', startEpoch:null, pausedRemaining:null, selectedId:null };
+  saveJ(K_TODAY, st); saveJ(K_TIMER, null);
+  document.getElementById('dayMemo').value = '';
+  document.getElementById('mainBtn').textContent = '▶ スタート';
+  document.getElementById('mainBtn').classList.remove('break');
+  hideToast();
+  renderAll(); renderPomSelect(); renderSessionLog(); renderStats(); refreshTimerUI();
 }
 
-function notify(title, body) {
-  if ('Notification' in window && Notification.permission === 'granted') {
-    new Notification(title, { body });
-  }
+function clearAll() {
+  if (!confirm('すべてのデータを削除しますか？この操作は元に戻せません。')) return;
+  [K_TODAY, K_HISTORY, K_TIMER].forEach(k => localStorage.removeItem(k));
+  history = [];
+  clearToday();
 }
 
-// ═══════════════════════════════════════
+// ═══════════════════════════════════════════════════
 //  Utilities
-// ═══════════════════════════════════════
+// ═══════════════════════════════════════════════════
 function esc(s) {
   return String(s||'')
     .replace(/&/g,'&amp;').replace(/</g,'&lt;')
     .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-function clearData() {
-  if (!confirm('今日のデータをすべてリセットしますか？')) return;
-  localStorage.removeItem(DATA_KEY());
-  saveTimer(null);
-  st  = defaultState();
-  tmr = { active:false, phase:'work', startEpoch:null, pausedRemaining:null, selectedId:null };
-  stopTicker();
-  resetTimer();
-  renderAll();
+function fmtMin(m) {
+  if (!m) return '0分';
+  if (m < 60) return m + '分';
+  const h = Math.floor(m / 60), r = m % 60;
+  return r ? `${h}時間${r}分` : `${h}時間`;
 }
 
-// Space bar shortcut on pomodoro tab
+function fmtDate(ds) {
+  const d = new Date(ds + 'T00:00:00');
+  const days = ['日','月','火','水','木','金','土'];
+  return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${days[d.getDay()]}）`;
+}
+
+// Space to toggle timer on pomodoro tab
 document.addEventListener('keydown', e => {
   if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
   if (e.key === ' ' && document.getElementById('tab-pomodoro').classList.contains('active')) {
-    e.preventDefault();
-    toggleTimer();
+    e.preventDefault(); toggleTimer();
   }
   if (e.key === 'Escape') closeModal();
 });
 
-// ═══════════════════════════════════════
+// ═══════════════════════════════════════════════════
 //  Boot
-// ═══════════════════════════════════════
+// ═══════════════════════════════════════════════════
 init();
 </script>
 </body>
