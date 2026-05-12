@@ -29,8 +29,8 @@
     .header-title { font-size: 17px; font-weight: 800; color: var(--accent); }
     .header-date  { font-size: 12px; color: var(--muted); }
 
-    .tabs { display: flex; background: var(--surface); border-bottom: 2px solid var(--border); padding: 0 10px; position: sticky; top: 49px; z-index: 19; }
-    .tab-btn { flex: 1; padding: 11px 6px; border: none; background: none; cursor: pointer; font-size: 12px; font-weight: 700; color: var(--muted); border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all .18s; font-family: inherit; }
+    .tabs { display: flex; background: var(--surface); border-bottom: 2px solid var(--border); padding: 0 4px; position: sticky; top: 49px; z-index: 19; }
+    .tab-btn { flex: 1; padding: 10px 2px; border: none; background: none; cursor: pointer; font-size: 11px; font-weight: 700; color: var(--muted); border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all .18s; font-family: inherit; }
     .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
 
     .content { max-width: 720px; margin: 0 auto; padding: 14px 12px 60px; }
@@ -40,7 +40,6 @@
     .card { background: var(--surface); border-radius: 16px; padding: 16px; margin-bottom: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); }
     .card-title { font-size: 14px; font-weight: 800; margin-bottom: 14px; color: var(--text); display: flex; align-items: center; justify-content: space-between; }
 
-    /* Patterns */
     .pattern-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
     .pattern-card { border: 2px solid var(--border); border-radius: 14px; padding: 12px 8px; cursor: pointer; transition: all .18s; text-align: center; user-select: none; }
     .pattern-card:hover { border-color: var(--pink); background: var(--pink-l); }
@@ -49,7 +48,6 @@
     .p-name  { font-weight: 800; font-size: 12px; margin-bottom: 2px; }
     .p-desc  { font-size: 10px; color: var(--muted); line-height: 1.4; }
 
-    /* Time progress */
     .time-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 10px; align-items: flex-end; }
     .time-col .t-lbl { font-size: 10px; color: var(--muted); margin-bottom: 2px; }
     .time-col .t-val { font-size: 20px; font-weight: 800; color: var(--accent); line-height: 1; }
@@ -58,7 +56,6 @@
     .progress-fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--green-d)); border-radius: 4px; transition: width .4s; }
     .progress-fill.over { background: #C04040; }
 
-    /* Tasks */
     .task-item { border: 1px solid var(--border); border-radius: 12px; padding: 11px 12px; margin-bottom: 7px; display: flex; gap: 10px; align-items: flex-start; transition: all .2s; }
     .task-item.done { opacity: .55; background: var(--green-l); border-color: var(--green); }
     .task-cb { width: 18px; height: 18px; accent-color: var(--green-d); cursor: pointer; flex-shrink: 0; margin-top: 3px; }
@@ -73,13 +70,11 @@
     .btn-ic { width: 28px; height: 28px; border: none; background: var(--pink-l); border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--muted); transition: all .15s; }
     .btn-ic:hover { background: var(--border); color: var(--accent); }
 
-    /* Badges */
     .badge { padding: 2px 7px; border-radius: 20px; font-size: 10px; font-weight: 700; flex-shrink: 0; }
     .b-must { background: #FFE0E8; color: #C04060; }
     .b-opt  { background: var(--green-l); color: var(--green-d); }
     .b-cat  { background: var(--pink-l); color: var(--pink-d); }
 
-    /* Buttons */
     .btn { padding: 9px 16px; border-radius: 10px; border: none; cursor: pointer; font-size: 13px; font-weight: 700; transition: all .18s; display: inline-flex; align-items: center; gap: 5px; font-family: inherit; }
     .btn-primary   { background: var(--accent); color: #fff; }
     .btn-primary:hover { background: var(--accent-d); }
@@ -91,7 +86,6 @@
     .btn-danger:hover { background: #FFCCCC; }
     .btn-full { width: 100%; justify-content: center; }
 
-    /* Forms */
     .form-group { margin-bottom: 12px; }
     .form-label { display: block; font-size: 11px; font-weight: 800; margin-bottom: 5px; color: var(--muted); }
     .form-ctrl { width: 100%; padding: 9px 11px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 14px; color: var(--text); background: var(--surface); transition: border-color .18s; font-family: inherit; }
@@ -103,14 +97,12 @@
     .pri-btn.sel-must { border-color: #C04060; background: #FFE0E8; color: #C04060; }
     .pri-btn.sel-opt  { border-color: var(--green-d); background: var(--green-l); color: var(--green-d); }
 
-    /* Modal */
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(60,20,40,.4); z-index: 200; align-items: center; justify-content: center; padding: 16px; }
     .modal-overlay.active { display: flex; }
     .modal { background: var(--surface); border-radius: 20px; padding: 22px; width: 100%; max-width: 460px; max-height: 90vh; overflow-y: auto; border: 1.5px solid var(--border); }
     .modal-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
     .modal-hdr h2 { font-size: 16px; font-weight: 800; }
 
-    /* Mode selector */
     .mode-selector { display: flex; gap: 8px; }
     .mode-btn { flex: 1; padding: 10px 4px; border-radius: 12px; border: 2px solid var(--border); background: var(--surface); cursor: pointer; text-align: center; transition: all .18s; font-family: inherit; }
     .mode-btn:hover { border-color: var(--pink); background: var(--pink-l); }
@@ -119,7 +111,15 @@
     .m-name  { font-size: 11px; font-weight: 800; color: var(--text); }
     .m-time  { font-size: 10px; color: var(--muted); margin-top: 1px; }
 
-    /* Circular timer */
+    .loop-selector { display: flex; gap: 8px; }
+    .loop-btn { flex: 1; padding: 10px 8px; border-radius: 10px; border: 2px solid var(--border); background: var(--surface); cursor: pointer; font-size: 12px; font-weight: 700; text-align: center; transition: all .18s; font-family: inherit; color: var(--muted); }
+    .loop-btn:hover { border-color: var(--pink); background: var(--pink-l); }
+    .loop-btn.active { border-color: var(--accent); background: var(--pink-l); color: var(--accent); }
+    .loop-set-row { display: flex; align-items: center; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+    .loop-set-row label { font-size: 13px; color: var(--text); }
+    .loop-set-row .form-ctrl { width: 80px; }
+    .loop-set-row span { font-size: 12px; color: var(--muted); }
+
     .timer-wrap { text-align: center; padding: 8px 0 16px; }
     .ring-wrap { position: relative; display: inline-block; width: 200px; height: 200px; margin-bottom: 14px; }
     .ring-wrap svg { position: absolute; top: 0; left: 0; }
@@ -139,14 +139,12 @@
     .btn-t-reset { padding: 12px 20px; border-radius: 30px; border: none; cursor: pointer; font-size: 14px; font-weight: 700; background: var(--pink-l); color: var(--muted); transition: all .18s; font-family: inherit; }
     .btn-t-reset:hover { background: var(--border); color: var(--text); }
 
-    /* Toast */
     .toast { display: none; border-radius: 12px; padding: 11px 14px; margin-bottom: 12px; text-align: center; font-weight: 800; font-size: 14px; animation: fadeIn .3s; }
     .toast.work-toast  { background: var(--pink-l);  border: 2px solid var(--pink);  color: var(--pink-d); }
     .toast.break-toast { background: var(--green-l); border: 2px solid var(--green); color: var(--green-d); }
     .toast.show { display: block; }
     @keyframes fadeIn { from{opacity:0;transform:translateY(-5px);}to{opacity:1;transform:none;} }
 
-    /* Sound toggle */
     .sound-row { display: flex; align-items: center; justify-content: flex-end; gap: 8px; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
     .toggle-wrap { position: relative; width: 36px; height: 20px; }
     .toggle-wrap input { opacity: 0; width: 0; height: 0; position: absolute; }
@@ -155,7 +153,6 @@
     input:checked + .toggle-slider { background: var(--accent); }
     input:checked + .toggle-slider:before { transform: translateX(16px); }
 
-    /* Sessions */
     .session-item { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
     .session-item:last-child { border-bottom: none; }
     .session-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
@@ -167,7 +164,6 @@
     .s-dur.work  { color: var(--pink-d); }
     .s-dur.break { color: var(--green-d); }
 
-    /* Stats */
     .stat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
     .stat-box   { border-radius: 12px; padding: 12px 8px; text-align: center; }
     .stat-box.p { background: var(--pink-l); }
@@ -177,7 +173,6 @@
     .stat-box.g .stat-num { color: var(--green-d); }
     .stat-lbl   { font-size: 10px; color: var(--muted); margin-top: 4px; }
 
-    /* Records */
     .rec-card { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 8px; overflow: hidden; cursor: pointer; transition: border-color .18s; }
     .rec-card:hover { border-color: var(--pink); }
     .rec-hdr  { padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
@@ -187,14 +182,32 @@
     .rec-body { display: none; padding: 12px 14px; border-top: 1px solid var(--border); background: var(--pink-l); }
     .rec-card.expanded .rec-body { display: block; }
     .rec-task-row { font-size: 12px; padding: 2px 0; display: flex; align-items: center; gap: 6px; }
+    .rec-memo { font-size: 13px; margin-bottom: 8px; white-space: pre-wrap; word-break: break-word; line-height: 1.6; }
 
-    /* Chart */
     .chart-wrap { width: 100%; }
     .legend { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
     .leg-item { display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--muted); }
     .leg-dot  { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
 
-    /* Misc */
+    /* Blackboard */
+    .board-lbl { font-size: 11px; font-weight: 800; color: var(--muted); margin-bottom: 6px; display: block; }
+    .board-ta { width: 100%; min-height: 120px; background: #252D3D; color: #DDE8FF; border: none; border-radius: 14px; padding: 16px; font-size: 15px; font-family: 'Courier New', monospace; resize: vertical; line-height: 1.75; letter-spacing: .3px; }
+    .board-ta::placeholder { color: #5A6A88; }
+    .board-ta:focus { outline: 2px solid #7A9AFF; }
+
+    /* Note cards */
+    .note-card { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 8px; overflow: hidden; }
+    .note-card-hdr { padding: 11px 12px; display: flex; align-items: center; gap: 8px; background: var(--surface); }
+    .note-card-hdr:hover { background: var(--pink-l); }
+    .note-title-input { flex: 1; border: none; background: transparent; font-size: 13px; font-weight: 700; color: var(--text); outline: none; min-width: 0; font-family: inherit; cursor: text; }
+    .note-toggle { font-size: 11px; color: var(--muted); flex-shrink: 0; transition: transform .2s; display: inline-block; }
+    .note-card.expanded .note-toggle { transform: rotate(180deg); }
+    .note-body { display: none; padding: 0 12px 12px; }
+    .note-card.expanded .note-body { display: block; }
+    .note-ta { width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 9px 11px; font-size: 13px; font-family: inherit; color: var(--text); background: var(--s2); resize: vertical; min-height: 80px; line-height: 1.6; }
+    .note-ta:focus { outline: none; border-color: var(--accent); }
+    .note-meta { font-size: 10px; color: var(--muted); margin-top: 6px; }
+
     .help { font-size: 11px; color: var(--muted); margin-top: 4px; }
     .status-msg { text-align: center; font-size: 13px; padding: 8px 12px; border-radius: 8px; margin-top: 8px; }
     .status-msg.ok  { background: var(--green-l); color: var(--green-d); }
@@ -222,6 +235,7 @@
   <button class="tab-btn active" onclick="switchTab('plan',this)">📋 計画</button>
   <button class="tab-btn"        onclick="switchTab('pomodoro',this)">⏱ ポモドーロ</button>
   <button class="tab-btn"        onclick="switchTab('records',this)">📊 記録</button>
+  <button class="tab-btn"        onclick="switchTab('memo',this)">📝 メモ</button>
   <button class="tab-btn"        onclick="switchTab('settings',this)">⚙️ 設定</button>
 </div>
 
@@ -289,6 +303,19 @@
     </div>
 
     <div class="card">
+      <div class="card-title">🔄 ループ設定</div>
+      <div class="loop-selector">
+        <button class="loop-btn active" id="loop-inf" onclick="setLoopMode('inf')">♾️ ノンストップ<div style="font-size:10px;font-weight:400;margin-top:2px;color:var(--muted)">一時停止するまで継続</div></button>
+        <button class="loop-btn" id="loop-set" onclick="setLoopMode('set')">🎯 セット数を決める<div style="font-size:10px;font-weight:400;margin-top:2px;color:var(--muted)">完了後に自動停止</div></button>
+      </div>
+      <div class="loop-set-row" id="loopSetRow" style="display:none">
+        <label>セット数：</label>
+        <input type="number" class="form-ctrl" id="loopCount" min="1" max="20" value="4" oninput="saveLoopCount()">
+        <span>セット完了後に自動停止します</span>
+      </div>
+    </div>
+
+    <div class="card">
       <div class="sound-row">
         🔔 通知音
         <label class="toggle-wrap">
@@ -343,8 +370,26 @@
       <div id="weekStats" style="font-size:12px;color:var(--muted);margin-top:8px;text-align:center"></div>
     </div>
     <div class="card">
-      <div class="card-title">🗓 過去の記録</div>
+      <div class="card-title">
+        🗓 過去の記録
+        <button class="btn btn-secondary" style="padding:6px 12px;font-size:12px" onclick="openRecordEdit(null)">＋ 手動追加</button>
+      </div>
       <div id="recordsList"><div class="empty">記録がありません。「計画」タブから記録しましょう！</div></div>
+    </div>
+  </div>
+
+  <!-- MEMO -->
+  <div class="tab-panel" id="tab-memo">
+    <div class="card">
+      <span class="board-lbl">🖊 ひとことメモ（思いついたことをぱっと書き留めよう）</span>
+      <textarea class="board-ta" id="boardMemo" placeholder="アイデア、やりたいこと、ひとこと..." oninput="saveBoard()"></textarea>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        📌 メモ一覧
+        <button class="btn btn-primary" style="padding:6px 13px;font-size:12px" onclick="addNoteCard()">＋ 追加</button>
+      </div>
+      <div id="notesList"><div class="empty">メモがありません。「＋ 追加」から追加してください 📝</div></div>
     </div>
   </div>
 
@@ -406,7 +451,7 @@
         <option>🎨 イラスト制作</option>
         <option>🛍️ グッズ・通販</option>
         <option>💡 新商品・企画</option>
-        <option>✨ ププ</option>
+        <option>✨ マシュマロ</option>
         <option>🏰 ギルド</option>
         <option>📌 その他</option>
       </select>
@@ -435,6 +480,47 @@
   </div>
 </div>
 
+<!-- Record edit modal -->
+<div class="modal-overlay" id="recordModal" onclick="onRecordModalBg(event)">
+  <div class="modal">
+    <div class="modal-hdr">
+      <h2 id="recordModalTitle">📝 記録を手動追加</h2>
+      <button class="btn-ic" onclick="closeRecordModal()">✕</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">日付</label>
+      <input type="date" class="form-ctrl" id="rDate">
+    </div>
+    <div class="form-group">
+      <label class="form-label">パターン</label>
+      <select class="form-ctrl" id="rPattern">
+        <option value="">未設定</option>
+        <option value="free">🌸 フリー</option>
+        <option value="light">☀️ 予定すこし</option>
+        <option value="heavy">📅 予定いっぱい</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">今日のメモ 💬</label>
+      <textarea class="form-ctrl" id="rMemo" rows="3" placeholder="その日のメモ・振り返りなど..."></textarea>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">🍅 集中した時間（分）</label>
+        <input type="number" class="form-ctrl" id="rWork" min="0" step="5" placeholder="0">
+      </div>
+      <div class="form-group">
+        <label class="form-label">☕ 休憩した時間（分）</label>
+        <input type="number" class="form-ctrl" id="rBreak" min="0" step="5" placeholder="0">
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:4px">
+      <button class="btn btn-secondary" onclick="closeRecordModal()">キャンセル</button>
+      <button class="btn btn-green" onclick="saveRecordEdit()">保存 💾</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ── Web Worker ──
 const _wBlob = new Blob([`setInterval(()=>self.postMessage('t'),200);`],{type:'application/javascript'});
@@ -455,16 +541,16 @@ const PATTERNS = {
   heavy: { name:'予定いっぱい', hours:1.5, emoji:'📅' },
 };
 const CAT_COLORS = {
-  '📱 SNS':        '#FFB3C6',
-  '🎨 イラスト制作':'#B3D4FF',
-  '🛍️ グッズ・通販':'#FFE5B3',
-  '💡 新商品・企画':'#FFC9A0',
-  '✨ ププ':         '#D4B3FF',
-  '🏰 ギルド':      '#B3E5C8',
-  '📌 その他':      '#D0D0D0',
+  '📱 SNS':         '#C5E8A0',
+  '🎨 イラスト制作': '#C5E8A0',
+  '🛍️ グッズ・通販': '#C5E8A0',
+  '💡 新商品・企画': '#C5E8A0',
+  '✨ マシュマロ':   '#FFB3C6',
+  '🏰 ギルド':      '#A8DCEF',
+  '📌 その他':      '#FFCCD6',
 };
 const CIRC = 2*Math.PI*85;
-const K_TODAY='cp_today', K_HIST='cp_history', K_TMR='cp_timer', K_SET='cp_settings';
+const K_TODAY='cp_today', K_HIST='cp_history', K_TMR='cp_timer', K_SET='cp_settings', K_NOTES='cp_notes';
 
 // ── State ──
 function todayStr(){ const d=new Date(); return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
@@ -478,13 +564,15 @@ let st   = loadJ(K_TODAY, defToday());
 if(st.date!==todayStr()){st=defToday();saveJ(K_TODAY,st);}
 let hist     = loadJ(K_HIST,[]);
 let settings = loadJ(K_SET,{notionKey:'',notionDb:'',sound:true});
-let tmr = {active:false,phase:'work',mode:'normal',startEpoch:null,pausedRem:null,cycle:1};
+let notes    = loadJ(K_NOTES,{board:'',cards:[]});
+let tmr = {active:false,phase:'work',mode:'normal',startEpoch:null,pausedRem:null,cycle:1,loopMode:'inf',maxCycles:4};
 
 // Restore timer
 (function(){
   const s=loadJ(K_TMR,null); if(!s) return;
   tmr.phase=s.phase||'work'; tmr.mode=s.mode||'normal';
   tmr.cycle=s.cycle||1; tmr.pausedRem=s.pausedRem??null;
+  tmr.loopMode=s.loopMode||'inf'; tmr.maxCycles=s.maxCycles||4;
   if(s.active&&s.startEpoch){
     const dur=MODES[tmr.mode][tmr.phase==='work'?'work':'brk'];
     const elap=(Date.now()-s.startEpoch)/1000;
@@ -493,17 +581,23 @@ let tmr = {active:false,phase:'work',mode:'normal',startEpoch:null,pausedRem:nul
   }
 })();
 
-let editId=null, curPri='must';
+let editId=null, curPri='must', editRecDate=null;
 
 // ── Init ──
 function init(){
   const d=new Date(), days=['日','月','火','水','木','金','土'];
   document.getElementById('headerDate').textContent=`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${days[d.getDay()]}）`;
   document.getElementById('dayMemo').value=st.dayMemo||'';
+  document.getElementById('boardMemo').value=notes.board||'';
   document.getElementById('notionKey').value=settings.notionKey||'';
   document.getElementById('notionDb').value=settings.notionDb||'';
   document.getElementById('soundToggle').checked=settings.sound!==false;
   document.getElementById('soundToggle2').checked=settings.sound!==false;
+  // Loop UI
+  document.getElementById('loop-inf').classList.toggle('active',tmr.loopMode==='inf');
+  document.getElementById('loop-set').classList.toggle('active',tmr.loopMode==='set');
+  document.getElementById('loopSetRow').style.display=tmr.loopMode==='set'?'flex':'none';
+  document.getElementById('loopCount').value=tmr.maxCycles||4;
   renderAll(); renderSessions(); renderStats(); renderModes(); refreshTimerUI(); updateCycleBadge();
   if(tmr.active){startWorker(); document.getElementById('mainBtn').textContent='⏸ 一時停止';}
 }
@@ -514,6 +608,7 @@ function switchTab(n,btn){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+n).classList.add('active'); btn.classList.add('active');
   if(n==='records'){renderRecords();drawChart();}
+  if(n==='memo'){renderNotes();}
 }
 
 function renderAll(){ renderPatterns(); renderTimeProgress(); renderTaskList(); }
@@ -610,7 +705,6 @@ function delTask(id){ if(!confirm('削除しますか？'))return; st.tasks=st.t
 function toggleDone(id){
   const t=st.tasks.find(x=>x.id===id); if(!t) return;
   t.done=!t.done;
-  // チェックON時：予定時間を実績として自動記録
   if(t.done && t.hours && !t.actualMin) t.actualMin=Math.round(t.hours*60);
   if(!t.done) t.actualMin=0;
   saveJ(K_TODAY,st); renderAll(); renderStats();
@@ -624,7 +718,24 @@ function setMode(m){
   renderModes(); refreshTimerUI(); updateCycleBadge(); persistTimer();
 }
 function renderModes(){ Object.keys(MODES).forEach(k=>document.getElementById('mode-'+k)?.classList.toggle('active',tmr.mode===k)); }
-function updateCycleBadge(){ document.getElementById('cycleBadge').textContent=`第${tmr.cycle}サイクル`; }
+function updateCycleBadge(){
+  const base=`第${tmr.cycle}サイクル`;
+  document.getElementById('cycleBadge').textContent=
+    tmr.loopMode==='set'?`${base} ／ ${tmr.maxCycles}セット目標`:base;
+}
+
+// ── Loop settings ──
+function setLoopMode(m){
+  tmr.loopMode=m;
+  document.getElementById('loop-inf').classList.toggle('active',m==='inf');
+  document.getElementById('loop-set').classList.toggle('active',m==='set');
+  document.getElementById('loopSetRow').style.display=m==='set'?'flex':'none';
+  updateCycleBadge(); persistTimer();
+}
+function saveLoopCount(){
+  tmr.maxCycles=Math.max(1,Math.min(20,parseInt(document.getElementById('loopCount').value)||4));
+  updateCycleBadge(); persistTimer();
+}
 
 // ── Pomodoro timer ──
 function toggleTimer(){ if(tmr.active)pauseTimer(); else resumeTimer(); }
@@ -644,7 +755,7 @@ function pauseTimer(){
 }
 function resetTimer(){
   stopWorker(); tmr.active=false; tmr.phase='work'; tmr.startEpoch=null; tmr.pausedRem=null; tmr.cycle=1;
-  saveJ(K_TMR,null);
+  persistTimer();
   document.getElementById('mainBtn').textContent='▶ スタート';
   hideToast(); renderModes(); refreshTimerUI(); updateCycleBadge();
 }
@@ -676,7 +787,7 @@ function setTimerUI(rem,dur,phase){
 }
 
 function phaseComplete(){
-  stopWorker(); // stop old worker before any await
+  stopWorker();
   const m=MODES[tmr.mode];
   const now=new Date();
   const tStr=pad(now.getHours())+':'+pad(now.getMinutes());
@@ -685,29 +796,39 @@ function phaseComplete(){
     st.sessions.push({id:'s'+Date.now(),type:'work',taskName:'集中',category:'_work',durationMin:m.work/60,timeStr:tStr});
     saveJ(K_TODAY,st); renderSessions(); renderStats();
     playSound('work'); showToast('🍅 作業完了！休憩を開始します...','break-toast');
-    // Auto-start break
     tmr.phase='break'; tmr.startEpoch=Date.now(); tmr.active=true; tmr.pausedRem=null;
-    const brk=m.brk; setTimerUI(brk,brk,'break');
+    setTimerUI(m.brk,m.brk,'break');
   } else {
     st.sessions.push({id:'s'+Date.now(),type:'break',taskName:'休憩',category:'_break',durationMin:m.brk/60,timeStr:tStr});
     saveJ(K_TODAY,st); renderSessions(); renderStats();
-    playSound('break'); showToast('☕ 休憩終了！作業を再開します...','work-toast');
-    // Auto-start next work
+    playSound('break');
+
+    // Check if set limit reached
+    if(tmr.loopMode==='set' && tmr.cycle>=tmr.maxCycles){
+      tmr.active=false; tmr.phase='work'; tmr.startEpoch=null; tmr.pausedRem=null; tmr.cycle=1;
+      document.getElementById('mainBtn').textContent='▶ スタート';
+      updateCycleBadge(); persistTimer();
+      const wk=m.work; setTimerUI(wk,wk,'work');
+      showToast(`🎉 ${tmr.maxCycles}セット完了！お疲れさまでした！`,'break-toast');
+      return;
+    }
+
+    showToast('☕ 休憩終了！作業を再開します...','work-toast');
     tmr.phase='work'; tmr.startEpoch=Date.now(); tmr.active=true; tmr.pausedRem=null; tmr.cycle++;
     updateCycleBadge();
-    const wk=m.work; setTimerUI(wk,wk,'work');
+    setTimerUI(m.work,m.work,'work');
   }
   persistTimer();
-  startWorker(); // start new worker for next phase
+  startWorker();
 }
 
 function handleExpired(s){
-  const m=MODES[s.mode||'normal'];
   if(s.phase==='work'){ tmr.phase='break'; }
   else { tmr.phase='work'; tmr.cycle=(s.cycle||1)+1; }
-  tmr.mode=s.mode||'normal'; tmr.cycle=s.cycle||1; saveJ(K_TMR,null);
+  tmr.mode=s.mode||'normal'; tmr.loopMode=s.loopMode||'inf'; tmr.maxCycles=s.maxCycles||4;
+  persistTimer();
 }
-function persistTimer(){ saveJ(K_TMR,{active:tmr.active,phase:tmr.phase,mode:tmr.mode,startEpoch:tmr.startEpoch,pausedRem:tmr.pausedRem,cycle:tmr.cycle}); }
+function persistTimer(){ saveJ(K_TMR,{active:tmr.active,phase:tmr.phase,mode:tmr.mode,startEpoch:tmr.startEpoch,pausedRem:tmr.pausedRem,cycle:tmr.cycle,loopMode:tmr.loopMode,maxCycles:tmr.maxCycles}); }
 
 function showToast(msg, cls){
   const el=document.getElementById('completeToast');
@@ -787,10 +908,13 @@ function renderRecords(){
           <div class="rec-date">${fmtDate(r.date)}</div>
           <div class="rec-sum">${r.patternLbl} ｜ 🍅${fmtMin(r.workMin||0)} ｜ ☕${fmtMin(r.breakMin||0)} ｜ ${done}/${total}タスク</div>
         </div>
-        <div class="rec-ach">${r.achievement}%</div>
+        <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+          <div class="rec-ach">${r.achievement}%</div>
+          <button class="btn-ic" onclick="event.stopPropagation();openRecordEdit('${r.date}')" title="編集">✏️</button>
+        </div>
       </div>
       <div class="rec-body">
-        ${r.dayMemo?`<div style="font-size:13px;margin-bottom:8px">💬 ${esc(r.dayMemo)}</div>`:''}
+        ${r.dayMemo?`<div class="rec-memo">💬 ${esc(r.dayMemo)}</div>`:''}
         <div style="font-size:11px;color:var(--muted);margin-bottom:6px">合計セッション時間: ${fmtMin(r.totalMin||0)}</div>
         ${(r.tasks||[]).map(t=>`<div class="rec-task-row" style="${t.done?'text-decoration:line-through;color:var(--muted)':''}">
           ${t.done?'✅':'⬜'} ${t.priority==='must'?'⚡':'✨'} ${esc(t.name)}
@@ -802,7 +926,46 @@ function renderRecords(){
 }
 function toggleRec(i){ document.getElementById('rc-'+i)?.classList.toggle('expanded'); }
 
-// ── Weekly chart: line + stacked bar on same canvas ──
+// ── Record edit modal ──
+function openRecordEdit(dateStr){
+  editRecDate = dateStr||null;
+  const r = dateStr ? hist.find(h=>h.date===dateStr) : null;
+  document.getElementById('recordModalTitle').textContent = r ? '✏️ 記録を編集' : '📝 記録を手動追加';
+  if(r){
+    document.getElementById('rDate').value=r.date;
+  } else {
+    const yd=new Date(); yd.setDate(yd.getDate()-1);
+    document.getElementById('rDate').value=toDS(yd);
+  }
+  document.getElementById('rPattern').value=r?.pattern||'';
+  document.getElementById('rMemo').value=r?.dayMemo||'';
+  document.getElementById('rWork').value=r?.workMin??0;
+  document.getElementById('rBreak').value=r?.breakMin??0;
+  document.getElementById('recordModal').classList.add('active');
+  setTimeout(()=>document.getElementById('rDate').focus(),80);
+}
+function saveRecordEdit(){
+  const date=document.getElementById('rDate').value;
+  if(!date){alert('日付を選択してください');return;}
+  const pattern=document.getElementById('rPattern').value||null;
+  const p=pattern?PATTERNS[pattern]:null;
+  const wm=parseInt(document.getElementById('rWork').value)||0;
+  const bm=parseInt(document.getElementById('rBreak').value)||0;
+  const existing=hist.find(h=>h.date===date);
+  const rec=existing?{...existing}:{date,tasks:[],sessions:[],achievement:0};
+  rec.pattern=pattern; rec.patternLbl=p?`${p.emoji} ${p.name}`:'未設定';
+  rec.dayMemo=document.getElementById('rMemo').value;
+  rec.workMin=wm; rec.breakMin=bm; rec.totalMin=wm+bm;
+  rec.savedAt=new Date().toISOString();
+  const idx=hist.findIndex(h=>h.date===date);
+  if(idx!==-1) hist[idx]=rec; else hist.unshift(rec);
+  saveJ(K_HIST,hist);
+  closeRecordModal(); renderRecords(); drawChart();
+}
+function closeRecordModal(){ document.getElementById('recordModal').classList.remove('active'); editRecDate=null; }
+function onRecordModalBg(e){ if(e.target===document.getElementById('recordModal'))closeRecordModal(); }
+
+// ── Weekly chart: line + stacked bar ──
 function drawChart(){
   const canvas=document.getElementById('weekChart');
   const wrap=canvas.parentElement;
@@ -822,7 +985,6 @@ function drawChart(){
   const cW=W-PAD_L-PAD_R;
   const barW=(cW/7)*0.55, barGap=cW/7;
 
-  // Build 7-day data
   const days=[];
   for(let i=6;i>=0;i--){
     const d=new Date(); d.setDate(d.getDate()-i);
@@ -844,14 +1006,10 @@ function drawChart(){
 
   ctx.clearRect(0,0,W,H);
 
-  // ═══ LINE CHART (top): pomodoro time ═══
   const lTop=PAD_T, lBot=PAD_T+LINE_H;
-
-  // Section label
   ctx.fillStyle='#CC607A'; ctx.font='bold 10px sans-serif'; ctx.textAlign='left';
   ctx.fillText('⏱ ポモドーロ時間（集中＋休憩）', PAD_L, lTop-4);
 
-  // Grid
   [0,.5,1].forEach(p=>{
     const y=lBot-LINE_H*p;
     ctx.strokeStyle='#FFE8EE'; ctx.lineWidth=1;
@@ -860,10 +1018,8 @@ function drawChart(){
     ctx.fillText(fmtMin(Math.round(maxPom*p)),PAD_L-3,y+3);
   });
 
-  // Points
   const pts=days.map((d,i)=>({x:PAD_L+barGap*i+barGap/2, y:lBot-LINE_H*(d.pomTotal/maxPom)}));
 
-  // Filled area
   const grad=ctx.createLinearGradient(0,lTop,0,lBot);
   grad.addColorStop(0,'rgba(255,183,197,0.35)'); grad.addColorStop(1,'rgba(255,183,197,0.03)');
   ctx.beginPath(); ctx.moveTo(pts[0].x,lBot);
@@ -871,11 +1027,9 @@ function drawChart(){
   ctx.lineTo(pts[pts.length-1].x,lBot); ctx.closePath();
   ctx.fillStyle=grad; ctx.fill();
 
-  // Line
   ctx.beginPath(); ctx.strokeStyle='#E0708A'; ctx.lineWidth=2.5; ctx.lineJoin='round';
   pts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y)); ctx.stroke();
 
-  // Dots + labels
   pts.forEach((p,i)=>{
     ctx.beginPath(); ctx.arc(p.x,p.y,4,0,Math.PI*2);
     ctx.fillStyle=days[i].isToday?'#E0708A':'#FFB7C5';
@@ -886,14 +1040,10 @@ function drawChart(){
     }
   });
 
-  // ═══ BAR CHART (bottom): completed task time ═══
   const bTop=lBot+SEP, bBot=bTop+BAR_H;
-
-  // Section label
   ctx.fillStyle='#45935A'; ctx.font='bold 10px sans-serif'; ctx.textAlign='left';
   ctx.fillText('✅ 完了タスクの作業時間', PAD_L, bTop-4);
 
-  // Grid
   [0,.5,1].forEach(p=>{
     const y=bBot-BAR_H*p;
     ctx.strokeStyle='#E8FBF0'; ctx.lineWidth=1;
@@ -904,7 +1054,6 @@ function drawChart(){
     }
   });
 
-  // Stacked bars
   days.forEach((d,i)=>{
     const x=PAD_L+barGap*i+(barGap-barW)/2;
     let stackY=bBot;
@@ -919,21 +1068,16 @@ function drawChart(){
       ctx.fillStyle='#45935A'; ctx.font='bold 9px sans-serif'; ctx.textAlign='center';
       ctx.fillText(fmtMin(d.taskTotal),x+barW/2,topY-3);
     }
-
-    // Shared day labels
     ctx.fillStyle=d.isToday?'#CC607A':'#9A7F8C';
     ctx.font=`${d.isToday?'800':'400'} 11px sans-serif`;
     ctx.textAlign='center';
     ctx.fillText(d.label,x+barW/2,bBot+16);
   });
 
-  // Separator between charts
-  ctx.strokeStyle='#FFD6E0'; ctx.lineWidth=1;
-  ctx.setLineDash([4,4]);
+  ctx.strokeStyle='#FFD6E0'; ctx.lineWidth=1; ctx.setLineDash([4,4]);
   ctx.beginPath(); ctx.moveTo(PAD_L,lBot+SEP/2); ctx.lineTo(W-PAD_R,lBot+SEP/2); ctx.stroke();
   ctx.setLineDash([]);
 
-  // Legend
   const used=new Set(); days.forEach(d=>Object.keys(d.catTotals).forEach(c=>used.add(c)));
   document.getElementById('chartLegend').innerHTML=[...used].map(c=>`
     <div class="leg-item"><div class="leg-dot" style="background:${CAT_COLORS[c]||'#ccc'}"></div><span>${c}</span></div>`).join('');
@@ -943,6 +1087,55 @@ function drawChart(){
   document.getElementById('weekStats').textContent=
     `今週のポモドーロ: ${fmtMin(totalPom)}  ｜  完了タスク時間: ${fmtMin(totalTask)}  ｜  作業日: ${days.filter(d=>d.pomTotal>0).length}日`;
 }
+
+// ── Memo (notes) tab ──
+function saveBoard(){ notes.board=document.getElementById('boardMemo').value; saveJ(K_NOTES,notes); }
+
+function renderNotes(){
+  const list=document.getElementById('notesList');
+  if(!notes.cards.length){
+    list.innerHTML='<div class="empty">メモがありません。「＋ 追加」から追加してください 📝</div>';
+    return;
+  }
+  list.innerHTML='';
+  notes.cards.forEach((c,i)=>{
+    const div=document.createElement('div');
+    div.id='nc-'+i;
+    div.className='note-card'+(c.collapsed===false?' expanded':'');
+    const dateStr=c.createdAt?new Date(c.createdAt).toLocaleDateString('ja-JP'):'';
+    div.innerHTML=`
+      <div class="note-card-hdr" onclick="toggleNoteCard(${i})">
+        <input class="note-title-input" value="${esc(c.title||'')}" placeholder="タイトル..."
+               onclick="event.stopPropagation()"
+               oninput="updateNoteTitle(${i},this.value)">
+        <button class="btn-ic" style="flex-shrink:0" onclick="event.stopPropagation();delNoteCard(${i})">🗑️</button>
+        <span class="note-toggle">▼</span>
+      </div>
+      <div class="note-body">
+        <textarea class="note-ta" placeholder="メモを入力..."
+                  oninput="updateNoteText(${i},this.value)">${esc(c.text||'')}</textarea>
+        ${dateStr?`<div class="note-meta">${dateStr}</div>`:''}
+      </div>`;
+    list.appendChild(div);
+  });
+}
+function addNoteCard(){
+  notes.cards.unshift({id:'n'+Date.now(),title:'',text:'',collapsed:false,createdAt:new Date().toISOString()});
+  saveJ(K_NOTES,notes); renderNotes();
+  setTimeout(()=>document.querySelector('.note-title-input')?.focus(),50);
+}
+function delNoteCard(i){
+  if(!confirm('このメモを削除しますか？'))return;
+  notes.cards.splice(i,1); saveJ(K_NOTES,notes); renderNotes();
+}
+function toggleNoteCard(i){
+  notes.cards[i].collapsed=!(notes.cards[i].collapsed===false);
+  saveJ(K_NOTES,notes);
+  const card=document.getElementById('nc-'+i);
+  if(card) card.classList.toggle('expanded',!notes.cards[i].collapsed);
+}
+function updateNoteTitle(i,v){ notes.cards[i].title=v; saveJ(K_NOTES,notes); }
+function updateNoteText(i,v){ notes.cards[i].text=v; saveJ(K_NOTES,notes); }
 
 // ── Notion ──
 async function exportNotion(){
@@ -978,16 +1171,18 @@ function saveSettings(){ settings.notionKey=document.getElementById('notionKey')
 function clearToday(){
   if(!confirm('今日のデータをリセットしますか？'))return;
   stopWorker(); st=defToday();
-  tmr={active:false,phase:'work',mode:tmr.mode,startEpoch:null,pausedRem:null,cycle:1};
-  saveJ(K_TODAY,st); saveJ(K_TMR,null);
+  tmr={active:false,phase:'work',mode:tmr.mode,startEpoch:null,pausedRem:null,cycle:1,loopMode:tmr.loopMode,maxCycles:tmr.maxCycles};
+  saveJ(K_TODAY,st); persistTimer();
   document.getElementById('dayMemo').value='';
   document.getElementById('mainBtn').textContent='▶ スタート';
   hideToast(); renderAll(); renderSessions(); renderStats(); renderModes(); refreshTimerUI(); updateCycleBadge();
 }
 function clearAll(){
   if(!confirm('すべてのデータを削除しますか？この操作は元に戻せません。'))return;
-  [K_TODAY,K_HIST,K_TMR].forEach(k=>localStorage.removeItem(k));
-  hist=[]; clearToday();
+  [K_TODAY,K_HIST,K_TMR,K_NOTES].forEach(k=>localStorage.removeItem(k));
+  hist=[]; notes={board:'',cards:[]};
+  document.getElementById('boardMemo').value='';
+  clearToday();
 }
 
 // ── Utils ──
@@ -998,7 +1193,7 @@ function fmtDate(ds){ const d=new Date(ds+'T00:00:00'),days=['日','月','火','
 document.addEventListener('keydown',e=>{
   if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.tagName==='SELECT') return;
   if(e.key===' '&&document.getElementById('tab-pomodoro').classList.contains('active')){e.preventDefault();toggleTimer();}
-  if(e.key==='Escape') closeModal();
+  if(e.key==='Escape'){ closeModal(); closeRecordModal(); }
 });
 
 init();
