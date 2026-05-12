@@ -191,9 +191,9 @@
 
     /* Blackboard */
     .board-lbl { font-size: 11px; font-weight: 800; color: var(--muted); margin-bottom: 6px; display: block; }
-    .board-ta { width: 100%; min-height: 120px; background: #252D3D; color: #DDE8FF; border: none; border-radius: 14px; padding: 16px; font-size: 15px; font-family: 'Courier New', monospace; resize: vertical; line-height: 1.75; letter-spacing: .3px; }
-    .board-ta::placeholder { color: #5A6A88; }
-    .board-ta:focus { outline: 2px solid #7A9AFF; }
+    .board-ta { width: 100%; min-height: 120px; background: var(--surface); color: var(--text); border: 1.5px solid var(--border); border-radius: 14px; padding: 16px; font-size: 15px; font-family: inherit; resize: vertical; line-height: 1.75; }
+    .board-ta::placeholder { color: var(--muted); }
+    .board-ta:focus { outline: none; border-color: var(--accent); }
 
     /* Note cards */
     .note-card { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 8px; overflow: hidden; }
@@ -546,6 +546,7 @@ const CAT_COLORS = {
   '🛍️ グッズ・通販': '#C5E8A0',
   '💡 新商品・企画': '#C5E8A0',
   '✨ マシュマロ':   '#FFB3C6',
+  '✨ ププ':         '#FFB3C6',
   '🏰 ギルド':      '#A8DCEF',
   '📌 その他':      '#FFCCD6',
 };
@@ -1078,7 +1079,8 @@ function drawChart(){
   ctx.beginPath(); ctx.moveTo(PAD_L,lBot+SEP/2); ctx.lineTo(W-PAD_R,lBot+SEP/2); ctx.stroke();
   ctx.setLineDash([]);
 
-  const used=new Set(); days.forEach(d=>Object.keys(d.catTotals).forEach(c=>used.add(c)));
+  const NORM_CAT = {'✨ ププ':'✨ マシュマロ'};
+  const used=new Set(); days.forEach(d=>Object.keys(d.catTotals).forEach(c=>used.add(NORM_CAT[c]||c)));
   document.getElementById('chartLegend').innerHTML=[...used].map(c=>`
     <div class="leg-item"><div class="leg-dot" style="background:${CAT_COLORS[c]||'#ccc'}"></div><span>${c}</span></div>`).join('');
 
