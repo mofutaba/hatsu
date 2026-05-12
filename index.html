@@ -7,40 +7,36 @@
   <style>
     :root {
       --pink:    #FFB7C5;
-      --pink-d:  #D4697F;
-      --pink-l:  #FFE8EE;
-      --green:   #8DC490;
-      --green-d: #5A8A5D;
-      --green-l: #D4EEDB;
-      --bg:      #FFF8FA;
+      --pink-d:  #CC607A;
+      --pink-l:  #FFECF0;
+      --green:   #B2EEC0;
+      --green-d: #45935A;
+      --green-l: #E8FBF0;
+      --bg:      #FEFCFC;
       --surface: #FFFFFF;
-      --text:    #3D2535;
-      --muted:   #9B7F8C;
-      --border:  #FFD4DF;
-      --shadow:  0 2px 14px rgba(212,105,127,0.10);
-      --accent:  #E8829A;
-      --accent-d:#C4607A;
-      --s2:      #FFF0F4;
+      --text:    #3A2535;
+      --muted:   #9A7F8C;
+      --border:  #FFD6E0;
+      --shadow:  0 2px 14px rgba(204,96,122,0.08);
+      --accent:  #E0708A;
+      --accent-d:#BF5070;
+      --s2:      #FFF5F7;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Helvetica Neue','Hiragino Sans',system-ui,sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-    /* Header */
     .header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 20; box-shadow: var(--shadow); }
     .header-title { font-size: 17px; font-weight: 800; color: var(--accent); }
     .header-date  { font-size: 12px; color: var(--muted); }
 
-    /* Tabs */
     .tabs { display: flex; background: var(--surface); border-bottom: 2px solid var(--border); padding: 0 10px; position: sticky; top: 49px; z-index: 19; }
     .tab-btn { flex: 1; padding: 11px 6px; border: none; background: none; cursor: pointer; font-size: 12px; font-weight: 700; color: var(--muted); border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all .18s; font-family: inherit; }
     .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-    /* Content */
     .content { max-width: 720px; margin: 0 auto; padding: 14px 12px 60px; }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
 
-    /* Card */
     .card { background: var(--surface); border-radius: 16px; padding: 16px; margin-bottom: 12px; box-shadow: var(--shadow); border: 1px solid var(--border); }
     .card-title { font-size: 14px; font-weight: 800; margin-bottom: 14px; color: var(--text); display: flex; align-items: center; justify-content: space-between; }
 
@@ -48,7 +44,7 @@
     .pattern-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
     .pattern-card { border: 2px solid var(--border); border-radius: 14px; padding: 12px 8px; cursor: pointer; transition: all .18s; text-align: center; user-select: none; }
     .pattern-card:hover { border-color: var(--pink); background: var(--pink-l); }
-    .pattern-card.selected { border-color: var(--accent); background: var(--pink-l); box-shadow: 0 2px 10px rgba(232,130,154,.2); }
+    .pattern-card.selected { border-color: var(--accent); background: var(--pink-l); box-shadow: 0 2px 10px rgba(224,112,138,.18); }
     .p-emoji { font-size: 22px; margin-bottom: 5px; }
     .p-name  { font-weight: 800; font-size: 12px; margin-bottom: 2px; }
     .p-desc  { font-size: 10px; color: var(--muted); line-height: 1.4; }
@@ -59,20 +55,20 @@
     .time-col .t-val { font-size: 20px; font-weight: 800; color: var(--accent); line-height: 1; }
     .time-col .t-val.warn { color: #C04040; }
     .progress-bar  { width: 100%; height: 8px; background: var(--pink-l); border-radius: 4px; overflow: hidden; }
-    .progress-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width .4s; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--green-d)); border-radius: 4px; transition: width .4s; }
     .progress-fill.over { background: #C04040; }
 
     /* Tasks */
-    .task-item { border: 1px solid var(--border); border-radius: 12px; padding: 11px 12px; margin-bottom: 7px; display: flex; gap: 10px; align-items: flex-start; transition: opacity .2s; }
-    .task-item.done { opacity: .55; }
-    .task-cb { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; margin-top: 3px; }
+    .task-item { border: 1px solid var(--border); border-radius: 12px; padding: 11px 12px; margin-bottom: 7px; display: flex; gap: 10px; align-items: flex-start; transition: all .2s; }
+    .task-item.done { opacity: .55; background: var(--green-l); border-color: var(--green); }
+    .task-cb { width: 18px; height: 18px; accent-color: var(--green-d); cursor: pointer; flex-shrink: 0; margin-top: 3px; }
     .task-body { flex: 1; min-width: 0; }
     .task-name-row { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; margin-bottom: 3px; }
     .task-name { font-weight: 700; font-size: 14px; word-break: break-word; }
     .task-item.done .task-name { text-decoration: line-through; }
     .task-sub  { font-size: 11px; color: var(--muted); display: flex; gap: 8px; flex-wrap: wrap; }
     .task-memo { font-size: 11px; color: var(--muted); font-style: italic; margin-top: 3px; }
-    .actual-time { color: var(--accent); font-weight: 700; }
+    .actual-time { color: var(--green-d); font-weight: 700; }
     .task-actions { display: flex; gap: 3px; flex-shrink: 0; }
     .btn-ic { width: 28px; height: 28px; border: none; background: var(--pink-l); border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--muted); transition: all .15s; }
     .btn-ic:hover { background: var(--border); color: var(--accent); }
@@ -80,13 +76,15 @@
     /* Badges */
     .badge { padding: 2px 7px; border-radius: 20px; font-size: 10px; font-weight: 700; flex-shrink: 0; }
     .b-must { background: #FFE0E8; color: #C04060; }
-    .b-opt  { background: #E4EEFF; color: #3366BB; }
+    .b-opt  { background: var(--green-l); color: var(--green-d); }
     .b-cat  { background: var(--pink-l); color: var(--pink-d); }
 
     /* Buttons */
     .btn { padding: 9px 16px; border-radius: 10px; border: none; cursor: pointer; font-size: 13px; font-weight: 700; transition: all .18s; display: inline-flex; align-items: center; gap: 5px; font-family: inherit; }
     .btn-primary   { background: var(--accent); color: #fff; }
     .btn-primary:hover { background: var(--accent-d); }
+    .btn-green     { background: var(--green-d); color: #fff; }
+    .btn-green:hover { background: #357045; }
     .btn-secondary { background: var(--pink-l); color: var(--accent); border: 1px solid var(--border); }
     .btn-secondary:hover { background: var(--border); }
     .btn-danger    { background: #FFEAEA; color: #C04040; }
@@ -103,7 +101,7 @@
     .pri-toggle { display: flex; gap: 8px; }
     .pri-btn { flex: 1; padding: 9px; border-radius: 10px; border: 2px solid var(--border); background: var(--surface); cursor: pointer; font-size: 12px; font-weight: 800; text-align: center; transition: all .18s; font-family: inherit; }
     .pri-btn.sel-must { border-color: #C04060; background: #FFE0E8; color: #C04060; }
-    .pri-btn.sel-opt  { border-color: #3366BB; background: #E4EEFF; color: #3366BB; }
+    .pri-btn.sel-opt  { border-color: var(--green-d); background: var(--green-l); color: var(--green-d); }
 
     /* Modal */
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(60,20,40,.4); z-index: 200; align-items: center; justify-content: center; padding: 16px; }
@@ -128,25 +126,25 @@
     .ring-inner { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; pointer-events: none; }
     .phase-lbl { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
     .phase-lbl.work  { color: var(--pink-d); }
-    .phase-lbl.break { color: var(--green-d); }
+    .phase-lbl.brk { color: var(--green-d); }
     .timer-digits { font-size: 40px; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1; }
     .timer-digits.work  { color: var(--pink-d); }
-    .timer-digits.break { color: var(--green-d); }
+    .timer-digits.brk { color: var(--green-d); }
     .timer-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .cycle-badge { font-size: 11px; color: var(--muted); margin-bottom: 10px; }
 
-    .task-label-row { font-size: 13px; color: var(--muted); margin-bottom: 14px; min-height: 20px; font-weight: 600; }
     .timer-btns { display: flex; gap: 10px; justify-content: center; }
-    .btn-t-main { padding: 12px 34px; border-radius: 30px; border: none; cursor: pointer; font-size: 15px; font-weight: 800; background: var(--accent); color: #fff; transition: all .18s; font-family: inherit; box-shadow: 0 4px 14px rgba(232,130,154,.35); }
+    .btn-t-main { padding: 12px 34px; border-radius: 30px; border: none; cursor: pointer; font-size: 15px; font-weight: 800; background: var(--accent); color: #fff; transition: all .18s; font-family: inherit; box-shadow: 0 4px 14px rgba(224,112,138,.3); }
     .btn-t-main:hover { background: var(--accent-d); transform: scale(1.03); }
-    .btn-t-main.brk { background: var(--green); box-shadow: 0 4px 14px rgba(141,196,144,.35); }
-    .btn-t-main.brk:hover { background: var(--green-d); }
     .btn-t-reset { padding: 12px 20px; border-radius: 30px; border: none; cursor: pointer; font-size: 14px; font-weight: 700; background: var(--pink-l); color: var(--muted); transition: all .18s; font-family: inherit; }
     .btn-t-reset:hover { background: var(--border); color: var(--text); }
 
     /* Toast */
-    .toast { display: none; background: var(--pink-l); border: 2px solid var(--pink); border-radius: 12px; padding: 11px 14px; margin-bottom: 12px; text-align: center; font-weight: 800; font-size: 14px; color: var(--pink-d); animation: fadeIn .3s; }
+    .toast { display: none; border-radius: 12px; padding: 11px 14px; margin-bottom: 12px; text-align: center; font-weight: 800; font-size: 14px; animation: fadeIn .3s; }
+    .toast.work-toast  { background: var(--pink-l);  border: 2px solid var(--pink);  color: var(--pink-d); }
+    .toast.break-toast { background: var(--green-l); border: 2px solid var(--green); color: var(--green-d); }
     .toast.show { display: block; }
-    @keyframes fadeIn { from { opacity:0; transform:translateY(-5px); } to { opacity:1; transform:none; } }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(-5px);}to{opacity:1;transform:none;} }
 
     /* Sound toggle */
     .sound-row { display: flex; align-items: center; justify-content: flex-end; gap: 8px; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
@@ -171,11 +169,13 @@
 
     /* Stats */
     .stat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
-    .stat-box  { background: var(--pink-l); border-radius: 12px; padding: 12px 8px; text-align: center; }
+    .stat-box   { border-radius: 12px; padding: 12px 8px; text-align: center; }
+    .stat-box.p { background: var(--pink-l); }
     .stat-box.g { background: var(--green-l); }
-    .stat-num  { font-size: 19px; font-weight: 800; color: var(--accent); }
+    .stat-num   { font-size: 18px; font-weight: 800; line-height: 1; }
+    .stat-box.p .stat-num { color: var(--pink-d); }
     .stat-box.g .stat-num { color: var(--green-d); }
-    .stat-lbl  { font-size: 10px; color: var(--muted); margin-top: 3px; }
+    .stat-lbl   { font-size: 10px; color: var(--muted); margin-top: 4px; }
 
     /* Records */
     .rec-card { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 8px; overflow: hidden; cursor: pointer; transition: border-color .18s; }
@@ -189,7 +189,7 @@
     .rec-task-row { font-size: 12px; padding: 2px 0; display: flex; align-items: center; gap: 6px; }
 
     /* Chart */
-    .chart-wrap { width: 100%; height: 170px; }
+    .chart-wrap { width: 100%; }
     .legend { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
     .leg-item { display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--muted); }
     .leg-dot  { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
@@ -197,11 +197,11 @@
     /* Misc */
     .help { font-size: 11px; color: var(--muted); margin-top: 4px; }
     .status-msg { text-align: center; font-size: 13px; padding: 8px 12px; border-radius: 8px; margin-top: 8px; }
-    .status-msg.ok  { background: #EDFAF2; color: #3A8A5A; }
+    .status-msg.ok  { background: var(--green-l); color: var(--green-d); }
     .status-msg.err { background: #FFEAEA; color: #C04040; }
     .status-msg.inf { background: var(--pink-l); color: var(--muted); }
     .empty { text-align: center; padding: 22px; color: var(--muted); font-size: 14px; }
-    .save-btn { width: 100%; padding: 13px; border: none; border-radius: 14px; background: linear-gradient(135deg, var(--pink), var(--accent)); color: #fff; font-size: 15px; font-weight: 800; cursor: pointer; transition: all .2s; margin-bottom: 10px; font-family: inherit; box-shadow: 0 4px 14px rgba(232,130,154,.35); }
+    .save-btn { width: 100%; padding: 13px; border: none; border-radius: 14px; background: linear-gradient(135deg, var(--green), var(--green-d)); color: #fff; font-size: 15px; font-weight: 800; cursor: pointer; transition: all .2s; margin-bottom: 10px; font-family: inherit; box-shadow: 0 4px 14px rgba(69,147,90,.28); }
     .save-btn:hover { transform: scale(1.01); opacity: .95; }
 
     @media (max-width:480px) {
@@ -220,7 +220,7 @@
 
 <div class="tabs">
   <button class="tab-btn active" onclick="switchTab('plan',this)">📋 計画</button>
-  <button class="tab-btn"        onclick="switchTab('pomodoro',this)">🍡 ポモドーロ</button>
+  <button class="tab-btn"        onclick="switchTab('pomodoro',this)">⏱ ポモドーロ</button>
   <button class="tab-btn"        onclick="switchTab('records',this)">📊 記録</button>
   <button class="tab-btn"        onclick="switchTab('settings',this)">⚙️ 設定</button>
 </div>
@@ -229,24 +229,17 @@
 
   <!-- PLAN -->
   <div class="tab-panel active" id="tab-plan">
-
     <div class="card">
       <div class="card-title">🗓 今日のパターン</div>
       <div class="pattern-grid">
         <div class="pattern-card" id="pc-free"  onclick="selectPattern('free')">
-          <div class="p-emoji">🌸</div>
-          <div class="p-name">フリー</div>
-          <div class="p-desc">予定なし<br>6h目安</div>
+          <div class="p-emoji">🌸</div><div class="p-name">フリー</div><div class="p-desc">予定なし<br>6h目安</div>
         </div>
         <div class="pattern-card" id="pc-light" onclick="selectPattern('light')">
-          <div class="p-emoji">☀️</div>
-          <div class="p-name">予定すこし</div>
-          <div class="p-desc">用事が少し<br>3h目安</div>
+          <div class="p-emoji">☀️</div><div class="p-name">予定すこし</div><div class="p-desc">用事が少し<br>3h目安</div>
         </div>
         <div class="pattern-card" id="pc-heavy" onclick="selectPattern('heavy')">
-          <div class="p-emoji">📅</div>
-          <div class="p-name">予定いっぱい</div>
-          <div class="p-desc">用事が多め<br>1.5h目安</div>
+          <div class="p-emoji">📅</div><div class="p-name">予定いっぱい</div><div class="p-desc">用事が多め<br>1.5h目安</div>
         </div>
       </div>
     </div>
@@ -266,7 +259,7 @@
         📝 タスク
         <button class="btn btn-primary" style="padding:6px 13px;font-size:12px" onclick="openAdd()">＋ 追加</button>
       </div>
-      <div id="taskList"><div class="empty" id="emptyMsg">タスクがありません。「＋ 追加」から追加してください 🌸</div></div>
+      <div id="taskList"><div class="empty" id="emptyMsg">タスクがありません。「＋ 追加」から追加してください 🌱</div></div>
     </div>
 
     <div class="card">
@@ -284,28 +277,15 @@
       <div class="card-title">⏱ タイマーモード</div>
       <div class="mode-selector">
         <div class="mode-btn active" id="mode-normal" onclick="setMode('normal')">
-          <span class="m-emoji">🍅</span>
-          <div class="m-name">ノーマル</div>
-          <div class="m-time">25分 / 5分</div>
+          <span class="m-emoji">🌱</span><div class="m-name">ノーマル</div><div class="m-time">25分 / 5分</div>
         </div>
         <div class="mode-btn" id="mode-short" onclick="setMode('short')">
-          <span class="m-emoji">⚡</span>
-          <div class="m-name">ショート</div>
-          <div class="m-time">20分 / 10分</div>
+          <span class="m-emoji">🫧</span><div class="m-name">ショート</div><div class="m-time">20分 / 10分</div>
         </div>
         <div class="mode-btn" id="mode-long" onclick="setMode('long')">
-          <span class="m-emoji">🔥</span>
-          <div class="m-name">ロング</div>
-          <div class="m-time">50分 / 10分</div>
+          <span class="m-emoji">🌈</span><div class="m-name">ロング</div><div class="m-time">50分 / 10分</div>
         </div>
       </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">🎯 作業するタスク</div>
-      <select class="form-ctrl" id="pomSelect" onchange="onPomSelectChange()">
-        <option value="">タスクを選択...</option>
-      </select>
     </div>
 
     <div class="card">
@@ -320,7 +300,7 @@
       <div class="timer-wrap">
         <div class="ring-wrap">
           <svg width="200" height="200" viewBox="0 0 200 200">
-            <circle id="timerTrack" cx="100" cy="100" r="85" fill="none" stroke="#FFE8EE" stroke-width="10"/>
+            <circle id="timerTrack" cx="100" cy="100" r="85" fill="none" stroke="#FFECF0" stroke-width="10"/>
             <circle id="timerRing"  cx="100" cy="100" r="85" fill="none" stroke="#FFB7C5" stroke-width="10"
               stroke-linecap="round" stroke-dasharray="534.07" stroke-dashoffset="0"
               transform="rotate(-90 100 100)"/>
@@ -331,7 +311,7 @@
             <div class="timer-sub" id="timerSub">25分</div>
           </div>
         </div>
-        <div class="task-label-row" id="taskLabelRow">🎯 タスクを選択してスタート</div>
+        <div class="cycle-badge" id="cycleBadge">第1サイクル</div>
         <div class="timer-btns">
           <button class="btn-t-main" id="mainBtn" onclick="toggleTimer()">▶ スタート</button>
           <button class="btn-t-reset" onclick="resetTimer()">↺ リセット</button>
@@ -341,15 +321,15 @@
 
     <div class="card">
       <div class="card-title">📋 今日のセッション</div>
-      <div id="sessionLog"><div class="empty" style="padding:10px">まだセッションがありません 🌸</div></div>
+      <div id="sessionLog"><div class="empty" style="padding:10px">まだセッションがありません 🌱</div></div>
     </div>
 
     <div class="card">
       <div class="card-title">📊 今日の実績</div>
       <div class="stat-grid">
-        <div class="stat-box"><div class="stat-num" id="sWork">0分</div><div class="stat-lbl">🍅 集中した</div></div>
+        <div class="stat-box p"><div class="stat-num" id="sWork">0分</div><div class="stat-lbl">🍅 集中した</div></div>
         <div class="stat-box g"><div class="stat-num" id="sBreak">0分</div><div class="stat-lbl">☕ 休憩した</div></div>
-        <div class="stat-box"><div class="stat-num" id="sComp">0</div><div class="stat-lbl">✅ 完了タスク</div></div>
+        <div class="stat-box g"><div class="stat-num" id="sComp">0</div><div class="stat-lbl">✅ 完了タスク</div></div>
       </div>
     </div>
   </div>
@@ -358,13 +338,13 @@
   <div class="tab-panel" id="tab-records">
     <div class="card">
       <div class="card-title">📈 週間サマリー（過去7日）</div>
-      <div class="chart-wrap"><canvas id="weekChart"></canvas></div>
+      <div class="chart-wrap"><canvas id="weekChart" style="display:block;width:100%"></canvas></div>
       <div class="legend" id="chartLegend"></div>
       <div id="weekStats" style="font-size:12px;color:var(--muted);margin-top:8px;text-align:center"></div>
     </div>
     <div class="card">
       <div class="card-title">🗓 過去の記録</div>
-      <div id="recordsList"><div class="empty">記録がありません。「計画」タブの「今日の記録を保存する」から記録しましょう！</div></div>
+      <div id="recordsList"><div class="empty">記録がありません。「計画」タブから記録しましょう！</div></div>
     </div>
   </div>
 
@@ -381,7 +361,7 @@
       <div class="form-group">
         <label class="form-label">データベース ID</label>
         <input type="text" class="form-ctrl" id="notionDb" placeholder="32桁の英数字" oninput="saveSettings()">
-        <div class="help">NotionデータベースのURLの ?v= より前の32桁</div>
+        <div class="help">NotionデータベースURLの ?v= より前の32桁</div>
       </div>
       <button class="btn btn-primary btn-full" onclick="exportNotion()" style="padding:11px">📤 今日の記録を Notion に保存</button>
       <div id="notionMsg"></div>
@@ -450,7 +430,7 @@
     </div>
     <div style="display:flex;gap:10px;justify-content:flex-end">
       <button class="btn btn-secondary" onclick="closeModal()">キャンセル</button>
-      <button class="btn btn-primary"   onclick="saveTask()">保存 💾</button>
+      <button class="btn btn-green"     onclick="saveTask()">保存 💾</button>
     </div>
   </div>
 </div>
@@ -459,52 +439,52 @@
 // ── Web Worker ──
 const _wBlob = new Blob([`setInterval(()=>self.postMessage('t'),200);`],{type:'application/javascript'});
 const _wURL  = URL.createObjectURL(_wBlob);
-let   _worker = null;
+let _worker=null;
 function startWorker(){ stopWorker(); _worker=new Worker(_wURL); _worker.onmessage=()=>tick(); }
 function stopWorker(){ if(_worker){_worker.terminate();_worker=null;} }
 
 // ── Constants ──
 const MODES = {
-  normal:{ name:'ノーマル', emoji:'🍅', work:25*60, brk: 5*60 },
-  short: { name:'ショート', emoji:'⚡', work:20*60, brk:10*60 },
-  long:  { name:'ロング',   emoji:'🔥', work:50*60, brk:10*60 },
+  normal:{ name:'ノーマル', emoji:'🌱', work:25*60, brk: 5*60 },
+  short: { name:'ショート', emoji:'🫧', work:20*60, brk:10*60 },
+  long:  { name:'ロング',   emoji:'🌈', work:50*60, brk:10*60 },
 };
 const PATTERNS = {
-  free:  { name:'フリー',       desc:'予定なし・6h目安',      hours:6,   emoji:'🌸' },
-  light: { name:'予定すこし',   desc:'用事が少し・3h目安',    hours:3,   emoji:'☀️' },
-  heavy: { name:'予定いっぱい', desc:'用事が多め・1.5h目安',  hours:1.5, emoji:'📅' },
+  free:  { name:'フリー',       hours:6,   emoji:'🌸' },
+  light: { name:'予定すこし',   hours:3,   emoji:'☀️' },
+  heavy: { name:'予定いっぱい', hours:1.5, emoji:'📅' },
 };
 const CAT_COLORS = {
-  '📱 SNS':       '#FFB3C6',
+  '📱 SNS':        '#FFB3C6',
   '🎨 イラスト制作':'#B3D4FF',
   '🛍️ グッズ・通販':'#FFE5B3',
   '💡 新商品・企画':'#FFC9A0',
-  '✨ ププ':        '#D4B3FF',
-  '🏰 ギルド':     '#B3E5C8',
-  '📌 その他':     '#D0D0D0',
-  '_break':       '#EBEBEB',
+  '✨ ププ':         '#D4B3FF',
+  '🏰 ギルド':      '#B3E5C8',
+  '📌 その他':      '#D0D0D0',
 };
-const CIRC = 2*Math.PI*85; // 534.07
-
+const CIRC = 2*Math.PI*85;
 const K_TODAY='cp_today', K_HIST='cp_history', K_TMR='cp_timer', K_SET='cp_settings';
 
 // ── State ──
-function todayStr(){ const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+function todayStr(){ const d=new Date(); return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
+function pad(n){ return String(n).padStart(2,'0'); }
+function toDS(d){ return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
 function defToday(){ return {date:todayStr(),pattern:null,tasks:[],dayMemo:'',sessions:[]}; }
 function loadJ(k,fb){ try{return JSON.parse(localStorage.getItem(k))||fb;}catch{return fb;} }
 function saveJ(k,v){ localStorage.setItem(k,JSON.stringify(v)); }
 
-let st  = loadJ(K_TODAY, defToday());
+let st   = loadJ(K_TODAY, defToday());
 if(st.date!==todayStr()){st=defToday();saveJ(K_TODAY,st);}
 let hist     = loadJ(K_HIST,[]);
 let settings = loadJ(K_SET,{notionKey:'',notionDb:'',sound:true});
-let tmr = {active:false,phase:'work',mode:'normal',startEpoch:null,pausedRem:null,selId:null};
+let tmr = {active:false,phase:'work',mode:'normal',startEpoch:null,pausedRem:null,cycle:1};
 
 // Restore timer
 (function(){
-  const s=loadJ(K_TMR,null); if(!s)return;
+  const s=loadJ(K_TMR,null); if(!s) return;
   tmr.phase=s.phase||'work'; tmr.mode=s.mode||'normal';
-  tmr.selId=s.selId||null; tmr.pausedRem=s.pausedRem??null;
+  tmr.cycle=s.cycle||1; tmr.pausedRem=s.pausedRem??null;
   if(s.active&&s.startEpoch){
     const dur=MODES[tmr.mode][tmr.phase==='work'?'work':'brk'];
     const elap=(Date.now()-s.startEpoch)/1000;
@@ -524,8 +504,8 @@ function init(){
   document.getElementById('notionDb').value=settings.notionDb||'';
   document.getElementById('soundToggle').checked=settings.sound!==false;
   document.getElementById('soundToggle2').checked=settings.sound!==false;
-  renderAll(); refreshPomSelect(); renderSessions(); renderStats(); renderModes(); refreshTimerUI();
-  if(tmr.active){startWorker();document.getElementById('mainBtn').textContent='⏸ 一時停止';}
+  renderAll(); renderSessions(); renderStats(); renderModes(); refreshTimerUI(); updateCycleBadge();
+  if(tmr.active){startWorker(); document.getElementById('mainBtn').textContent='⏸ 一時停止';}
 }
 
 // ── Tabs ──
@@ -533,7 +513,6 @@ function switchTab(n,btn){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+n).classList.add('active'); btn.classList.add('active');
-  if(n==='pomodoro') refreshPomSelect();
   if(n==='records'){renderRecords();drawChart();}
 }
 
@@ -587,8 +566,8 @@ function buildTaskEl(t){
         <span class="badge b-cat">${esc(t.category)}</span>
       </div>
       <div class="task-sub">
-        ${t.hours?`<span>⏱ ${t.hours}h</span>`:''}
-        ${am>0?`<span class="actual-time">実績: ${fmtMin(am)}</span>`:''}
+        ${t.hours?`<span>⏱ ${t.hours}h予定</span>`:''}
+        ${am>0?`<span class="actual-time">✅ ${fmtMin(am)}</span>`:''}
       </div>
       ${t.memo?`<div class="task-memo">${esc(t.memo)}</div>`:''}
     </div>
@@ -606,7 +585,7 @@ function openAdd(){
   setTimeout(()=>document.getElementById('fName').focus(),80);
 }
 function openEdit(id){
-  const t=st.tasks.find(x=>x.id===id); if(!t)return;
+  const t=st.tasks.find(x=>x.id===id); if(!t) return;
   editId=id; document.getElementById('modalTitle').textContent='✏️ タスクを編集';
   document.getElementById('fName').value=t.name; document.getElementById('fCat').value=t.category;
   document.getElementById('fHours').value=t.hours||''; document.getElementById('fMemo').value=t.memo||'';
@@ -620,49 +599,41 @@ function setPri(p){
   document.getElementById('priOpt').className ='pri-btn'+(p==='opt' ?' sel-opt' :'');
 }
 function saveTask(){
-  const name=document.getElementById('fName').value.trim();
-  if(!name){document.getElementById('fName').focus();return;}
+  const name=document.getElementById('fName').value.trim(); if(!name){document.getElementById('fName').focus();return;}
   const data={name,category:document.getElementById('fCat').value,priority:curPri,
-    hours:parseFloat(document.getElementById('fHours').value)||0,
-    memo:document.getElementById('fMemo').value.trim()};
+    hours:parseFloat(document.getElementById('fHours').value)||0,memo:document.getElementById('fMemo').value.trim()};
   if(editId){const i=st.tasks.findIndex(t=>t.id===editId);if(i!==-1)st.tasks[i]={...st.tasks[i],...data};}
   else st.tasks.push({id:'t'+Date.now(),done:false,actualMin:0,...data});
-  saveJ(K_TODAY,st); closeModal(); renderAll(); refreshPomSelect();
+  saveJ(K_TODAY,st); closeModal(); renderAll();
 }
-function delTask(id){ if(!confirm('削除しますか？'))return; st.tasks=st.tasks.filter(t=>t.id!==id); saveJ(K_TODAY,st); renderAll(); refreshPomSelect(); }
-function toggleDone(id){ const t=st.tasks.find(x=>x.id===id); if(t){t.done=!t.done;saveJ(K_TODAY,st);renderAll();renderStats();} }
+function delTask(id){ if(!confirm('削除しますか？'))return; st.tasks=st.tasks.filter(t=>t.id!==id); saveJ(K_TODAY,st); renderAll(); }
+function toggleDone(id){
+  const t=st.tasks.find(x=>x.id===id); if(!t) return;
+  t.done=!t.done;
+  // チェックON時：予定時間を実績として自動記録
+  if(t.done && t.hours && !t.actualMin) t.actualMin=Math.round(t.hours*60);
+  if(!t.done) t.actualMin=0;
+  saveJ(K_TODAY,st); renderAll(); renderStats();
+}
 function saveDayMemo(){ st.dayMemo=document.getElementById('dayMemo').value; saveJ(K_TODAY,st); }
 
 // ── Timer modes ──
 function setMode(m){
   if(tmr.active){alert('タイマー実行中はモード変更できません。リセットしてください。');return;}
-  tmr.mode=m; tmr.phase='work'; tmr.pausedRem=null;
-  renderModes(); refreshTimerUI(); persistTimer();
+  tmr.mode=m; tmr.phase='work'; tmr.pausedRem=null; tmr.cycle=1;
+  renderModes(); refreshTimerUI(); updateCycleBadge(); persistTimer();
 }
 function renderModes(){ Object.keys(MODES).forEach(k=>document.getElementById('mode-'+k)?.classList.toggle('active',tmr.mode===k)); }
+function updateCycleBadge(){ document.getElementById('cycleBadge').textContent=`第${tmr.cycle}サイクル`; }
 
-// ── Pomodoro ──
-function refreshPomSelect(){
-  const sel=document.getElementById('pomSelect'), prev=sel.value;
-  sel.innerHTML='<option value="">タスクを選択...</option>';
-  st.tasks.filter(t=>!t.done).forEach(t=>{
-    const o=document.createElement('option'); o.value=t.id;
-    o.textContent=(t.priority==='must'?'⚡ ':'✨ ')+t.name; sel.appendChild(o);
-  });
-  if(prev)sel.value=prev; tmr.selId=sel.value||null; refreshTaskLabel();
-}
-function onPomSelectChange(){ tmr.selId=document.getElementById('pomSelect').value||null; refreshTaskLabel(); persistTimer(); }
-function refreshTaskLabel(){
-  const t=st.tasks.find(x=>x.id===tmr.selId);
-  document.getElementById('taskLabelRow').textContent=t?`🎯 ${t.name}`:'🎯 タスクを選択してスタート';
-}
-function toggleTimer(){ if(tmr.active)pauseTimer();else resumeTimer(); }
+// ── Pomodoro timer ──
+function toggleTimer(){ if(tmr.active)pauseTimer(); else resumeTimer(); }
+
 function resumeTimer(){
   const dur=MODES[tmr.mode][tmr.phase==='work'?'work':'brk'];
   const rem=tmr.pausedRem!==null?tmr.pausedRem:dur;
   tmr.startEpoch=Date.now()-(dur-rem)*1000; tmr.active=true; tmr.pausedRem=null;
   document.getElementById('mainBtn').textContent='⏸ 一時停止';
-  document.getElementById('mainBtn').classList.toggle('brk',tmr.phase==='break');
   persistTimer(); startWorker(); hideToast();
 }
 function pauseTimer(){
@@ -672,18 +643,18 @@ function pauseTimer(){
   document.getElementById('mainBtn').textContent='▶ 再開'; persistTimer();
 }
 function resetTimer(){
-  stopWorker(); tmr.active=false; tmr.phase='work'; tmr.startEpoch=null; tmr.pausedRem=null;
+  stopWorker(); tmr.active=false; tmr.phase='work'; tmr.startEpoch=null; tmr.pausedRem=null; tmr.cycle=1;
   saveJ(K_TMR,null);
   document.getElementById('mainBtn').textContent='▶ スタート';
-  document.getElementById('mainBtn').classList.remove('brk');
-  hideToast(); renderModes(); refreshTimerUI();
+  hideToast(); renderModes(); refreshTimerUI(); updateCycleBadge();
 }
+
 function tick(){
-  if(!tmr.active)return;
+  if(!tmr.active) return;
   const dur=MODES[tmr.mode][tmr.phase==='work'?'work':'brk'];
   const rem=Math.max(0,dur-(Date.now()-tmr.startEpoch)/1000);
   setTimerUI(rem,dur,tmr.phase);
-  if(rem<=0)phaseComplete();
+  if(rem<=0) phaseComplete();
 }
 function refreshTimerUI(){
   const dur=MODES[tmr.mode][tmr.phase==='work'?'work':'brk'];
@@ -691,67 +662,68 @@ function refreshTimerUI(){
   setTimerUI(rem,dur,tmr.phase);
 }
 function setTimerUI(rem,dur,phase){
-  const mins=Math.floor(rem/60),secs=Math.floor(rem%60);
-  document.getElementById('timerDigits').textContent=String(mins).padStart(2,'0')+':'+String(secs).padStart(2,'0');
+  const mins=Math.floor(rem/60), secs=Math.floor(rem%60);
+  document.getElementById('timerDigits').textContent=pad(mins)+':'+pad(secs);
   const w=phase==='work';
-  document.getElementById('timerDigits').className='timer-digits '+(w?'work':'break');
-  document.getElementById('phaseLabel').className='phase-lbl '+(w?'work':'break');
+  document.getElementById('timerDigits').className='timer-digits '+(w?'work':'brk');
+  document.getElementById('phaseLabel').className='phase-lbl '+(w?'work':'brk');
   document.getElementById('phaseLabel').textContent=w?'🍅 作業時間':'☕ 休憩時間';
   document.getElementById('timerSub').textContent=w?`作業${MODES[tmr.mode].work/60}分`:`休憩${MODES[tmr.mode].brk/60}分`;
-  // Ring
   const offset=CIRC*((dur-rem)/dur);
   document.getElementById('timerRing').setAttribute('stroke-dashoffset',offset.toFixed(2));
-  document.getElementById('timerRing').setAttribute('stroke',w?'#FFB7C5':'#8DC490');
-  document.getElementById('timerTrack').setAttribute('stroke',w?'#FFE8EE':'#D4EEDB');
+  document.getElementById('timerRing').setAttribute('stroke',w?'#FFB7C5':'#B2EEC0');
+  document.getElementById('timerTrack').setAttribute('stroke',w?'#FFECF0':'#E8FBF0');
 }
+
 function phaseComplete(){
-  stopWorker(); tmr.active=false; tmr.pausedRem=null;
+  stopWorker(); // stop old worker before any await
   const m=MODES[tmr.mode];
   const now=new Date();
-  const tStr=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  const tStr=pad(now.getHours())+':'+pad(now.getMinutes());
+
   if(tmr.phase==='work'){
-    const task=st.tasks.find(x=>x.id===tmr.selId);
-    if(task) task.actualMin=(task.actualMin||0)+(m.work/60);
-    st.sessions.push({id:'s'+Date.now(),type:'work',taskId:tmr.selId||null,
-      taskName:task?task.name:'（タスクなし）',category:task?task.category:'📌 その他',
-      durationMin:m.work/60,timeStr:tStr});
-    saveJ(K_TODAY,st); renderTaskList(); renderSessions(); renderStats();
-    playSound('work'); showToast('🍅 お疲れさまでした！休憩しましょう✨');
-    tmr.phase='break';
-    document.getElementById('mainBtn').textContent='▶ 休憩スタート';
-    document.getElementById('mainBtn').classList.add('brk');
-  } else {
-    st.sessions.push({id:'s'+Date.now(),type:'break',taskId:null,taskName:'休憩',
-      category:'_break',durationMin:m.brk/60,timeStr:tStr});
+    st.sessions.push({id:'s'+Date.now(),type:'work',taskName:'集中',category:'_work',durationMin:m.work/60,timeStr:tStr});
     saveJ(K_TODAY,st); renderSessions(); renderStats();
-    playSound('break'); showToast('☕ 休憩終了！次の作業を始めましょう 🌸');
-    tmr.phase='work';
-    document.getElementById('mainBtn').textContent='▶ スタート';
-    document.getElementById('mainBtn').classList.remove('brk');
+    playSound('work'); showToast('🍅 作業完了！休憩を開始します...','break-toast');
+    // Auto-start break
+    tmr.phase='break'; tmr.startEpoch=Date.now(); tmr.active=true; tmr.pausedRem=null;
+    const brk=m.brk; setTimerUI(brk,brk,'break');
+  } else {
+    st.sessions.push({id:'s'+Date.now(),type:'break',taskName:'休憩',category:'_break',durationMin:m.brk/60,timeStr:tStr});
+    saveJ(K_TODAY,st); renderSessions(); renderStats();
+    playSound('break'); showToast('☕ 休憩終了！作業を再開します...','work-toast');
+    // Auto-start next work
+    tmr.phase='work'; tmr.startEpoch=Date.now(); tmr.active=true; tmr.pausedRem=null; tmr.cycle++;
+    updateCycleBadge();
+    const wk=m.work; setTimerUI(wk,wk,'work');
   }
-  const dur2=MODES[tmr.mode][tmr.phase==='work'?'work':'brk'];
-  setTimerUI(dur2,dur2,tmr.phase); persistTimer();
+  persistTimer();
+  startWorker(); // start new worker for next phase
 }
+
 function handleExpired(s){
   const m=MODES[s.mode||'normal'];
-  if(s.phase==='work'){
-    if(s.selId){const t=st.tasks.find(x=>x.id===s.selId);if(t)t.actualMin=(t.actualMin||0)+(m.work/60);}
-    saveJ(K_TODAY,st); tmr.phase='break';
-  } else { tmr.phase='work'; }
-  tmr.mode=s.mode||'normal'; saveJ(K_TMR,null);
+  if(s.phase==='work'){ tmr.phase='break'; }
+  else { tmr.phase='work'; tmr.cycle=(s.cycle||1)+1; }
+  tmr.mode=s.mode||'normal'; tmr.cycle=s.cycle||1; saveJ(K_TMR,null);
 }
-function persistTimer(){ saveJ(K_TMR,{active:tmr.active,phase:tmr.phase,mode:tmr.mode,startEpoch:tmr.startEpoch,pausedRem:tmr.pausedRem,selId:tmr.selId}); }
-function showToast(msg){ const el=document.getElementById('completeToast'); el.textContent=msg; el.classList.add('show'); }
+function persistTimer(){ saveJ(K_TMR,{active:tmr.active,phase:tmr.phase,mode:tmr.mode,startEpoch:tmr.startEpoch,pausedRem:tmr.pausedRem,cycle:tmr.cycle}); }
+
+function showToast(msg, cls){
+  const el=document.getElementById('completeToast');
+  el.textContent=msg; el.className='toast '+(cls||'work-toast')+' show';
+  clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove('show'),3500);
+}
 function hideToast(){ document.getElementById('completeToast').classList.remove('show'); }
 
 function renderSessions(){
   const log=document.getElementById('sessionLog'), ss=st.sessions||[];
-  if(!ss.length){log.innerHTML='<div class="empty" style="padding:10px">まだセッションがありません 🌸</div>';return;}
+  if(!ss.length){log.innerHTML='<div class="empty" style="padding:10px">まだセッションがありません 🌱</div>';return;}
   log.innerHTML=[...ss].reverse().map(s=>`
     <div class="session-item">
       <div class="session-dot ${s.type}"></div>
       <span class="s-time">${s.timeStr}</span>
-      <span class="s-task">${esc(s.type==='break'?'☕ 休憩':s.taskName)}</span>
+      <span class="s-task">${esc(s.type==='break'?'☕ 休憩':'🍅 集中')}</span>
       <span class="s-dur ${s.type}">${fmtMin(s.durationMin)}</span>
     </div>`).join('');
 }
@@ -766,15 +738,14 @@ function renderStats(){
 
 // ── Audio ──
 function playSound(type){
-  if(settings.sound===false)return;
+  if(settings.sound===false) return;
   try{
     const ctx=new(window.AudioContext||window.webkitAudioContext)();
     const beep=(freq,t0,dur)=>{
-      const osc=ctx.createOscillator(),gain=ctx.createGain();
-      osc.connect(gain);gain.connect(ctx.destination);
-      osc.type='sine';osc.frequency.value=freq;
-      gain.gain.setValueAtTime(0.28,t0);gain.gain.exponentialRampToValueAtTime(0.001,t0+dur);
-      osc.start(t0);osc.stop(t0+dur+0.05);
+      const osc=ctx.createOscillator(),g=ctx.createGain();
+      osc.connect(g); g.connect(ctx.destination); osc.type='sine'; osc.frequency.value=freq;
+      g.gain.setValueAtTime(0.25,t0); g.gain.exponentialRampToValueAtTime(0.001,t0+dur);
+      osc.start(t0); osc.stop(t0+dur+0.05);
     };
     const t=ctx.currentTime;
     if(type==='work'){beep(523,t,.18);beep(659,t+.22,.18);beep(784,t+.44,.35);}
@@ -792,10 +763,11 @@ function saveTodayRecord(){
   const bm=ss.filter(s=>s.type==='break').reduce((a,s)=>a+s.durationMin,0);
   const p=st.pattern?PATTERNS[st.pattern]:null;
   const rec={
-    date:st.date,pattern:st.pattern,patternLbl:p?`${p.emoji} ${p.name}`:'未設定',
-    tasks:tasks.map(t=>({...t})),sessions:ss.map(s=>({...s})),
-    workMin:wm,breakMin:bm,totalMin:wm+bm,
-    dayMemo:st.dayMemo||'',achievement:tasks.length?Math.round(done/tasks.length*100):0,
+    date:st.date, pattern:st.pattern, patternLbl:p?`${p.emoji} ${p.name}`:'未設定',
+    tasks:tasks.map(t=>({...t})), sessions:ss.map(s=>({...s})),
+    workMin:wm, breakMin:bm, totalMin:wm+bm,
+    dayMemo:st.dayMemo||'',
+    achievement:tasks.length?Math.round(done/tasks.length*100):0,
     savedAt:new Date().toISOString(),
   };
   const idx=hist.findIndex(r=>r.date===rec.date);
@@ -806,7 +778,7 @@ function saveTodayRecord(){
 function renderRecords(){
   const list=document.getElementById('recordsList');
   const recs=[...hist].sort((a,b)=>b.date.localeCompare(a.date));
-  if(!recs.length){list.innerHTML='<div class="empty">記録がありません。「計画」タブから記録しましょう！</div>';return;}
+  if(!recs.length){list.innerHTML='<div class="empty">まだ記録がありません。「計画」タブから記録しましょう！</div>';return;}
   list.innerHTML=recs.map((r,i)=>{
     const done=(r.tasks||[]).filter(t=>t.done).length, total=(r.tasks||[]).length;
     return `<div class="rec-card" id="rc-${i}" onclick="toggleRec(${i})">
@@ -822,7 +794,7 @@ function renderRecords(){
         <div style="font-size:11px;color:var(--muted);margin-bottom:6px">合計セッション時間: ${fmtMin(r.totalMin||0)}</div>
         ${(r.tasks||[]).map(t=>`<div class="rec-task-row" style="${t.done?'text-decoration:line-through;color:var(--muted)':''}">
           ${t.done?'✅':'⬜'} ${t.priority==='must'?'⚡':'✨'} ${esc(t.name)}
-          ${t.actualMin?`<span style="color:var(--accent);font-size:10px">(${fmtMin(t.actualMin)})</span>`:''}
+          ${t.actualMin?`<span style="color:var(--green-d);font-size:10px">(${fmtMin(t.actualMin)})</span>`:''}
         </div>`).join('')}
       </div>
     </div>`;
@@ -830,101 +802,153 @@ function renderRecords(){
 }
 function toggleRec(i){ document.getElementById('rc-'+i)?.classList.toggle('expanded'); }
 
-// ── Weekly chart (stacked bars by category) ──
+// ── Weekly chart: line + stacked bar on same canvas ──
 function drawChart(){
   const canvas=document.getElementById('weekChart');
   const wrap=canvas.parentElement;
   const dpr=window.devicePixelRatio||1;
-  const W=wrap.clientWidth, H=170;
-  canvas.style.width=W+'px'; canvas.style.height=H+'px';
+  const W=wrap.clientWidth;
+
+  const PAD_L=38, PAD_R=8, PAD_T=18, SEP=20;
+  const LINE_H=90, BAR_H=100, LABEL_H=22;
+  const H=PAD_T+LINE_H+SEP+BAR_H+LABEL_H;
+
+  canvas.style.height=H+'px';
   canvas.width=W*dpr; canvas.height=H*dpr;
   const ctx=canvas.getContext('2d'); ctx.scale(dpr,dpr);
 
-  const dayLabels=['日','月','火','水','木','金','土'];
-  const allCatKeys=Object.keys(CAT_COLORS);
+  const dayNames=['日','月','火','水','木','金','土'];
+  const allCats=Object.keys(CAT_COLORS);
+  const cW=W-PAD_L-PAD_R;
+  const barW=(cW/7)*0.55, barGap=cW/7;
 
+  // Build 7-day data
   const days=[];
   for(let i=6;i>=0;i--){
     const d=new Date(); d.setDate(d.getDate()-i);
-    const ds=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-    const ss=ds===todayStr()?(st.sessions||[]):(hist.find(r=>r.date===ds)?.sessions||[]);
+    const ds=toDS(d);
+    const rec=ds===todayStr()?null:hist.find(r=>r.date===ds);
+    const ss=ds===todayStr()?(st.sessions||[]):(rec?.sessions||[]);
+    const tasks=ds===todayStr()?st.tasks:(rec?.tasks||[]);
+    const pomTotal=ss.reduce((a,s)=>a+s.durationMin,0);
     const catTotals={};
-    ss.forEach(s=>{const c=s.category||'📌 その他';catTotals[c]=(catTotals[c]||0)+(s.durationMin||0);});
-    const total=Object.values(catTotals).reduce((a,b)=>a+b,0);
-    days.push({label:dayLabels[d.getDay()],catTotals,total,isToday:ds===todayStr()});
+    tasks.filter(t=>t.done&&t.actualMin).forEach(t=>{
+      const c=t.category||'📌 その他'; catTotals[c]=(catTotals[c]||0)+(t.actualMin||0);
+    });
+    const taskTotal=Object.values(catTotals).reduce((a,b)=>a+b,0);
+    days.push({label:dayNames[d.getDay()],pomTotal,catTotals,taskTotal,isToday:ds===todayStr()});
   }
 
-  const maxMin=Math.max(...days.map(d=>d.total),60);
-  const pad={t:16,b:28,l:28,r:8};
-  const cW=W-pad.l-pad.r, cH=H-pad.t-pad.b;
+  const maxPom=Math.max(...days.map(d=>d.pomTotal),60);
+  const maxTask=Math.max(...days.map(d=>d.taskTotal),60);
 
   ctx.clearRect(0,0,W,H);
 
-  // Grid lines
-  [0,.25,.5,.75,1].forEach(pct=>{
-    const y=pad.t+cH*(1-pct);
+  // ═══ LINE CHART (top): pomodoro time ═══
+  const lTop=PAD_T, lBot=PAD_T+LINE_H;
+
+  // Section label
+  ctx.fillStyle='#CC607A'; ctx.font='bold 10px sans-serif'; ctx.textAlign='left';
+  ctx.fillText('⏱ ポモドーロ時間（集中＋休憩）', PAD_L, lTop-4);
+
+  // Grid
+  [0,.5,1].forEach(p=>{
+    const y=lBot-LINE_H*p;
     ctx.strokeStyle='#FFE8EE'; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(W-pad.r,y); ctx.stroke();
-    if(pct>0){ctx.fillStyle='#9B7F8C';ctx.font='9px sans-serif';ctx.textAlign='right';ctx.fillText(fmtMin(Math.round(maxMin*pct)),pad.l-3,y+3);}
+    ctx.beginPath(); ctx.moveTo(PAD_L,y); ctx.lineTo(W-PAD_R,y); ctx.stroke();
+    ctx.fillStyle='#9A7F8C'; ctx.font='9px sans-serif'; ctx.textAlign='right';
+    ctx.fillText(fmtMin(Math.round(maxPom*p)),PAD_L-3,y+3);
   });
 
-  const barW=(cW/7)*0.55, barGap=cW/7;
+  // Points
+  const pts=days.map((d,i)=>({x:PAD_L+barGap*i+barGap/2, y:lBot-LINE_H*(d.pomTotal/maxPom)}));
 
+  // Filled area
+  const grad=ctx.createLinearGradient(0,lTop,0,lBot);
+  grad.addColorStop(0,'rgba(255,183,197,0.35)'); grad.addColorStop(1,'rgba(255,183,197,0.03)');
+  ctx.beginPath(); ctx.moveTo(pts[0].x,lBot);
+  pts.forEach(p=>ctx.lineTo(p.x,p.y));
+  ctx.lineTo(pts[pts.length-1].x,lBot); ctx.closePath();
+  ctx.fillStyle=grad; ctx.fill();
+
+  // Line
+  ctx.beginPath(); ctx.strokeStyle='#E0708A'; ctx.lineWidth=2.5; ctx.lineJoin='round';
+  pts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y)); ctx.stroke();
+
+  // Dots + labels
+  pts.forEach((p,i)=>{
+    ctx.beginPath(); ctx.arc(p.x,p.y,4,0,Math.PI*2);
+    ctx.fillStyle=days[i].isToday?'#E0708A':'#FFB7C5';
+    ctx.strokeStyle='#fff'; ctx.lineWidth=2; ctx.fill(); ctx.stroke();
+    if(days[i].pomTotal>0){
+      ctx.fillStyle='#CC607A'; ctx.font='bold 9px sans-serif'; ctx.textAlign='center';
+      ctx.fillText(fmtMin(days[i].pomTotal),p.x,p.y-8);
+    }
+  });
+
+  // ═══ BAR CHART (bottom): completed task time ═══
+  const bTop=lBot+SEP, bBot=bTop+BAR_H;
+
+  // Section label
+  ctx.fillStyle='#45935A'; ctx.font='bold 10px sans-serif'; ctx.textAlign='left';
+  ctx.fillText('✅ 完了タスクの作業時間', PAD_L, bTop-4);
+
+  // Grid
+  [0,.5,1].forEach(p=>{
+    const y=bBot-BAR_H*p;
+    ctx.strokeStyle='#E8FBF0'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(PAD_L,y); ctx.lineTo(W-PAD_R,y); ctx.stroke();
+    if(p>0){
+      ctx.fillStyle='#9A7F8C'; ctx.font='9px sans-serif'; ctx.textAlign='right';
+      ctx.fillText(fmtMin(Math.round(maxTask*p)),PAD_L-3,y+3);
+    }
+  });
+
+  // Stacked bars
   days.forEach((d,i)=>{
-    const x=pad.l+barGap*i+(barGap-barW)/2;
-    let stackY=pad.t+cH;
-
-    allCatKeys.forEach(cat=>{
-      const min=d.catTotals[cat]||0; if(!min)return;
-      const bH=Math.max(cH*(min/maxMin),2);
-      stackY-=bH;
+    const x=PAD_L+barGap*i+(barGap-barW)/2;
+    let stackY=bBot;
+    allCats.forEach(cat=>{
+      const min=d.catTotals[cat]||0; if(!min) return;
+      const bH=Math.max(BAR_H*(min/maxTask),2); stackY-=bH;
       ctx.fillStyle=CAT_COLORS[cat]||'#D0D0D0';
       ctx.fillRect(x,stackY,barW,bH);
     });
-
-    // Rounded cap on top of entire stack
-    if(d.total>0){
-      const totalH=Math.max(cH*(d.total/maxMin),2);
-      const topY=pad.t+cH-totalH;
-      // Find color of topmost cat
-      let topColor='#D0D0D0';
-      for(let k=allCatKeys.length-1;k>=0;k--){if(d.catTotals[allCatKeys[k]]>0){topColor=CAT_COLORS[allCatKeys[k]]||'#D0D0D0';break;}}
-      ctx.fillStyle=topColor;
-      ctx.beginPath();
-      ctx.moveTo(x+3,topY); ctx.lineTo(x+barW-3,topY);
-      ctx.quadraticCurveTo(x+barW,topY,x+barW,topY+3);
-      ctx.lineTo(x+barW,topY+4); ctx.lineTo(x,topY+4);
-      ctx.lineTo(x,topY+3); ctx.quadraticCurveTo(x,topY,x+3,topY);
-      ctx.closePath(); ctx.fill();
-      // Value label
-      ctx.fillStyle='#D4697F'; ctx.font='bold 9px sans-serif'; ctx.textAlign='center';
-      ctx.fillText(fmtMin(d.total),x+barW/2,topY-3);
+    if(d.taskTotal>0){
+      const topY=bBot-BAR_H*(d.taskTotal/maxTask);
+      ctx.fillStyle='#45935A'; ctx.font='bold 9px sans-serif'; ctx.textAlign='center';
+      ctx.fillText(fmtMin(d.taskTotal),x+barW/2,topY-3);
     }
 
-    // Day label
-    ctx.fillStyle=d.isToday?'#D4697F':'#9B7F8C';
+    // Shared day labels
+    ctx.fillStyle=d.isToday?'#CC607A':'#9A7F8C';
     ctx.font=`${d.isToday?'800':'400'} 11px sans-serif`;
-    ctx.textAlign='center'; ctx.fillText(d.label,x+barW/2,H-pad.b+14);
+    ctx.textAlign='center';
+    ctx.fillText(d.label,x+barW/2,bBot+16);
   });
+
+  // Separator between charts
+  ctx.strokeStyle='#FFD6E0'; ctx.lineWidth=1;
+  ctx.setLineDash([4,4]);
+  ctx.beginPath(); ctx.moveTo(PAD_L,lBot+SEP/2); ctx.lineTo(W-PAD_R,lBot+SEP/2); ctx.stroke();
+  ctx.setLineDash([]);
 
   // Legend
   const used=new Set(); days.forEach(d=>Object.keys(d.catTotals).forEach(c=>used.add(c)));
   document.getElementById('chartLegend').innerHTML=[...used].map(c=>`
-    <div class="leg-item">
-      <div class="leg-dot" style="background:${CAT_COLORS[c]||'#ccc'}"></div>
-      <span>${c==='_break'?'☕ 休憩':c}</span>
-    </div>`).join('');
+    <div class="leg-item"><div class="leg-dot" style="background:${CAT_COLORS[c]||'#ccc'}"></div><span>${c}</span></div>`).join('');
 
-  const totalWeek=days.reduce((s,d)=>s+d.total,0);
-  const actDays=days.filter(d=>d.total>0).length;
-  document.getElementById('weekStats').textContent=`今週の合計: ${fmtMin(totalWeek)}  ｜  作業日: ${actDays}日`;
+  const totalPom=days.reduce((s,d)=>s+d.pomTotal,0);
+  const totalTask=days.reduce((s,d)=>s+d.taskTotal,0);
+  document.getElementById('weekStats').textContent=
+    `今週のポモドーロ: ${fmtMin(totalPom)}  ｜  完了タスク時間: ${fmtMin(totalTask)}  ｜  作業日: ${days.filter(d=>d.pomTotal>0).length}日`;
 }
 
 // ── Notion ──
 async function exportNotion(){
   const key=settings.notionKey, db=settings.notionDb;
   const msg=document.getElementById('notionMsg');
-  if(!key||!db){msg.innerHTML='<div class="status-msg err">⚠️ TokenとデータベースIDを入力してください</div>';return;}
+  if(!key||!db){msg.innerHTML='<div class="status-msg err">⚠️ TokenとDBのIDを入力してください</div>';return;}
   msg.innerHTML='<div class="status-msg inf">送信中...</div>';
   const tasks=st.tasks||[], ss=st.sessions||[];
   const done=tasks.filter(t=>t.done);
@@ -939,8 +963,7 @@ async function exportNotion(){
         'タイトル':{title:[{text:{content:`${st.date} の作業記録`}}]},
         '日付':{date:{start:st.date}},
         'パターン':{rich_text:[{text:{content:p?`${p.emoji} ${p.name}`:'未設定'}}]},
-        '作業時間（分）':{number:wm},
-        '達成度（%）':{number:ach},
+        '作業時間（分）':{number:wm},'達成度（%）':{number:ach},
         '完了タスク':{rich_text:[{text:{content:done.map(t=>t.name).join(', ')||'なし'}}]},
         '一言メモ':{rich_text:[{text:{content:st.dayMemo||''}}]},
       }}),
@@ -955,12 +978,11 @@ function saveSettings(){ settings.notionKey=document.getElementById('notionKey')
 function clearToday(){
   if(!confirm('今日のデータをリセットしますか？'))return;
   stopWorker(); st=defToday();
-  tmr={active:false,phase:'work',mode:tmr.mode,startEpoch:null,pausedRem:null,selId:null};
+  tmr={active:false,phase:'work',mode:tmr.mode,startEpoch:null,pausedRem:null,cycle:1};
   saveJ(K_TODAY,st); saveJ(K_TMR,null);
   document.getElementById('dayMemo').value='';
   document.getElementById('mainBtn').textContent='▶ スタート';
-  document.getElementById('mainBtn').classList.remove('brk');
-  hideToast(); renderAll(); refreshPomSelect(); renderSessions(); renderStats(); renderModes(); refreshTimerUI();
+  hideToast(); renderAll(); renderSessions(); renderStats(); renderModes(); refreshTimerUI(); updateCycleBadge();
 }
 function clearAll(){
   if(!confirm('すべてのデータを削除しますか？この操作は元に戻せません。'))return;
@@ -970,13 +992,13 @@ function clearAll(){
 
 // ── Utils ──
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function fmtMin(m){ if(!m)return '0分'; if(m<60)return m+'分'; const h=Math.floor(m/60),r=m%60; return r?`${h}時間${r}分`:`${h}時間`; }
+function fmtMin(m){ if(!m)return '0分'; m=Math.round(m); if(m<60)return m+'分'; const h=Math.floor(m/60),r=m%60; return r?`${h}時間${r}分`:`${h}時間`; }
 function fmtDate(ds){ const d=new Date(ds+'T00:00:00'),days=['日','月','火','水','木','金','土']; return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${days[d.getDay()]}）`; }
 
 document.addEventListener('keydown',e=>{
-  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.tagName==='SELECT')return;
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.tagName==='SELECT') return;
   if(e.key===' '&&document.getElementById('tab-pomodoro').classList.contains('active')){e.preventDefault();toggleTimer();}
-  if(e.key==='Escape')closeModal();
+  if(e.key==='Escape') closeModal();
 });
 
 init();
