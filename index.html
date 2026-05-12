@@ -214,8 +214,8 @@
     .status-msg.err { background: #FFEAEA; color: #C04040; }
     .status-msg.inf { background: var(--pink-l); color: var(--muted); }
     .empty { text-align: center; padding: 22px; color: var(--muted); font-size: 14px; }
-    .save-btn { width: 100%; padding: 13px; border: none; border-radius: 14px; background: linear-gradient(135deg, var(--green), var(--green-d)); color: #fff; font-size: 15px; font-weight: 800; cursor: pointer; transition: all .2s; margin-bottom: 10px; font-family: inherit; box-shadow: 0 4px 14px rgba(69,147,90,.28); }
-    .save-btn:hover { transform: scale(1.01); opacity: .95; }
+    .save-btn { width: 100%; padding: 13px; border: 2px solid var(--green-d); border-radius: 14px; background: var(--green); color: var(--green-d); font-size: 15px; font-weight: 800; cursor: pointer; transition: all .2s; margin-bottom: 10px; font-family: inherit; }
+    .save-btn:hover { background: #9FE4B0; transform: scale(1.01); }
 
     @media (max-width:480px) {
       .form-row { grid-template-columns: 1fr; }
