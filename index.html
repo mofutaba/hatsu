@@ -428,11 +428,17 @@
         <div class="help">Notion Integrationページで発行したトークン</div>
       </div>
       <div class="form-group">
-        <label class="form-label">データベース ID</label>
-        <input type="text" class="form-ctrl" id="notionDb" placeholder="32桁の英数字" oninput="saveSettings()">
-        <div class="help">NotionデータベースURLの ?v= より前の32桁</div>
+        <label class="form-label">記録 DB ID（📅 日々の記録）</label>
+        <input type="text" class="form-ctrl" id="notionDb" placeholder="27488e6ba1d7462aac97d7dfb4efd733" oninput="saveSettings()">
       </div>
-      <button class="btn btn-primary btn-full" onclick="exportNotion()" style="padding:11px">📤 今日の記録を Notion に保存</button>
+      <div class="form-group">
+        <label class="form-label">目標 DB ID（🎯 月別目標）</label>
+        <input type="text" class="form-ctrl" id="notionGoalDb" placeholder="0fb17b048069439fa6902690e5ad80c4" oninput="saveSettings()">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button class="btn btn-primary btn-full" onclick="exportNotion()" style="padding:11px">📤 今日の記録を Notion に保存</button>
+        <button class="btn btn-secondary btn-full" onclick="exportGoalNotion()" style="padding:11px">🎯 今月の目標を Notion に保存</button>
+      </div>
       <div id="notionMsg"></div>
     </div>
     <div class="card">
@@ -620,6 +626,7 @@ function init(){
   document.getElementById('boardMemo').value=notes.board||'';
   document.getElementById('notionKey').value=settings.notionKey||'';
   document.getElementById('notionDb').value=settings.notionDb||'';
+  document.getElementById('notionGoalDb').value=settings.notionGoalDb||'';
   document.getElementById('soundToggle').checked=settings.sound!==false;
   document.getElementById('soundToggle2').checked=settings.sound!==false;
   // Loop UI
@@ -1194,34 +1201,71 @@ function updateNoteTitle(i,v){ notes.cards[i].title=v; saveJ(K_NOTES,notes); }
 function updateNoteText(i,v){ notes.cards[i].text=v; saveJ(K_NOTES,notes); }
 
 // ── Notion ──
+function achToSelect(pct){
+  if(pct>=80) return '🌟 完璧';
+  if(pct>=50) return '👍 まあまあ';
+  if(pct>=20) return '🌱 少しできた';
+  return '😴 ほぼできず';
+}
+async function notionPost(key, path, body){
+  return fetch('https://api.notion.com/v1/'+path,{
+    method:'POST',
+    headers:{'Authorization':`Bearer ${key}`,'Notion-Version':'2022-06-28','Content-Type':'application/json'},
+    body:JSON.stringify(body),
+  });
+}
 async function exportNotion(){
   const key=settings.notionKey, db=settings.notionDb;
   const msg=document.getElementById('notionMsg');
-  if(!key||!db){msg.innerHTML='<div class="status-msg err">⚠️ TokenとDBのIDを入力してください</div>';return;}
+  if(!key||!db){msg.innerHTML='<div class="status-msg err">⚠️ TokenとDB IDを入力してください</div>';return;}
   msg.innerHTML='<div class="status-msg inf">送信中...</div>';
   const tasks=st.tasks||[], ss=st.sessions||[];
   const done=tasks.filter(t=>t.done);
-  const wm=ss.filter(s=>s.type==='work').reduce((a,s)=>a+s.durationMin,0);
+  const wm=Math.round(ss.filter(s=>s.type==='work').reduce((a,s)=>a+s.durationMin,0));
+  const bm=Math.round(ss.filter(s=>s.type==='break').reduce((a,s)=>a+s.durationMin,0));
   const ach=tasks.length?Math.round(done.length/tasks.length*100):0;
   const p=st.pattern?PATTERNS[st.pattern]:null;
+  const patternName=p?`${p.emoji} ${p.name}`:'';
   try{
-    const res=await fetch('https://api.notion.com/v1/pages',{
-      method:'POST',
-      headers:{'Authorization':`Bearer ${key}`,'Notion-Version':'2022-06-28','Content-Type':'application/json'},
-      body:JSON.stringify({parent:{database_id:db},properties:{
-        'タイトル':{title:[{text:{content:`${st.date} の作業記録`}}]},
-        '日付':{date:{start:st.date}},
-        'パターン':{rich_text:[{text:{content:p?`${p.emoji} ${p.name}`:'未設定'}}]},
-        '作業時間（分）':{number:wm},'達成度（%）':{number:ach},
-        '完了タスク':{rich_text:[{text:{content:done.map(t=>t.name).join(', ')||'なし'}}]},
-        '一言メモ':{rich_text:[{text:{content:st.dayMemo||''}}]},
-      }}),
-    });
-    if(res.ok){msg.innerHTML='<div class="status-msg ok">✅ Notionに保存しました！</div>';}
+    const res=await notionPost(key,'pages',{parent:{database_id:db},properties:{
+      'Name':{title:[{text:{content:`${st.date} の作業記録`}}]},
+      '日付':{date:{start:st.date}},
+      ...(patternName?{'パターン':{select:{name:patternName}}}:{}),
+      '集中時間（分）':{number:wm},
+      '休憩時間（分）':{number:bm},
+      '完了タスク':{rich_text:[{text:{content:done.map(t=>t.name).join('、')||'なし'}}]},
+      '一言メモ':{rich_text:[{text:{content:st.dayMemo||''}}]},
+      '達成度':{select:{name:achToSelect(ach)}},
+    }});
+    if(res.ok){msg.innerHTML='<div class="status-msg ok">✅ 記録をNotionに保存しました！</div>';}
     else{const e=await res.json().catch(()=>({}));msg.innerHTML=`<div class="status-msg err">❌ エラー: ${esc(e.message||String(res.status))}</div>`;}
   }catch(e){msg.innerHTML=`<div class="status-msg err">❌ 通信エラー: ${esc(e.message)}</div>`;}
 }
-function saveSettings(){ settings.notionKey=document.getElementById('notionKey').value.trim(); settings.notionDb=document.getElementById('notionDb').value.trim(); saveJ(K_SET,settings); }
+async function exportGoalNotion(){
+  const key=settings.notionKey, db=settings.notionGoalDb;
+  const msg=document.getElementById('notionMsg');
+  if(!key||!db){msg.innerHTML='<div class="status-msg err">⚠️ TokenとDB IDを入力してください</div>';return;}
+  const goalText=goals[monthStr()]||'';
+  if(!goalText){msg.innerHTML='<div class="status-msg err">⚠️ 今月の目標がまだ入力されていません</div>';return;}
+  msg.innerHTML='<div class="status-msg inf">送信中...</div>';
+  const d=new Date(); const monthStart=`${d.getFullYear()}-${pad(d.getMonth()+1)}-01`;
+  const monthName=`${d.getFullYear()}年${d.getMonth()+1}月`;
+  try{
+    const res=await notionPost(key,'pages',{parent:{database_id:db},properties:{
+      'Name':{title:[{text:{content:monthName}}]},
+      '月':{date:{start:monthStart}},
+      '目標':{rich_text:[{text:{content:goalText}}]},
+    }});
+    if(res.ok){msg.innerHTML='<div class="status-msg ok">✅ 目標をNotionに保存しました！</div>';}
+    else{const e=await res.json().catch(()=>({}));msg.innerHTML=`<div class="status-msg err">❌ エラー: ${esc(e.message||String(res.status))}</div>`;}
+  }catch(e){msg.innerHTML=`<div class="status-msg err">❌ 通信エラー: ${esc(e.message)}</div>`;}
+}
+function saveSettings(){
+  settings.notionKey=document.getElementById('notionKey').value.trim();
+  settings.notionDb=document.getElementById('notionDb').value.trim();
+  settings.notionGoalDb=document.getElementById('notionGoalDb').value.trim();
+  saveJ(K_SET,settings);
+}
 
 // ── Data management ──
 function clearToday(){
