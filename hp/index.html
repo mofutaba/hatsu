@@ -3,48 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>妖精のもふぅ</title>
+  <title>妖精のもふぅ — おふとんから うまれた ちいさな 妖精</title>
+  <meta name="description" content="おふとんから うまれた 妖精、もふぅ。どこにでも たくさんいて、あなたのことがだいすき！ もふたばが 描く、やさしい キャラクターブランドです。">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap');
 
     :root {
-      --cream:   #FFF8F2;
+      --cream:   #FEF9F4;
       --white:   #FFFFFF;
       --pink:    #FFD6E0;
-      --pink-d:  #F4A0B8;
+      --pink-d:  #E8849E;
+      --pink-m:  #F4A8BE;
       --pink-s:  #FFF0F5;
-      --green:   #D8EED8;
-      --green-d: #8DC88D;
-      --green-s: #F0FAF0;
-      --yellow:  #FFF3C4;
-      --text:    #4A3840;
+      --pink-ss: #FFF8FB;
+      --green:   #D4EDD4;
+      --green-d: #7EBE7E;
+      --green-s: #EEF9EE;
+      --lav:     #E8E0F8;
+      --lav-d:   #9B8FC8;
+      --yellow:  #FFF8D6;
+      --yellow-d:#C8A84A;
+      --text:    #3E3040;
+      --text-s:  #6A5460;
       --muted:   #A08898;
-      --border:  #FFE4EE;
-      --shadow:  0 4px 24px rgba(200,120,150,0.10);
+      --border:  #FFE6EE;
+      --shadow:  0 4px 28px rgba(180,100,130,0.09);
+      --r:       20px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Zen Maru Gothic', 'Hiragino Maru Gothic Pro', 'Yu Gothic', system-ui, sans-serif;
+      font-family: 'Zen Maru Gothic', 'Hiragino Maru Gothic Pro', 'Meiryo', system-ui, sans-serif;
       background: var(--cream);
       color: var(--text);
-      line-height: 1.7;
+      line-height: 1.75;
       overflow-x: hidden;
     }
 
-    /* ===== HEADER ===== */
+    /* ========== HEADER ========== */
     header {
-      background: var(--white);
-      border-bottom: 2px solid var(--border);
-      padding: 14px 24px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--border);
+      padding: 10px 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       position: sticky;
       top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 16px rgba(200,120,150,0.08);
+      z-index: 200;
+      box-shadow: 0 2px 20px rgba(180,100,130,0.06);
     }
 
     .logo {
@@ -55,308 +67,442 @@
       color: var(--text);
     }
 
-    .logo-icon {
-      width: 38px;
-      height: 38px;
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
     }
 
-    .logo-text {
-      font-size: 15px;
+    .logo-name {
+      font-size: 14px;
       font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: 0.02em;
+    }
+
+    .logo-name small {
+      display: block;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--muted);
       letter-spacing: 0.04em;
     }
 
     nav {
       display: flex;
-      gap: 24px;
+      align-items: center;
+      gap: 4px;
     }
 
     nav a {
       text-decoration: none;
-      color: var(--muted);
+      color: var(--text-s);
       font-size: 13px;
       font-weight: 500;
-      transition: color 0.2s;
+      padding: 6px 12px;
+      border-radius: 999px;
+      transition: background 0.18s, color 0.18s;
     }
 
-    nav a:hover { color: var(--pink-d); }
+    nav a:hover { background: var(--pink-s); color: var(--pink-d); }
 
-    .nav-insta {
-      background: linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7);
+    .btn-nav-insta {
+      background: linear-gradient(135deg, #fdd835 0%, #e91e8c 55%, #6228d7 100%);
       color: white !important;
-      padding: 6px 14px;
-      border-radius: 20px;
       font-weight: 700 !important;
+      padding: 7px 16px !important;
     }
 
-    /* ===== HERO ===== */
+    .btn-nav-insta:hover { opacity: 0.88; background: linear-gradient(135deg, #fdd835, #e91e8c, #6228d7) !important; }
+
+    /* ========== HERO ========== */
     .hero {
-      background: linear-gradient(160deg, #FFF0F5 0%, #FFF8F2 50%, #F0FAF0 100%);
-      padding: 70px 24px 80px;
+      min-height: 100svh;
+      background: linear-gradient(170deg, #FFF0F7 0%, #FDF8F2 45%, #EEF9F0 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
+      padding: 60px 24px 80px;
       position: relative;
       overflow: hidden;
     }
 
-    .hero::before {
-      content: '';
+    /* background blobs */
+    .blob {
       position: absolute;
-      top: -60px; right: -60px;
-      width: 260px; height: 260px;
-      background: radial-gradient(circle, rgba(255,214,224,0.4) 0%, transparent 70%);
       border-radius: 50%;
+      pointer-events: none;
+      filter: blur(60px);
+      opacity: 0.35;
+    }
+    .blob-1 { width: 420px; height: 420px; background: #FFD6E0; top: -120px; right: -80px; }
+    .blob-2 { width: 320px; height: 320px; background: #D4EDD4; bottom: -80px; left: -80px; }
+    .blob-3 { width: 200px; height: 200px; background: #E8E0F8; top: 40%; left: 10%; }
+
+    /* floating dots decor */
+    .hero-dot {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
     }
 
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -40px; left: -40px;
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(216,238,216,0.4) 0%, transparent 70%);
-      border-radius: 50%;
-    }
+    .hero-content { position: relative; z-index: 2; max-width: 640px; }
 
     .hero-mofu {
-      display: inline-block;
       margin-bottom: 28px;
-      animation: float 3s ease-in-out infinite;
+      display: inline-block;
+      animation: floatY 3.6s ease-in-out infinite;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-12px); }
+    @keyframes floatY {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-14px); }
+    }
+
+    .speech-bubble {
+      display: inline-block;
+      background: var(--white);
+      border: 2px solid var(--pink);
+      border-radius: 18px;
+      padding: 10px 22px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--pink-d);
+      margin-bottom: 32px;
+      position: relative;
+      animation: pop 0.5s cubic-bezier(.36,1.56,.64,1) both;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.7); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -12px; left: 50%;
+      transform: translateX(-50%);
+      border: 7px solid transparent;
+      border-top-color: var(--pink);
+    }
+    .speech-bubble::before {
+      content: '';
+      position: absolute;
+      bottom: -9px; left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: var(--white);
+      z-index: 1;
     }
 
     .hero h1 {
-      font-size: clamp(28px, 6vw, 48px);
+      font-size: clamp(26px, 5.5vw, 46px);
       font-weight: 700;
-      line-height: 1.4;
+      line-height: 1.45;
       margin-bottom: 16px;
-      color: var(--text);
     }
 
-    .hero h1 span {
+    .hero h1 em {
+      font-style: normal;
       color: var(--pink-d);
     }
 
-    .hero-sub {
-      font-size: clamp(14px, 2.5vw, 17px);
-      color: var(--muted);
+    .hero-desc {
+      font-size: clamp(14px, 2.2vw, 16px);
+      color: var(--text-s);
       margin-bottom: 36px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .hero-mofu-text {
-      background: var(--white);
-      border: 2px solid var(--pink);
-      border-radius: 20px;
-      padding: 16px 28px;
-      display: inline-block;
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--pink-d);
-      margin-bottom: 36px;
-      position: relative;
-    }
-
-    .hero-mofu-text::before {
-      content: '';
-      position: absolute;
-      top: -12px; left: 50%;
-      transform: translateX(-50%);
-      border: 6px solid transparent;
-      border-bottom-color: var(--pink);
-    }
-
-    .hero-mofu-text::after {
-      content: '';
-      position: absolute;
-      top: -9px; left: 50%;
-      transform: translateX(-50%);
-      border: 5px solid transparent;
-      border-bottom-color: var(--white);
+      line-height: 1.85;
     }
 
     .hero-btns {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       justify-content: center;
       flex-wrap: wrap;
     }
 
+    /* ========== BUTTONS ========== */
     .btn {
-      display: inline-block;
-      padding: 12px 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 26px;
       border-radius: 999px;
       font-size: 14px;
       font-weight: 700;
       text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
       font-family: inherit;
       cursor: pointer;
+      border: none;
+      transition: transform 0.18s, box-shadow 0.18s, opacity 0.18s;
     }
 
-    .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .btn:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .btn:active { transform: translateY(0); }
 
-    .btn-primary {
-      background: linear-gradient(135deg, var(--pink-d), #e87aaa);
+    .btn-pink {
+      background: linear-gradient(135deg, var(--pink-m), var(--pink-d));
       color: white;
     }
 
-    .btn-secondary {
+    .btn-outline {
       background: var(--white);
-      color: var(--pink-d);
       border: 2px solid var(--pink);
+      color: var(--pink-d);
     }
 
-    /* ===== SECTIONS ===== */
-    section {
-      padding: 60px 24px;
+    .btn-green {
+      background: linear-gradient(135deg, #96d896, var(--green-d));
+      color: white;
     }
 
-    .section-inner {
-      max-width: 860px;
+    .btn-insta {
+      background: linear-gradient(135deg, #fdd835, #e91e8c, #6228d7);
+      color: white;
+      font-size: 15px;
+      padding: 14px 32px;
+    }
+
+    /* ========== SECTION BASE ========== */
+    .section {
+      padding: 72px 24px;
+    }
+
+    .inner {
+      max-width: 880px;
       margin: 0 auto;
     }
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 40px;
+    .inner-sm {
+      max-width: 640px;
+      margin: 0 auto;
     }
 
-    .section-title h2 {
+    .sec-head {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    .chip {
+      display: inline-block;
+      padding: 4px 16px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+
+    .chip-pink  { background: var(--pink-s);  color: var(--pink-d); }
+    .chip-green { background: var(--green-s); color: var(--green-d); }
+    .chip-lav   { background: var(--lav);     color: var(--lav-d); }
+    .chip-yel   { background: var(--yellow);  color: var(--yellow-d); }
+
+    .sec-head h2 {
       font-size: clamp(22px, 4vw, 32px);
       font-weight: 700;
-      margin-bottom: 8px;
+      line-height: 1.45;
     }
 
-    .section-title p {
+    .sec-head p {
       color: var(--muted);
       font-size: 14px;
+      margin-top: 8px;
     }
 
-    .tag {
-      display: inline-block;
-      background: var(--pink-s);
-      color: var(--pink-d);
-      border-radius: 999px;
-      padding: 4px 14px;
+    /* ========== NEWS ========== */
+    .section-news {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .news-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px dashed var(--border);
+      text-decoration: none;
+      color: var(--text);
+      transition: background 0.15s;
+    }
+
+    .news-item:last-child { border-bottom: none; }
+
+    .news-date {
       font-size: 12px;
-      font-weight: 700;
-      margin-bottom: 10px;
-      letter-spacing: 0.06em;
+      color: var(--muted);
+      min-width: 80px;
+      padding-top: 2px;
+      flex-shrink: 0;
     }
 
-    /* ===== ABOUT ===== */
-    .about { background: var(--white); }
+    .news-tag {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 700;
+      min-width: 58px;
+      text-align: center;
+      flex-shrink: 0;
+    }
 
-    .about-grid {
+    .tag-event  { background: var(--green-s);  color: var(--green-d); }
+    .tag-goods  { background: var(--pink-s);   color: var(--pink-d); }
+    .tag-info   { background: var(--lav);      color: var(--lav-d); }
+
+    .news-text {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* ========== ABOUT (もふぅって？) ========== */
+    .section-about { background: var(--cream); }
+
+    .about-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      gap: 52px;
       align-items: center;
+    }
+
+    .about-ilus {
+      display: flex;
+      justify-content: center;
     }
 
     .about-text h3 {
-      font-size: 22px;
+      font-size: clamp(20px, 3.5vw, 28px);
       font-weight: 700;
-      margin-bottom: 14px;
       line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .about-text h3 em {
+      font-style: normal;
+      color: var(--pink-d);
     }
 
     .about-text p {
-      color: var(--muted);
-      margin-bottom: 12px;
       font-size: 15px;
-    }
-
-    .about-mofu-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* ===== もふぅの特徴 ===== */
-    .features { background: var(--cream); }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-    }
-
-    .feature-card {
-      background: var(--white);
-      border-radius: 20px;
-      padding: 28px 20px;
-      text-align: center;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      transition: transform 0.2s;
-    }
-
-    .feature-card:hover { transform: translateY(-4px); }
-
-    .feature-icon {
-      font-size: 40px;
+      color: var(--text-s);
       margin-bottom: 14px;
+      line-height: 1.85;
     }
 
-    .feature-card h4 {
-      font-size: 15px;
+    /* ========== EXPRESSIONS ========== */
+    .section-expr { background: var(--white); }
+
+    .expr-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 16px;
+    }
+
+    .expr-card {
+      background: var(--cream);
+      border-radius: var(--r);
+      padding: 24px 16px 20px;
+      text-align: center;
+      border: 1.5px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .expr-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+
+    .expr-label {
+      font-size: 12px;
       font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--text);
+      color: var(--pink-d);
+      margin-top: 12px;
     }
 
-    .feature-card p {
+    /* ========== MESSAGE ========== */
+    .section-msg {
+      background: linear-gradient(150deg, #FFF0F7 0%, #EEF9F0 100%);
+    }
+
+    .msg-card {
+      background: var(--white);
+      border-radius: 28px;
+      padding: 52px 44px;
+      text-align: center;
+      border: 2px solid var(--pink);
+      box-shadow: var(--shadow);
+    }
+
+    .msg-card h3 {
+      font-size: clamp(20px, 3.5vw, 28px);
+      font-weight: 700;
+      line-height: 1.65;
+      margin: 20px 0 18px;
+    }
+
+    .msg-card h3 strong {
+      color: var(--pink-d);
+    }
+
+    .msg-card p {
+      font-size: 15px;
+      color: var(--text-s);
+      line-height: 1.9;
+    }
+
+    /* ========== GALLERY ========== */
+    .section-gallery { background: var(--pink-ss); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--pink-s), var(--green-s));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 52px;
+      border: 1.5px solid var(--border);
+      transition: transform 0.2s;
+      position: relative;
+    }
+
+    .gallery-item:hover { transform: scale(1.03); }
+
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-item.wide { grid-column: span 2; }
+
+    /* placeholder emoji sizes */
+    .gallery-item.tall   { font-size: 80px; }
+    .gallery-item.wide   { font-size: 64px; }
+
+    .gallery-note {
+      text-align: center;
+      margin-top: 20px;
       font-size: 13px;
       color: var(--muted);
     }
 
-    /* ===== MESSAGE ===== */
-    .message {
-      background: linear-gradient(135deg, var(--pink-s), var(--green-s));
-    }
-
-    .message-box {
-      background: var(--white);
-      border-radius: 28px;
-      padding: 48px 40px;
-      text-align: center;
-      border: 2px solid var(--pink);
-      box-shadow: var(--shadow);
-      max-width: 620px;
-      margin: 0 auto;
-    }
-
-    .message-box h3 {
-      font-size: clamp(20px, 4vw, 28px);
-      font-weight: 700;
-      line-height: 1.6;
-      margin-bottom: 20px;
-      color: var(--text);
-    }
-
-    .message-box p {
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.8;
-    }
-
-    .message-mofu {
-      margin-bottom: 24px;
-      animation: float 3s ease-in-out 0.5s infinite;
-    }
-
-    /* ===== GOODS ===== */
-    .goods { background: var(--white); }
+    /* ========== GOODS ========== */
+    .section-goods { background: var(--white); }
 
     .goods-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 20px;
     }
 
@@ -364,488 +510,796 @@
       background: var(--cream);
       border-radius: 20px;
       overflow: hidden;
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .goods-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .goods-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
 
     .goods-img {
       width: 100%;
       aspect-ratio: 1;
+      background: linear-gradient(145deg, var(--pink-s), var(--green-s));
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 64px;
-      background: linear-gradient(135deg, var(--pink-s), var(--green-s));
+      font-size: 72px;
     }
 
-    .goods-info {
-      padding: 16px 18px 20px;
+    .goods-body { padding: 18px 20px 22px; }
+
+    .goods-body h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .goods-body p  { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    .goods-cta {
+      margin-top: 36px;
+      text-align: center;
     }
 
-    .goods-info h4 {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
+    /* ========== EVENTS ========== */
+    .section-events { background: var(--green-s); }
 
-    .goods-info p {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    /* ===== EVENTS ===== */
-    .events { background: var(--green-s); }
-
-    .events-list {
+    .ev-list {
       display: flex;
       flex-direction: column;
       gap: 14px;
-      max-width: 620px;
-      margin: 0 auto;
     }
 
-    .event-item {
+    .ev-card {
       background: var(--white);
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 20px 24px;
       display: flex;
+      gap: 18px;
       align-items: flex-start;
-      gap: 16px;
-      border: 1px solid var(--green);
-      box-shadow: 0 2px 12px rgba(100,180,100,0.07);
+      border: 1.5px solid var(--green);
+      box-shadow: 0 2px 14px rgba(80,160,80,0.06);
+      transition: transform 0.18s;
     }
 
-    .event-date {
+    .ev-card:hover { transform: translateX(4px); }
+
+    .ev-date {
       background: var(--green);
-      border-radius: 12px;
-      padding: 8px 14px;
+      border-radius: 14px;
+      padding: 10px 14px;
       text-align: center;
-      min-width: 72px;
+      min-width: 68px;
       flex-shrink: 0;
     }
 
-    .event-date .month {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--green-d);
-      display: block;
-    }
+    .ev-date .month { font-size: 10px; font-weight: 700; color: var(--green-d); display: block; }
+    .ev-date .day   { font-size: 24px; font-weight: 700; color: var(--text); display: block; line-height: 1.1; }
 
-    .event-date .day {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--text);
-      display: block;
-      line-height: 1;
-    }
-
-    .event-info h4 {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .event-info p {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .event-badge {
+    .ev-badge {
       display: inline-block;
       background: var(--yellow);
-      color: #8B6914;
+      color: var(--yellow-d);
       border-radius: 999px;
       padding: 2px 10px;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       margin-bottom: 6px;
     }
 
-    /* ===== SNS ===== */
-    .sns-section { background: var(--white); }
+    .ev-info h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .ev-info p  { font-size: 13px; color: var(--muted); line-height: 1.65; }
 
-    .sns-box {
-      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-      border-radius: 28px;
-      padding: 48px 32px;
-      text-align: center;
-      max-width: 580px;
-      margin: 0 auto;
+    /* ========== CREATOR ========== */
+    .section-creator { background: var(--white); }
+
+    .creator-layout {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 36px;
+      align-items: center;
+      background: var(--cream);
+      border-radius: 24px;
+      padding: 36px 40px;
+      border: 1.5px solid var(--border);
     }
 
-    .sns-box h3 {
-      font-size: 22px;
+    .creator-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink-s), var(--green-s));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 52px;
+      border: 3px solid var(--pink);
+      flex-shrink: 0;
+    }
+
+    .creator-text h3 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .creator-text .creator-handle { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+    .creator-text p { font-size: 14px; color: var(--text-s); line-height: 1.8; }
+
+    .creator-links {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .creator-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
       font-weight: 700;
-      margin-bottom: 10px;
-      color: var(--text);
+      text-decoration: none;
+      border: 1.5px solid var(--border);
+      color: var(--text-s);
+      background: var(--white);
+      transition: border-color 0.18s, color 0.18s;
     }
 
-    .sns-box p {
-      font-size: 14px;
-      color: #8B5E4A;
+    .creator-link:hover { border-color: var(--pink-d); color: var(--pink-d); }
+
+    /* ========== SNS CTA ========== */
+    .section-sns { background: linear-gradient(150deg, #FFF6E8 0%, #FFEEF5 100%); }
+
+    .sns-card {
+      background: var(--white);
+      border-radius: 28px;
+      padding: 52px 44px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .sns-card h3 { font-size: clamp(20px, 4vw, 28px); font-weight: 700; margin: 20px 0 12px; }
+    .sns-card p  { font-size: 15px; color: var(--text-s); margin-bottom: 28px; line-height: 1.8; }
+
+    .sns-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
       margin-bottom: 28px;
     }
 
-    .btn-insta {
-      background: linear-gradient(135deg, #f9ce34 0%, #ee2a7b 50%, #6228d7 100%);
-      color: white;
-      font-size: 15px;
-      padding: 14px 36px;
-    }
+    .stat-item { text-align: center; }
+    .stat-num  { font-size: 26px; font-weight: 700; color: var(--pink-d); display: block; }
+    .stat-lbl  { font-size: 12px; color: var(--muted); }
 
-    /* ===== FOOTER ===== */
+    /* ========== FOOTER ========== */
     footer {
       background: var(--text);
-      color: rgba(255,255,255,0.7);
+      color: rgba(255,255,255,0.65);
       text-align: center;
-      padding: 36px 24px;
-      font-size: 13px;
+      padding: 44px 24px 32px;
     }
 
-    footer .footer-logo {
-      font-size: 18px;
-      font-weight: 700;
+    .footer-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
       color: white;
-      margin-bottom: 10px;
-    }
-
-    footer p { margin-bottom: 4px; }
-
-    footer a {
-      color: rgba(255,255,255,0.5);
       text-decoration: none;
     }
 
-    footer a:hover { color: white; }
+    .footer-logo-text { font-size: 16px; font-weight: 700; }
 
-    /* ===== MOFU SVG ===== */
-    .mofu-svg { filter: drop-shadow(0 6px 18px rgba(200,120,150,0.20)); }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 620px) {
-      nav { display: none; }
-      .about-grid { grid-template-columns: 1fr; }
-      .about-mofu-wrap { order: -1; }
-      .message-box { padding: 32px 20px; }
-      .sns-box { padding: 32px 20px; }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
     }
 
-    /* ===== DECORATIVE DOTS ===== */
-    .dots {
-      position: absolute;
-      pointer-events: none;
-      opacity: 0.18;
+    .footer-links a {
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.18s;
+    }
+
+    .footer-links a:hover { color: white; }
+
+    .footer-copy { font-size: 11px; opacity: 0.35; margin-top: 8px; }
+
+    /* ========== SCROLL REVEAL ========== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 640px) {
+      header { padding: 10px 16px; }
+      nav a:not(.btn-nav-insta):not(:last-child) { display: none; }
+      .about-layout { grid-template-columns: 1fr; gap: 28px; }
+      .about-ilus { order: -1; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item.tall { grid-row: span 1; }
+      .gallery-item.wide { grid-column: span 1; }
+      .msg-card { padding: 32px 20px; }
+      .sns-card { padding: 36px 20px; }
+      .creator-layout { grid-template-columns: 1fr; text-align: center; padding: 28px 20px; }
+      .creator-avatar { margin: 0 auto; }
+      .creator-links { justify-content: center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <a href="#" class="logo">
-      <!-- もふぅ mini icon -->
-      <svg class="logo-icon" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="19" cy="20" rx="16" ry="15" fill="#FFE0EC"/>
-        <ellipse cx="19" cy="20" rx="14" ry="13" fill="#FFF0F5"/>
-        <!-- left eye -->
-        <ellipse cx="14" cy="19" rx="2.5" ry="3" fill="#4A3840"/>
-        <ellipse cx="14.8" cy="17.8" rx="0.8" ry="0.8" fill="white"/>
-        <!-- right eye -->
-        <ellipse cx="24" cy="19" rx="2.5" ry="3" fill="#4A3840"/>
-        <ellipse cx="24.8" cy="17.8" rx="0.8" ry="0.8" fill="white"/>
-        <!-- blush -->
-        <ellipse cx="11.5" cy="22" rx="2" ry="1.2" fill="#FFB3C8" opacity="0.6"/>
-        <ellipse cx="26.5" cy="22" rx="2" ry="1.2" fill="#FFB3C8" opacity="0.6"/>
-        <!-- ear bumps -->
-        <ellipse cx="7" cy="13" rx="4" ry="3.5" fill="#FFE0EC"/>
-        <ellipse cx="31" cy="13" rx="4" ry="3.5" fill="#FFE0EC"/>
-      </svg>
-      <span class="logo-text">妖精のもふぅ</span>
-    </a>
-    <nav>
-      <a href="#about">もふぅって？</a>
-      <a href="#goods">グッズ</a>
-      <a href="#events">イベント</a>
-      <a href="https://www.instagram.com/fairy_mofu/" target="_blank" class="nav-insta">Instagram ✨</a>
-    </nav>
-  </header>
+<!-- ========== HEADER ========== -->
+<header>
+  <a href="#" class="logo">
+    <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="20" cy="22" rx="16" ry="14.5" fill="#FFE0EC"/>
+      <ellipse cx="20" cy="22" rx="13" ry="12" fill="#FFF5F8"/>
+      <ellipse cx="8"  cy="12" rx="6"  ry="5.5" fill="#FFE0EC"/>
+      <ellipse cx="32" cy="12" rx="6"  ry="5.5" fill="#FFE0EC"/>
+      <ellipse cx="14.5" cy="21.5" rx="2.8" ry="3.2" fill="#3E3040"/>
+      <ellipse cx="15.4" cy="20.2" rx="0.9" ry="0.9" fill="white"/>
+      <ellipse cx="25.5" cy="21.5" rx="2.8" ry="3.2" fill="#3E3040"/>
+      <ellipse cx="26.4" cy="20.2" rx="0.9" ry="0.9" fill="white"/>
+      <ellipse cx="11"  cy="25.5" rx="2.2" ry="1.3" fill="#FFB3C8" opacity="0.55"/>
+      <ellipse cx="29"  cy="25.5" rx="2.2" ry="1.3" fill="#FFB3C8" opacity="0.55"/>
+    </svg>
+    <span class="logo-name">
+      妖精のもふぅ
+      <small>fairy mofu</small>
+    </span>
+  </a>
+  <nav>
+    <a href="#about">もふぅって？</a>
+    <a href="#gallery">ギャラリー</a>
+    <a href="#goods">グッズ</a>
+    <a href="#events">イベント</a>
+    <a href="https://www.instagram.com/fairy_mofu/" target="_blank" rel="noopener" class="btn-nav-insta">Instagram ✨</a>
+  </nav>
+</header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <!-- floating もふぅ -->
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <!-- bg blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="hero-content">
+    <!-- main もふぅ -->
     <div class="hero-mofu">
-      <svg class="mofu-svg" width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 10px 28px rgba(220,140,170,0.22))">
+        <!-- ears -->
+        <ellipse cx="36"  cy="54" rx="26" ry="23" fill="#FFE0EC"/>
+        <ellipse cx="164" cy="54" rx="26" ry="23" fill="#FFE0EC"/>
+        <ellipse cx="36"  cy="54" rx="17" ry="15" fill="#FFF0F5"/>
+        <ellipse cx="164" cy="54" rx="17" ry="15" fill="#FFF0F5"/>
         <!-- body -->
-        <ellipse cx="80" cy="86" rx="66" ry="62" fill="#FFE8F0"/>
-        <ellipse cx="80" cy="86" rx="58" ry="54" fill="#FFF5F8"/>
-        <!-- ear bumps -->
-        <ellipse cx="28" cy="42" rx="18" ry="16" fill="#FFE8F0"/>
-        <ellipse cx="132" cy="42" rx="18" ry="16" fill="#FFE8F0"/>
-        <ellipse cx="28" cy="42" rx="12" ry="10" fill="#FFF0F5"/>
-        <ellipse cx="132" cy="42" rx="12" ry="10" fill="#FFF0F5"/>
-        <!-- left eye happy -->
-        <ellipse cx="62" cy="84" rx="11" ry="13" fill="#4A3840"/>
-        <ellipse cx="65" cy="79" rx="3.5" ry="3.5" fill="white"/>
-        <!-- right eye happy -->
-        <ellipse cx="98" cy="84" rx="11" ry="13" fill="#4A3840"/>
-        <ellipse cx="101" cy="79" rx="3.5" ry="3.5" fill="white"/>
+        <ellipse cx="100" cy="112" rx="82" ry="76" fill="#FFE8F2"/>
+        <ellipse cx="100" cy="112" rx="72" ry="66" fill="#FFF8FB"/>
+        <!-- left eye — happy open -->
+        <ellipse cx="76"  cy="108" rx="13" ry="15" fill="#3E3040"/>
+        <ellipse cx="79"  cy="102" rx="4"  ry="4"  fill="white"/>
+        <ellipse cx="73"  cy="115" rx="3"  ry="2"  fill="#5E3050" opacity="0.18"/>
+        <!-- right eye -->
+        <ellipse cx="124" cy="108" rx="13" ry="15" fill="#3E3040"/>
+        <ellipse cx="127" cy="102" rx="4"  ry="4"  fill="white"/>
+        <ellipse cx="121" cy="115" rx="3"  ry="2"  fill="#5E3050" opacity="0.18"/>
         <!-- blush -->
-        <ellipse cx="48" cy="100" rx="10" ry="6" fill="#FFB3C8" opacity="0.55"/>
-        <ellipse cx="112" cy="100" rx="10" ry="6" fill="#FFB3C8" opacity="0.55"/>
-        <!-- small sparkles -->
-        <circle cx="130" cy="52" r="3" fill="#FFD6E0" opacity="0.8"/>
-        <circle cx="140" cy="70" r="2" fill="#D8EED8" opacity="0.8"/>
-        <circle cx="22" cy="66" r="2" fill="#FFD6E0" opacity="0.7"/>
+        <ellipse cx="58"  cy="126" rx="13" ry="7.5" fill="#FFB3C8" opacity="0.52"/>
+        <ellipse cx="142" cy="126" rx="13" ry="7.5" fill="#FFB3C8" opacity="0.52"/>
+        <!-- sparkles -->
+        <circle cx="162" cy="68" r="4"   fill="#FFD6E0" opacity="0.75"/>
+        <circle cx="174" cy="88" r="2.5" fill="#D4EDD4" opacity="0.75"/>
+        <circle cx="28"  cy="82" r="2.5" fill="#FFD6E0" opacity="0.65"/>
+        <circle cx="22"  cy="62" r="3.5" fill="#E8E0F8" opacity="0.65"/>
       </svg>
     </div>
 
-    <div class="hero-mofu-text">
+    <!-- speech bubble -->
+    <div class="speech-bubble">
       きみの こと だいすきだよ〜 🌸
     </div>
 
     <h1>
       おふとんから うまれた<br>
-      <span>ちいさな 妖精</span>
+      <em>ちいさな 妖精</em>
     </h1>
-    <p class="hero-sub">
-      自分のことが好きって言えない人に、<br>
-      代わりに「だいすき」を伝える妖精、もふぅ。
+    <p class="hero-desc">
+      どこにでも たくさんいて、<br>
+      あなたのことが だいすきな もふぅ の せかい へ。
     </p>
     <div class="hero-btns">
-      <a href="#about" class="btn btn-primary">もふぅを みつける 🌱</a>
-      <a href="https://www.instagram.com/fairy_mofu/" target="_blank" class="btn btn-secondary">Instagram で フォロー ✨</a>
+      <a href="#about" class="btn btn-pink">もふぅを みつける 🌱</a>
+      <a href="https://www.instagram.com/fairy_mofu/" target="_blank" rel="noopener" class="btn btn-outline">Instagram で フォロー ✨</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ABOUT -->
-  <section class="about" id="about">
-    <div class="section-inner">
-      <div class="about-grid">
-        <div class="about-text">
-          <span class="tag">もふぅ って？</span>
-          <h3>おふとんから うまれた<br>やさしい 妖精 だよ！</h3>
-          <p>
-            もふぅは どこにでも たくさんいて、
-            あなたの こと が だいすきな 妖精 です🌱
-          </p>
-          <p>
-            足も 口も ないけど、目だけで 気持ちを つたえるよ。
-            ふわふわ もこもこ やわらかくて、
-            そっと そばに いるだけで ほっとする、そんな 存在 です。
-          </p>
-          <p>
-            自分のことが好きって言えない人に、
-            代わりに「だいすき」を届けたくて うまれたよ。
-          </p>
-        </div>
-        <div class="about-mofu-wrap">
-          <svg class="mofu-svg" width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- sleepy もふぅ -->
-            <ellipse cx="100" cy="108" rx="76" ry="70" fill="#E8F5E8"/>
-            <ellipse cx="100" cy="108" rx="66" ry="61" fill="#F5FDF5"/>
-            <!-- ears -->
-            <ellipse cx="38" cy="56" rx="20" ry="17" fill="#E8F5E8"/>
-            <ellipse cx="162" cy="56" rx="20" ry="17" fill="#E8F5E8"/>
-            <ellipse cx="38" cy="56" rx="13" ry="11" fill="#F0FAF0"/>
-            <ellipse cx="162" cy="56" rx="13" ry="11" fill="#F0FAF0"/>
-            <!-- sleepy eyes — half closed -->
-            <ellipse cx="80" cy="106" rx="12" ry="7" fill="#4A3840"/>
-            <ellipse cx="120" cy="106" rx="12" ry="7" fill="#4A3840"/>
-            <!-- eye glints -->
-            <ellipse cx="83" cy="103" rx="3" ry="2.5" fill="white"/>
-            <ellipse cx="123" cy="103" rx="3" ry="2.5" fill="white"/>
-            <!-- blush -->
-            <ellipse cx="64" cy="120" rx="11" ry="6.5" fill="#B2EEC0" opacity="0.6"/>
-            <ellipse cx="136" cy="120" rx="11" ry="6.5" fill="#B2EEC0" opacity="0.6"/>
-            <!-- zzz -->
-            <text x="145" y="72" font-size="14" fill="#8DC88D" font-family="sans-serif" font-weight="bold" opacity="0.8">z</text>
-            <text x="155" y="60" font-size="11" fill="#8DC88D" font-family="sans-serif" font-weight="bold" opacity="0.6">z</text>
-          </svg>
-        </div>
+
+<!-- ========== NEWS ========== -->
+<section class="section section-news">
+  <div class="inner reveal">
+    <div class="sec-head">
+      <span class="chip chip-lav">おしらせ</span>
+      <h2>新しい おしらせ 📢</h2>
+    </div>
+    <div class="news-list">
+      <div class="news-item">
+        <span class="news-date">2026.06</span>
+        <span class="news-tag tag-event">イベント</span>
+        <span class="news-text">渋谷で もふぅグッズの 委託販売が はじまるよ！ 6〜8月 開催予定 🌸</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">2026.07</span>
+        <span class="news-tag tag-event">イベント</span>
+        <span class="news-text">大阪 イベントに 出展するよ〜！ 詳細は Instagram で おしらせするね ✨</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">2026.05</span>
+        <span class="news-tag tag-goods">グッズ</span>
+        <span class="news-text">新しい 3Dフィギュアが 完成したよ！ もふぅを そだてた いちまいを Instagram に のせたよ 🌱</span>
+      </div>
+      <div class="news-item">
+        <span class="news-date">2026.04</span>
+        <span class="news-tag tag-info">おしらせ</span>
+        <span class="news-text">もふぅの 公式サイトが できたよ！ これからも どうぞ よろしくね えへへ〜</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FEATURES -->
-  <section class="features">
-    <div class="section-inner">
-      <div class="section-title">
-        <span class="tag">もふぅの ここが すきっ</span>
-        <h2>もふぅ の みりょく ✨</h2>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🫧</div>
-          <h4>ふわふわ まるまる</h4>
-          <p>一等身の まんまるシルエット。<br>みるだけで ほっこりする よ！</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">👀</div>
-          <h4>目だけで かんじる</h4>
-          <p>口も 足も ないけど、目で ぜんぶ つたわるよ。<br>きみの きもちと おなじだよ！</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🌸</div>
-          <h4>いつでも そばにいる</h4>
-          <p>どこにでも いっぱいいる から、<br>きみの おふとんにも いるよ〜</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">💌</div>
-          <h4>だいすきを とどける</h4>
-          <p>自分を すきに なれない きみに、<br>もふぅが かわりに「だいすき」って言うよ！</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- MESSAGE -->
-  <section class="message">
-    <div class="section-inner">
-      <div class="message-box">
-        <div class="message-mofu">
-          <svg class="mofu-svg" width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- happy もふぅ small -->
-            <ellipse cx="45" cy="48" rx="37" ry="34" fill="#FFE8F0"/>
-            <ellipse cx="45" cy="48" rx="31" ry="28" fill="#FFF5F8"/>
-            <ellipse cx="16" cy="24" rx="10" ry="9" fill="#FFE8F0"/>
-            <ellipse cx="74" cy="24" rx="10" ry="9" fill="#FFE8F0"/>
-            <!-- big happy eyes -->
-            <ellipse cx="35" cy="47" rx="7" ry="8" fill="#4A3840"/>
-            <ellipse cx="55" cy="47" rx="7" ry="8" fill="#4A3840"/>
-            <ellipse cx="37" cy="44" rx="2.5" ry="2.5" fill="white"/>
-            <ellipse cx="57" cy="44" rx="2.5" ry="2.5" fill="white"/>
-            <!-- blush -->
-            <ellipse cx="28" cy="57" rx="6" ry="3.5" fill="#FFB3C8" opacity="0.55"/>
-            <ellipse cx="62" cy="57" rx="6" ry="3.5" fill="#FFB3C8" opacity="0.55"/>
-          </svg>
-        </div>
-        <h3>
-          自分のことが 好きって<br>言えなくても いいよ〜<br>
-          <span style="color: var(--pink-d)">もふぅが だいすきだよ！</span>
-        </h3>
+<!-- ========== ABOUT ========== -->
+<section class="section section-about" id="about">
+  <div class="inner">
+    <div class="about-layout">
+      <!-- illustration side -->
+      <div class="about-ilus reveal">
+        <svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 8px 24px rgba(100,180,100,0.16))">
+          <!-- sleepy/cozy もふぅ -->
+          <ellipse cx="120" cy="130" rx="90" ry="84" fill="#D8F0D8"/>
+          <ellipse cx="120" cy="130" rx="78" ry="72" fill="#F0FAF0"/>
+          <!-- ears -->
+          <ellipse cx="44"  cy="68" rx="24" ry="21" fill="#D8F0D8"/>
+          <ellipse cx="196" cy="68" rx="24" ry="21" fill="#D8F0D8"/>
+          <ellipse cx="44"  cy="68" rx="15" ry="13" fill="#EAF8EA"/>
+          <ellipse cx="196" cy="68" rx="15" ry="13" fill="#EAF8EA"/>
+          <!-- sleepy eyes (half-lid) -->
+          <ellipse cx="96"  cy="128" rx="14" ry="9" fill="#3E3040"/>
+          <ellipse cx="144" cy="128" rx="14" ry="9" fill="#3E3040"/>
+          <ellipse cx="99"  cy="124" rx="4"  ry="3" fill="white"/>
+          <ellipse cx="147" cy="124" rx="4"  ry="3" fill="white"/>
+          <!-- blush green tint -->
+          <ellipse cx="76"  cy="146" rx="13" ry="7.5" fill="#96D8A0" opacity="0.55"/>
+          <ellipse cx="164" cy="146" rx="13" ry="7.5" fill="#96D8A0" opacity="0.55"/>
+          <!-- zzz -->
+          <text x="174" y="86" font-family="sans-serif" font-size="16" font-weight="700" fill="#7EBE7E" opacity="0.85">z</text>
+          <text x="188" y="70" font-family="sans-serif" font-size="12" font-weight="700" fill="#7EBE7E" opacity="0.65">z</text>
+          <!-- futon hint at bottom -->
+          <ellipse cx="120" cy="205" rx="80" ry="18" fill="#C8E8C8" opacity="0.55"/>
+        </svg>
+      </div>
+      <!-- text side -->
+      <div class="about-text reveal" style="transition-delay:0.1s">
+        <span class="chip chip-pink">もふぅ って？</span>
+        <h3>おふとんから うまれた<br><em>やさしい 妖精</em> だよ！</h3>
         <p>
-          疲れた日も、うまくいかない日も、<br>
-          もふぅは ずっと きみの そばに いるよ。🌱<br>
-          だいすき が つたわって、少しずつ 自分を<br>大事に できる人が 増えてほしいな。
+          もふぅは どこにでも たくさんいて、
+          あなたのことが だいすきな 妖精 です 🌱
         </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- GOODS -->
-  <section class="goods" id="goods">
-    <div class="section-inner">
-      <div class="section-title">
-        <span class="tag">グッズ</span>
-        <h2>もふぅと いっしょに いられる 🧸</h2>
-        <p>もふぅを 手元に おいてね！</p>
-      </div>
-      <div class="goods-grid">
-        <div class="goods-card">
-          <div class="goods-img">🪆</div>
-          <div class="goods-info">
-            <h4>3D フィギュア</h4>
-            <p>3Dプリンターで 手作り！<br>もふぅを リアルに 感じてね</p>
-          </div>
-        </div>
-        <div class="goods-card">
-          <div class="goods-img">🖼️</div>
-          <div class="goods-info">
-            <h4>イラスト グッズ</h4>
-            <p>もふぅの イラストが ついた<br>ポストカード・缶バッジ など</p>
-          </div>
-        </div>
-        <div class="goods-card">
-          <div class="goods-img">💬</div>
-          <div class="goods-info">
-            <h4>LINE スタンプ</h4>
-            <p>日常の「だいすき」を<br>スタンプで おくろうね！</p>
-          </div>
-        </div>
-      </div>
-      <div style="text-align:center; margin-top: 32px;">
-        <a href="https://www.instagram.com/fairy_mofu/" target="_blank" class="btn btn-primary">
-          グッズを もっと みる ✨
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- EVENTS -->
-  <section class="events" id="events">
-    <div class="section-inner">
-      <div class="section-title">
-        <span class="tag" style="background:var(--green); color:var(--green-d)">イベント</span>
-        <h2>会いに きてね！ 🌱</h2>
-        <p>もふたばと もふぅに あえる イベント情報</p>
-      </div>
-      <div class="events-list">
-        <div class="event-item">
-          <div class="event-date">
-            <span class="month">2026</span>
-            <span class="day">6-8</span>
-            <span class="month">月</span>
-          </div>
-          <div class="event-info">
-            <span class="event-badge">委託販売</span>
-            <h4>渋谷 委託販売</h4>
-            <p>渋谷の お店で もふぅグッズが かえるよ！<br>詳細は Instagram で おしらせするね 🌸</p>
-          </div>
-        </div>
-        <div class="event-item">
-          <div class="event-date">
-            <span class="month">2026</span>
-            <span class="day">7</span>
-            <span class="month">月</span>
-          </div>
-          <div class="event-info">
-            <span class="event-badge">イベント出展</span>
-            <h4>大阪 イベント 出展</h4>
-            <p>大阪で もふたばに あえるよ！<br>グッズも いっぱい もっていくね ✨</p>
-          </div>
-        </div>
-        <div class="event-item">
-          <div class="event-date">
-            <span class="month">2026</span>
-            <span class="day">9</span>
-            <span class="month">月</span>
-          </div>
-          <div class="event-info">
-            <span class="event-badge">イベント出展予定</span>
-            <h4>大阪 イベント 出展（予定）</h4>
-            <p>秋の 大阪 イベントにも でるよ！<br>申込み 準備中 🌱</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SNS -->
-  <section class="sns-section">
-    <div class="section-inner">
-      <div class="sns-box">
-        <div style="font-size: 52px; margin-bottom: 16px;">🌸</div>
-        <h3>Instagram で もふぅと<br>なかよく なろう！</h3>
         <p>
-          まいにち もふぅの かわいい イラストや<br>
-          アニメーションを とどけてるよ〜<br>
-          @fairy_mofu を フォローしてね！
+          足も 口も ないけど、目だけで 気持ちを つたえるよ。
+          ふわふわ もこもこ やわらかくて、
+          そっと そばに いるだけで ほっとする そんな 存在。
         </p>
-        <a href="https://www.instagram.com/fairy_mofu/" target="_blank" class="btn btn-insta">
-          📸 @fairy_mofu を フォローする
-        </a>
+        <p>
+          自分のことが すきって 言えない 人に、
+          代わりに「だいすき」を とどけたくて うまれたよ。
+        </p>
+        <a href="#message" class="btn btn-pink" style="margin-top:8px">もふぅの きもちを よむ 💌</a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-logo">妖精のもふぅ 🌸</div>
-    <p>イラスト・キャラクターデザイン：<a href="https://www.instagram.com/fairy_mofu/" target="_blank">もふたば</a></p>
-    <p style="margin-top: 16px; font-size: 11px; opacity: 0.5;">© 2022 妖精のもふぅ / もふたば. All rights reserved.</p>
-  </footer>
+
+<!-- ========== EXPRESSIONS ========== -->
+<section class="section section-expr">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="chip chip-lav">もふぅの 表情</span>
+      <h2>目だけで つたわる もふぅの きもち 👀</h2>
+      <p>足も 口も ないけど、目の かたちで ぜんぶ わかるよ！</p>
+    </div>
+    <div class="expr-grid">
+
+      <!-- 😊 うれしい -->
+      <div class="expr-card reveal">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <ellipse cx="40" cy="42" rx="32" ry="30" fill="#FFE8F2"/>
+          <ellipse cx="40" cy="42" rx="26" ry="24" fill="#FFF5F8"/>
+          <ellipse cx="14" cy="20" rx="9" ry="8" fill="#FFE8F2"/>
+          <ellipse cx="66" cy="20" rx="9" ry="8" fill="#FFE8F2"/>
+          <ellipse cx="28" cy="41" rx="6" ry="7" fill="#3E3040"/>
+          <ellipse cx="52" cy="41" rx="6" ry="7" fill="#3E3040"/>
+          <ellipse cx="30" cy="37.5" rx="2" ry="2" fill="white"/>
+          <ellipse cx="54" cy="37.5" rx="2" ry="2" fill="white"/>
+          <ellipse cx="23" cy="51" rx="6" ry="3.5" fill="#FFB3C8" opacity="0.55"/>
+          <ellipse cx="57" cy="51" rx="6" ry="3.5" fill="#FFB3C8" opacity="0.55"/>
+        </svg>
+        <div class="expr-label">うれしい！</div>
+      </div>
+
+      <!-- 😴 ねむい -->
+      <div class="expr-card reveal" style="transition-delay:.05s">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <ellipse cx="40" cy="42" rx="32" ry="30" fill="#E8F0FF"/>
+          <ellipse cx="40" cy="42" rx="26" ry="24" fill="#F5F8FF"/>
+          <ellipse cx="14" cy="20" rx="9" ry="8" fill="#E8F0FF"/>
+          <ellipse cx="66" cy="20" rx="9" ry="8" fill="#E8F0FF"/>
+          <!-- half-lid eyes -->
+          <ellipse cx="28" cy="42" rx="6" ry="4" fill="#3E3040"/>
+          <ellipse cx="52" cy="42" rx="6" ry="4" fill="#3E3040"/>
+          <ellipse cx="30" cy="39.5" rx="2" ry="1.5" fill="white"/>
+          <ellipse cx="54" cy="39.5" rx="2" ry="1.5" fill="white"/>
+          <ellipse cx="23" cy="51" rx="5.5" ry="3" fill="#B0C0E8" opacity="0.5"/>
+          <ellipse cx="57" cy="51" rx="5.5" ry="3" fill="#B0C0E8" opacity="0.5"/>
+          <text x="55" y="24" font-size="9" fill="#9DB0D8" font-family="sans-serif" font-weight="700">z</text>
+          <text x="62" y="17" font-size="7" fill="#9DB0D8" font-family="sans-serif" font-weight="700">z</text>
+        </svg>
+        <div class="expr-label">ねむい〜</div>
+      </div>
+
+      <!-- 😲 びっくり -->
+      <div class="expr-card reveal" style="transition-delay:.10s">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <ellipse cx="40" cy="42" rx="32" ry="30" fill="#FFF3D6"/>
+          <ellipse cx="40" cy="42" rx="26" ry="24" fill="#FFFBF0"/>
+          <ellipse cx="14" cy="20" rx="9" ry="8" fill="#FFF3D6"/>
+          <ellipse cx="66" cy="20" rx="9" ry="8" fill="#FFF3D6"/>
+          <!-- wide eyes -->
+          <ellipse cx="28" cy="40" rx="7.5" ry="9" fill="#3E3040"/>
+          <ellipse cx="52" cy="40" rx="7.5" ry="9" fill="#3E3040"/>
+          <ellipse cx="31" cy="35.5" rx="2.5" ry="2.5" fill="white"/>
+          <ellipse cx="55" cy="35.5" rx="2.5" ry="2.5" fill="white"/>
+          <ellipse cx="23" cy="52" rx="5.5" ry="3" fill="#F0C860" opacity="0.45"/>
+          <ellipse cx="57" cy="52" rx="5.5" ry="3" fill="#F0C860" opacity="0.45"/>
+        </svg>
+        <div class="expr-label">びっくり！</div>
+      </div>
+
+      <!-- 🥺 うるうる -->
+      <div class="expr-card reveal" style="transition-delay:.15s">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <ellipse cx="40" cy="42" rx="32" ry="30" fill="#E8F5FF"/>
+          <ellipse cx="40" cy="42" rx="26" ry="24" fill="#F5FBFF"/>
+          <ellipse cx="14" cy="20" rx="9" ry="8" fill="#E8F5FF"/>
+          <ellipse cx="66" cy="20" rx="9" ry="8" fill="#E8F5FF"/>
+          <!-- big watery eyes -->
+          <ellipse cx="28" cy="40" rx="7" ry="9" fill="#3E3040"/>
+          <ellipse cx="52" cy="40" rx="7" ry="9" fill="#3E3040"/>
+          <ellipse cx="31" cy="35" rx="2.5" ry="3" fill="white"/>
+          <ellipse cx="55" cy="35" rx="2.5" ry="3" fill="white"/>
+          <!-- teardrops -->
+          <ellipse cx="24" cy="51" rx="2" ry="3" fill="#90CAEE" opacity="0.7"/>
+          <ellipse cx="56" cy="51" rx="2" ry="3" fill="#90CAEE" opacity="0.7"/>
+          <ellipse cx="22" cy="53" rx="5.5" ry="3" fill="#A8DCEE" opacity="0.4"/>
+          <ellipse cx="58" cy="53" rx="5.5" ry="3" fill="#A8DCEE" opacity="0.4"/>
+        </svg>
+        <div class="expr-label">うるうる…</div>
+      </div>
+
+      <!-- 😊🌸 はずかし -->
+      <div class="expr-card reveal" style="transition-delay:.20s">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <ellipse cx="40" cy="42" rx="32" ry="30" fill="#FFE8F2"/>
+          <ellipse cx="40" cy="42" rx="26" ry="24" fill="#FFF5F8"/>
+          <ellipse cx="14" cy="20" rx="9" ry="8" fill="#FFE8F2"/>
+          <ellipse cx="66" cy="20" rx="9" ry="8" fill="#FFE8F2"/>
+          <!-- looking-down shy eyes -->
+          <ellipse cx="28" cy="43" rx="6" ry="5" fill="#3E3040"/>
+          <ellipse cx="52" cy="43" rx="6" ry="5" fill="#3E3040"/>
+          <ellipse cx="30" cy="40" rx="2" ry="2" fill="white"/>
+          <ellipse cx="54" cy="40" rx="2" ry="2" fill="white"/>
+          <!-- big blush -->
+          <ellipse cx="21" cy="50" rx="8" ry="5" fill="#FF8FAE" opacity="0.6"/>
+          <ellipse cx="59" cy="50" rx="8" ry="5" fill="#FF8FAE" opacity="0.6"/>
+        </svg>
+        <div class="expr-label">はずかし〜</div>
+      </div>
+
+      <!-- 😍 だいすき -->
+      <div class="expr-card reveal" style="transition-delay:.25s">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <ellipse cx="40" cy="42" rx="32" ry="30" fill="#FFE8F2"/>
+          <ellipse cx="40" cy="42" rx="26" ry="24" fill="#FFF5F8"/>
+          <ellipse cx="14" cy="20" rx="9" ry="8" fill="#FFE8F2"/>
+          <ellipse cx="66" cy="20" rx="9" ry="8" fill="#FFE8F2"/>
+          <!-- heart eyes -->
+          <path d="M22 38 C22 34 28 32 28 38 C28 32 34 34 34 38 C34 43 28 47 28 47 C28 47 22 43 22 38Z" fill="#E85080"/>
+          <path d="M46 38 C46 34 52 32 52 38 C52 32 58 34 58 38 C58 43 52 47 52 47 C52 47 46 43 46 38Z" fill="#E85080"/>
+          <ellipse cx="23" cy="53" rx="6" ry="3.5" fill="#FFB3C8" opacity="0.55"/>
+          <ellipse cx="57" cy="53" rx="6" ry="3.5" fill="#FFB3C8" opacity="0.55"/>
+        </svg>
+        <div class="expr-label">だいすき！</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== MESSAGE ========== -->
+<section class="section section-msg" id="message">
+  <div class="inner-sm">
+    <div class="msg-card reveal">
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none" style="filter:drop-shadow(0 5px 16px rgba(220,140,170,0.2))">
+        <ellipse cx="50" cy="54" rx="40" ry="37" fill="#FFE8F2"/>
+        <ellipse cx="50" cy="54" rx="33" ry="30" fill="#FFF8FB"/>
+        <ellipse cx="20" cy="28" rx="12" ry="10" fill="#FFE8F2"/>
+        <ellipse cx="80" cy="28" rx="12" ry="10" fill="#FFE8F2"/>
+        <ellipse cx="38" cy="53" rx="7" ry="8" fill="#3E3040"/>
+        <ellipse cx="62" cy="53" rx="7" ry="8" fill="#3E3040"/>
+        <ellipse cx="40.5" cy="49" rx="2.5" ry="2.5" fill="white"/>
+        <ellipse cx="64.5" cy="49" rx="2.5" ry="2.5" fill="white"/>
+        <ellipse cx="30"  cy="64" rx="8" ry="4.5" fill="#FFB3C8" opacity="0.55"/>
+        <ellipse cx="70"  cy="64" rx="8" ry="4.5" fill="#FFB3C8" opacity="0.55"/>
+      </svg>
+      <h3>
+        自分のことが 好きって<br>
+        言えなくても いいよ〜<br>
+        <strong>もふぅが かわりに だいすきって 言うよ！</strong>
+      </h3>
+      <p>
+        疲れた日も うまくいかない日も<br>
+        もふぅは ずっと きみの そばに いるよ 🌱<br><br>
+        「だいすき」が つたわって<br>
+        少しずつ 自分を 大事に できる人が 増えてほしいな。
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== GALLERY ========== -->
+<section class="section section-gallery" id="gallery">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="chip chip-pink">ギャラリー</span>
+      <h2>もふぅの イラスト 🖼</h2>
+      <p>もふたばが 描いた もふぅたちに あいにきてね</p>
+    </div>
+
+    <!-- placeholder gallery — replace img tags when real art is ready -->
+    <div class="gallery-grid reveal">
+      <div class="gallery-item tall">🌸</div>
+      <div class="gallery-item">🌱</div>
+      <div class="gallery-item">✨</div>
+      <div class="gallery-item wide">🍃</div>
+      <div class="gallery-item">🌼</div>
+      <div class="gallery-item">🌙</div>
+      <div class="gallery-item">☁️</div>
+    </div>
+
+    <p class="gallery-note reveal">
+      ※ イラスト画像は 準備中 だよ！ もうすぐ かわいい もふぅに あえるよ〜 えへへ〜 🌱
+    </p>
+
+    <div style="text-align:center;margin-top:28px;" class="reveal">
+      <a href="https://www.instagram.com/fairy_mofu/" target="_blank" rel="noopener" class="btn btn-pink">
+        Instagram で もっとみる ✨
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== GOODS ========== -->
+<section class="section section-goods" id="goods">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="chip chip-green">グッズ</span>
+      <h2>もふぅと いっしょに いられるよ 🧸</h2>
+      <p>手元に おいて いつでも もふもふ してね！</p>
+    </div>
+    <div class="goods-grid">
+      <div class="goods-card reveal">
+        <div class="goods-img">🪆</div>
+        <div class="goods-body">
+          <h4>3D フィギュア</h4>
+          <p>3Dプリンターで 手作りした もふぅ フィギュア。<br>手のひらに のる ちいさな かわいさ！</p>
+        </div>
+      </div>
+      <div class="goods-card reveal" style="transition-delay:.08s">
+        <div class="goods-img">📮</div>
+        <div class="goods-body">
+          <h4>ポストカード・缶バッジ</h4>
+          <p>もふぅの イラストが ついた グッズたち。<br>お気に入りを 見つけてね 🌸</p>
+        </div>
+      </div>
+      <div class="goods-card reveal" style="transition-delay:.16s">
+        <div class="goods-img">💬</div>
+        <div class="goods-body">
+          <h4>LINE スタンプ</h4>
+          <p>日常の「だいすき」を もふぅで おくろう！<br>トーク画面が ほっこりするよ ✨</p>
+        </div>
+      </div>
+    </div>
+    <div class="goods-cta reveal">
+      <a href="https://www.instagram.com/fairy_mofu/" target="_blank" rel="noopener" class="btn btn-green">
+        グッズを もっとみる 🛒
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== EVENTS ========== -->
+<section class="section section-events" id="events">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="chip chip-green">イベント</span>
+      <h2>あいに きてね！ 🌱</h2>
+      <p>もふたばと もふぅに あえる イベント・販売 情報</p>
+    </div>
+    <div class="ev-list inner-sm" style="margin:0 auto;">
+      <div class="ev-card reveal">
+        <div class="ev-date">
+          <span class="month">6〜8月</span>
+          <span class="day">📦</span>
+          <span class="month">2026</span>
+        </div>
+        <div class="ev-info">
+          <span class="ev-badge">委託販売</span>
+          <h4>渋谷 委託販売</h4>
+          <p>渋谷の お店で もふぅグッズが かえるよ！<br>詳細は Instagram で おしらせするね 🌸</p>
+        </div>
+      </div>
+      <div class="ev-card reveal" style="transition-delay:.08s">
+        <div class="ev-date">
+          <span class="month">7月</span>
+          <span class="day">🎪</span>
+          <span class="month">2026</span>
+        </div>
+        <div class="ev-info">
+          <span class="ev-badge">イベント</span>
+          <h4>大阪 イベント 出展</h4>
+          <p>大阪で もふたばに あえるよ！<br>グッズも いっぱい もっていくね ✨</p>
+        </div>
+      </div>
+      <div class="ev-card reveal" style="transition-delay:.16s">
+        <div class="ev-date">
+          <span class="month">9月</span>
+          <span class="day">🎪</span>
+          <span class="month">2026</span>
+        </div>
+        <div class="ev-info">
+          <span class="ev-badge">予定</span>
+          <h4>大阪 イベント 出展（予定）</h4>
+          <p>秋も 大阪に いくよ！ 申込み 準備中 🌱<br>決まったら おしらせするね〜</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== CREATOR ========== -->
+<section class="section section-creator">
+  <div class="inner">
+    <div class="sec-head reveal">
+      <span class="chip chip-lav">つくった人</span>
+      <h2>もふたばって どんな人？ 🎨</h2>
+    </div>
+    <div class="creator-layout reveal">
+      <div class="creator-avatar">🎨</div>
+      <div class="creator-text">
+        <h3>もふたば</h3>
+        <p class="creator-handle">イラストレーター ／ @fairy_mofu</p>
+        <p>
+          もふぅを 描いている イラストレーター です。<br>
+          「自分のことが 好きって 言えない人に、もふぅが だいすきを とどけてほしい」
+          という 想いで、2022年から もふぅの せかいを つくっています 🌱<br>
+          3Dプリンターで フィギュアも つくってるよ！ えへへ〜
+        </p>
+        <div class="creator-links">
+          <a href="https://www.instagram.com/fairy_mofu/" target="_blank" rel="noopener" class="creator-link">📷 Instagram</a>
+          <a href="#" class="creator-link">💬 お仕事のご相談</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== SNS CTA ========== -->
+<section class="section section-sns">
+  <div class="inner-sm">
+    <div class="sns-card reveal">
+      <svg width="80" height="80" viewBox="0 0 80 80" fill="none" style="filter:drop-shadow(0 4px 12px rgba(220,140,170,0.2))">
+        <ellipse cx="40" cy="44" rx="32" ry="30" fill="#FFE8F2"/>
+        <ellipse cx="40" cy="44" rx="26" ry="24" fill="#FFF8FB"/>
+        <ellipse cx="16" cy="22" rx="9" ry="8" fill="#FFE8F2"/>
+        <ellipse cx="64" cy="22" rx="9" ry="8" fill="#FFE8F2"/>
+        <ellipse cx="28" cy="43" rx="6" ry="7" fill="#3E3040"/>
+        <ellipse cx="52" cy="43" rx="6" ry="7" fill="#3E3040"/>
+        <ellipse cx="30" cy="39.5" rx="2" ry="2" fill="white"/>
+        <ellipse cx="54" cy="39.5" rx="2" ry="2" fill="white"/>
+        <ellipse cx="23" cy="53" rx="6" ry="3.5" fill="#FFB3C8" opacity="0.55"/>
+        <ellipse cx="57" cy="53" rx="6" ry="3.5" fill="#FFB3C8" opacity="0.55"/>
+      </svg>
+      <h3>Instagram で<br>もふぅと なかよく なろう！</h3>
+      <div class="sns-stats">
+        <div class="stat-item">
+          <span class="stat-num">4,000+</span>
+          <span class="stat-lbl">フォロワー</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">2022</span>
+          <span class="stat-lbl">年〜 活動中</span>
+        </div>
+      </div>
+      <p>
+        まいにち もふぅの イラストや アニメーションを とどけてるよ〜 🌸<br>
+        @fairy_mofu を フォローしてね！
+      </p>
+      <a href="https://www.instagram.com/fairy_mofu/" target="_blank" rel="noopener" class="btn btn-insta">
+        📸 @fairy_mofu を フォローする
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <a href="#" class="footer-logo">
+    <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+      <ellipse cx="20" cy="22" rx="16" ry="14.5" fill="#FFE0EC" opacity="0.7"/>
+      <ellipse cx="20" cy="22" rx="13" ry="12" fill="#FFF5F8" opacity="0.5"/>
+      <ellipse cx="8"  cy="12" rx="6"  ry="5.5" fill="#FFE0EC" opacity="0.7"/>
+      <ellipse cx="32" cy="12" rx="6"  ry="5.5" fill="#FFE0EC" opacity="0.7"/>
+      <ellipse cx="14.5" cy="21.5" rx="2.8" ry="3.2" fill="white" opacity="0.9"/>
+      <ellipse cx="25.5" cy="21.5" rx="2.8" ry="3.2" fill="white" opacity="0.9"/>
+    </svg>
+    <span class="footer-logo-text">妖精のもふぅ</span>
+  </a>
+  <div class="footer-links">
+    <a href="#about">もふぅって？</a>
+    <a href="#gallery">ギャラリー</a>
+    <a href="#goods">グッズ</a>
+    <a href="#events">イベント</a>
+    <a href="https://www.instagram.com/fairy_mofu/" target="_blank" rel="noopener">Instagram</a>
+  </div>
+  <p style="font-size:13px; color:rgba(255,255,255,0.5); margin-bottom:6px;">
+    イラスト・デザイン：もふたば（@fairy_mofu）
+  </p>
+  <p class="footer-copy">© 2022 妖精のもふぅ / もふたば. All rights reserved.</p>
+</footer>
+
+
+<!-- ========== SCROLL REVEAL ========== -->
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
